@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+
 class LoginController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
@@ -22,6 +23,7 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+        
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

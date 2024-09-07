@@ -10,7 +10,12 @@
 
 <div class="example-wrapper">
    <h1>Esta es la página de inicio</h1>
-  <button> <a href="{{ path('app_login') }}">Login</a></button>
+   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+   <h2>Bienvenido {{ app.user.nombre }}</h2>
+   <button><a href="{{ path('app_logout') }}">Logout</a></button>
+   {% else %}
+   <button> <a href="{{ path('app_login') }}">Login</a></button>
    <button><a href="{{ path('app_register') }}">Registro</a></button>
-</div>
+   {% endif%}
+  </div>
 {% endblock %}
