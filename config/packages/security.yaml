@@ -25,6 +25,10 @@ security:
                 # where to redirect after logout
                 # target: app_any_route
             user_checker: App\Security\UserIsVerified
+            #ataques de fuerza
+            login_throttling:
+                max_attempts: 3
+                interval: '15 minutes'
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
