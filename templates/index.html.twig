@@ -8,6 +8,8 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
+{{include('comun/header.html.twig')}}
+
 <div class="example-wrapper">
    <h1>Esta es la página de inicio</h1>
    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -19,4 +21,6 @@
    <button><a href="{{ path('app_forgot_password_request') }}">He olvidado mi contraseña</a></button>
    {% endif%}
   </div>
+
+
 {% endblock %}
