@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Productos{% endblock %}
+
+{% block body %}
+    <h1>Productos</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ producto.id }}</td>
+            </tr>
+            <tr>
+                <th>Marca</th>
+                <td>{{ producto.marca }}</td>
+            </tr>
+            <tr>
+                <th>Modelo</th>
+                <td>{{ producto.modelo }}</td>
+            </tr>
+            <tr>
+                <th>PrecioSinIva</th>
+                <td>{{ producto.precioSinIva }}</td>
+            </tr>
+            <tr>
+                <th>Iva</th>
+                <td>{{ producto.iva }}</td>
+            </tr>
+            <tr>
+                <th>Descuento</th>
+                <td>{{ producto.descuento }}</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ producto.stock }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ producto.estado }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ producto.descripcion }}</td>
+            </tr>
+            {% if producto.imageName %}
+              <tr>
+                <th>Imagen</th>
+                <td> 
+                    <img src="{{ vich_uploader_asset(producto, 'imageFile') }}" alt="{{ producto.imageName }}" width="80px">
+                </td>
+            </tr> 
+            {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_productos_index') }}">back to list</a>
+
+    <a href="{{ path('app_productos_edit', {'id': producto.id}) }}">edit</a>
+
+    {{ include('productos/_delete_form.html.twig') }}
+{% endblock %}
