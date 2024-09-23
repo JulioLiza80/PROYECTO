@@ -16,11 +16,11 @@ class UserType extends AbstractType
         $builder
             ->add('email')
         //   ->add('roles')
-        //    ->add('password')
+            ->add('password')
             ->add('nombre')
             ->add('apellido1')
             ->add('apellido2')
-        //    ->add('isVerified')
+         //   ->add('isVerified')
             ->add('documentFile', VichFileType::class)
         ;
     }

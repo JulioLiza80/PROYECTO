@@ -1,16 +1,62 @@
 
 {% block body%}
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginmodal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+<header data-bs-theme="dark">
+  
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <strong>Optica Nova</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarHeader">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li class="nav-item">
+                <a href="{{ path('app_logout') }}" class="nav-link active">logout</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contacto</a>
+           </li>
+           
+           {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a href="{{ path('app_user_index') }}" class="nav-link">Editar Usuarios</a>
+           </li>
+            <li class="nav-item">
+                <a href="{{ path('app_categorias_index') }}" class="nav-link">Editar Categorias</a>
+           </li>
+            <li class="nav-item">
+                <a href="{{ path('app_productos_index') }}" class="nav-link">Editar Productos</a>
+           </li>
+           {% endif%}
+           <li class="nav-item">
+                <h2 class="nav-link">Bienvenido {{ app.user.nombre }}</h2>
+           </li>
+        </ul>
+        <a href="#checkout.php" class="btn btn-primary">Carrito
+          <span id="nun_cart" class="badge bg-secondary"></span>
+        </a>
+         {% else %}
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginmodal" data-bs-whatever="@mdo">Login</button>
+        <button type="button" class="btn btn-primary"><a style="color:white; text-decoration: none;" href="{{ path('app_register') }}">Registro</a></button>
+        <button type="button" class="btn btn-primary"><a style="color:white; text-decoration: none;" href="{{ path('app_forgot_password_request') }}">He olvidado mi contraseña</a></button>
+        {% endif%}
+          
+      </div>
+    </div>
+  </div>
+</header>
+
+
 
 <div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Inicio de sesion</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+      <div class="modal-body">       
           <form class="mb-3 mt-md-2" action="{{ path('app_login') }}" method="post">
               <h2 class="fw-bold mb-4">Inicia Sesión</h2>
               <div class="mb-3">
@@ -42,7 +88,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
       </div>
     </div>
   </div>
