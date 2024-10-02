@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -44,6 +46,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $direccion = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ciudad = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $cp = null;
+
+    /**
+     * @var Collection<int, DetalleCompra>
+     */
+    #[ORM\OneToMany(targetEntity: DetalleCompra::class, mappedBy: 'idUsuario')]
+    private Collection $detalleCompras;
+
+    /**
+     * @var Collection<int, Pedidos>
+     */
+    #[ORM\OneToMany(targetEntity: Pedidos::class, mappedBy: 'idUsuarioPedidos')]
+    private Collection $pedidos;
+
+    
+
+    public function __construct()
+    {
+        $this->detalleCompras = new ArrayCollection();
+        $this->pedidos = new ArrayCollection();
+      
+    }
 
     public function getId(): ?int
     {
@@ -167,4 +199,101 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getDireccion(): ?string
+    {
+        return $this->direccion;
+    }
+
+    public function setDireccion(?string $direccion): static
+    {
+        $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    public function getCiudad(): ?string
+    {
+        return $this->ciudad;
+    }
+
+    public function setCiudad(?string $ciudad): static
+    {
+        $this->ciudad = $ciudad;
+
+        return $this;
+    }
+
+    public function getCp(): ?int
+    {
+        return $this->cp;
+    }
+
+    public function setCp(?int $cp): static
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetalleCompra>
+     */
+    public function getDetalleCompras(): Collection
+    {
+        return $this->detalleCompras;
+    }
+
+    public function addDetalleCompra(DetalleCompra $detalleCompra): static
+    {
+        if (!$this->detalleCompras->contains($detalleCompra)) {
+            $this->detalleCompras->add($detalleCompra);
+            $detalleCompra->setIdUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalleCompra(DetalleCompra $detalleCompra): static
+    {
+        if ($this->detalleCompras->removeElement($detalleCompra)) {
+            // set the owning side to null (unless already changed)
+            if ($detalleCompra->getIdUsuario() === $this) {
+                $detalleCompra->setIdUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pedidos>
+     */
+    public function getPedidos(): Collection
+    {
+        return $this->pedidos;
+    }
+
+    public function addPedido(Pedidos $pedido): static
+    {
+        if (!$this->pedidos->contains($pedido)) {
+            $this->pedidos->add($pedido);
+            $pedido->setIdUsuarioPedidos($this);
+        }
+
+        return $this;
+    }
+
+    public function removePedido(Pedidos $pedido): static
+    {
+        if ($this->pedidos->removeElement($pedido)) {
+            // set the owning side to null (unless already changed)
+            if ($pedido->getIdUsuarioPedidos() === $this) {
+                $pedido->setIdUsuarioPedidos(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

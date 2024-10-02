@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Categorias;
+use App\Entity\Campanias;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Categorias>
+ * @extends ServiceEntityRepository<Campanias>
  */
-class CategoriasRepository extends ServiceEntityRepository
+class CampaniasRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Categorias::class);
+        parent::__construct($registry, Campanias::class);
     }
 
     //    /**
-    //     * @return Categorias[] Returns an array of Categorias objects
+    //     * @return Campanias[] Returns an array of Campanias objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class CategoriasRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Categorias
+    //    public function findOneBySomeField($value): ?Campanias
     //    {
     //        return $this->createQueryBuilder('c')
     //            ->andWhere('c.exampleField = :val')
