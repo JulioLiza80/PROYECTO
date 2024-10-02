@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pedidos index{% endblock %}
+
+{% block body %}
+    <h1>Pedidos index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Direccion</th>
+                <th>Ciudad</th>
+                <th>Cp</th>
+                <th>Precio</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pedido in pedidos %}
+            <tr>
+                <td>{{ pedido.id }}</td>
+                <td>{{ pedido.direccion }}</td>
+                <td>{{ pedido.ciudad }}</td>
+                <td>{{ pedido.cp }}</td>
+                <td>{{ pedido.precio }}</td>
+                <td>
+                    <a href="{{ path('app_pedidos_show', {'id': pedido.id}) }}">show</a>
+                    <a href="{{ path('app_pedidos_edit', {'id': pedido.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pedidos_new') }}">Create new</a>
+{% endblock %}

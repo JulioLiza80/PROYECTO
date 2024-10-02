@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lentillas{% endblock %}
+
+{% block body %}
+    <h1>Lentillas</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lentilla.id }}</td>
+            </tr>
+            <tr>
+                <th>Marca</th>
+                <td>{{ lentilla.marca }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ lentilla.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>TipoProducto</th>
+                <td>{{ lentilla.tipoProducto }}</td>
+            </tr>
+            <tr>
+                <th>Frecuencia</th>
+                <td>{{ lentilla.frecuencia }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ lentilla.tipo }}</td>
+            </tr>
+            <tr>
+                <th>Material</th>
+                <td>{{ lentilla.material }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ lentilla.precio }}</td>
+            </tr>
+            <tr>
+                <th>Iva</th>
+                <td>{{ lentilla.iva }}</td>
+            </tr>
+            <tr>
+                <th>Descuento</th>
+                <td>{{ lentilla.descuento }}</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ lentilla.stock }}</td>
+            </tr>
+            <tr>
+                <th>Destacado</th>
+                <td>{{ lentilla.destacado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_lentillas_index') }}">back to list</a>
+
+    <a href="{{ path('app_lentillas_edit', {'id': lentilla.id}) }}">edit</a>
+
+    {{ include('lentillas/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lentillas index{% endblock %}
+
+{% block body %}
+    <h1>Lentillas index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Marca</th>
+                <th>Descripcion</th>
+                <th>TipoProducto</th>
+                <th>Frecuencia</th>
+                <th>Tipo</th>
+                <th>Material</th>
+                <th>Precio</th>
+                <th>Iva</th>
+                <th>Descuento</th>
+                <th>Stock</th>
+                <th>Destacado</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lentilla in lentillas %}
+            <tr>
+                <td>{{ lentilla.id }}</td>
+                <td>{{ lentilla.marca }}</td>
+                <td>{{ lentilla.descripcion }}</td>
+                <td>{{ lentilla.tipoProducto }}</td>
+                <td>{{ lentilla.frecuencia }}</td>
+                <td>{{ lentilla.tipo }}</td>
+                <td>{{ lentilla.material }}</td>
+                <td>{{ lentilla.precio }}</td>
+                <td>{{ lentilla.iva }}</td>
+                <td>{{ lentilla.descuento }}</td>
+                <td>{{ lentilla.stock }}</td>
+                <td>{{ lentilla.destacado }}</td>
+                <td>
+                    <a href="{{ path('app_lentillas_show', {'id': lentilla.id}) }}">show</a>
+                    <a href="{{ path('app_lentillas_edit', {'id': lentilla.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_lentillas_new') }}">Create new</a>
+{% endblock %}

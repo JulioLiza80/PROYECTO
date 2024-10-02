@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DetalleCompra{% endblock %}
+
+{% block body %}
+    <h1>DetalleCompra</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ detalle_compra.id }}</td>
+            </tr>
+            <tr>
+                <th>IdTransaccion</th>
+                <td>{{ detalle_compra.IdTransaccion }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ detalle_compra.fecha ? detalle_compra.fecha|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ detalle_compra.status }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ detalle_compra.email }}</td>
+            </tr>
+            <tr>
+                <th>IdCliente</th>
+                <td>{{ detalle_compra.idCliente }}</td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td>{{ detalle_compra.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_detalle_compra_index') }}">back to list</a>
+
+    <a href="{{ path('app_detalle_compra_edit', {'id': detalle_compra.id}) }}">edit</a>
+
+    {{ include('detalle_compra/_delete_form.html.twig') }}
+{% endblock %}

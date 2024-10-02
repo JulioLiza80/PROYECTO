@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gafas index{% endblock %}
+
+{% block body %}
+    <h1>Gafas index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Descripcion</th>
+                <th>Tipo</th>
+                <th>Aro</th>
+                <th>Puente</th>
+                <th>Talla</th>
+                <th>Varilla</th>
+                <th>ColorMontura</th>
+                <th>ColorLentes</th>
+                <th>MaterialMontura</th>
+                <th>TipoMontura</th>
+                <th>Precio</th>
+                <th>Iva</th>
+                <th>Descuento</th>
+                <th>Stock</th>
+                <th>Destacado</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gafa in gafas %}
+            <tr>
+                <td>{{ gafa.id }}</td>
+                <td>{{ gafa.marca }}</td>
+                <td>{{ gafa.modelo }}</td>
+                <td>{{ gafa.descripcion }}</td>
+                <td>{{ gafa.tipo }}</td>
+                <td>{{ gafa.aro }}</td>
+                <td>{{ gafa.puente }}</td>
+                <td>{{ gafa.talla }}</td>
+                <td>{{ gafa.varilla }}</td>
+                <td>{{ gafa.colorMontura }}</td>
+                <td>{{ gafa.colorLentes }}</td>
+                <td>{{ gafa.materialMontura }}</td>
+                <td>{{ gafa.tipoMontura }}</td>
+                <td>{{ gafa.precio }}</td>
+                <td>{{ gafa.iva }}</td>
+                <td>{{ gafa.descuento }}</td>
+                <td>{{ gafa.stock }}</td>
+                <td>{{ gafa.destacado }}</td>
+                <td>
+                    <a href="{{ path('app_gafas_show', {'id': gafa.id}) }}">show</a>
+                    <a href="{{ path('app_gafas_edit', {'id': gafa.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="19">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_gafas_new') }}">Create new</a>
+{% endblock %}

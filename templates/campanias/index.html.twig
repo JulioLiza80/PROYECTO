@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campanias index{% endblock %}
+
+{% block body %}
+    <h1>Campanias index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for campania in campanias %}
+            <tr>
+                <td>{{ campania.id }}</td>
+                <td>
+                    <a href="{{ path('app_campanias_show', {'id': campania.id}) }}">show</a>
+                    <a href="{{ path('app_campanias_edit', {'id': campania.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_campanias_new') }}">Create new</a>
+{% endblock %}

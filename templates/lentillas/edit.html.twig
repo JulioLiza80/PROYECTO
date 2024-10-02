@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Lentillas{% endblock %}
+
+{% block body %}
+    <h1>Edit Lentillas</h1>
+
+    {{ include('lentillas/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_lentillas_index') }}">back to list</a>
+
+    {{ include('lentillas/_delete_form.html.twig') }}
+{% endblock %}

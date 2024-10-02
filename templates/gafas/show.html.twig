@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gafas{% endblock %}
+
+{% block body %}
+    <h1>Gafas</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gafa.id }}</td>
+            </tr>
+            <tr>
+                <th>Marca</th>
+                <td>{{ gafa.marca }}</td>
+            </tr>
+            <tr>
+                <th>Modelo</th>
+                <td>{{ gafa.modelo }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ gafa.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ gafa.tipo }}</td>
+            </tr>
+            <tr>
+                <th>Aro</th>
+                <td>{{ gafa.aro }}</td>
+            </tr>
+            <tr>
+                <th>Puente</th>
+                <td>{{ gafa.puente }}</td>
+            </tr>
+            <tr>
+                <th>Talla</th>
+                <td>{{ gafa.talla }}</td>
+            </tr>
+            <tr>
+                <th>Varilla</th>
+                <td>{{ gafa.varilla }}</td>
+            </tr>
+            <tr>
+                <th>ColorMontura</th>
+                <td>{{ gafa.colorMontura }}</td>
+            </tr>
+            <tr>
+                <th>ColorLentes</th>
+                <td>{{ gafa.colorLentes }}</td>
+            </tr>
+            <tr>
+                <th>MaterialMontura</th>
+                <td>{{ gafa.materialMontura }}</td>
+            </tr>
+            <tr>
+                <th>TipoMontura</th>
+                <td>{{ gafa.tipoMontura }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ gafa.precio }}</td>
+            </tr>
+            <tr>
+                <th>Iva</th>
+                <td>{{ gafa.iva }}</td>
+            </tr>
+            <tr>
+                <th>Descuento</th>
+                <td>{{ gafa.descuento }}</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ gafa.stock }}</td>
+            </tr>
+            <tr>
+                <th>Destacado</th>
+                <td>{{ gafa.destacado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_gafas_index') }}">back to list</a>
+
+    <a href="{{ path('app_gafas_edit', {'id': gafa.id}) }}">edit</a>
+
+    {{ include('gafas/_delete_form.html.twig') }}
+{% endblock %}
