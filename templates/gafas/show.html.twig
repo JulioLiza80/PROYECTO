@@ -79,6 +79,24 @@
                 <th>Destacado</th>
                 <td>{{ gafa.destacado }}</td>
             </tr>
+            <tr>
+                <th>Imagen1</th>
+                <td> 
+                    <img src="{{ vich_uploader_asset(gafa, 'imageFile') }}" alt="{{ gafa.imageName }}" width="80px">
+                </td>
+            </tr>
+            <tr>
+                <th>Imagen2</th>
+                <td> 
+                    <img src="{{ vich_uploader_asset(gafa, 'imageFile2') }}" alt="{{ gafa.imageName2 }}" width="80px">
+                </td>
+            </tr>
+            <tr>
+                <th>Imagen3</th>
+                <td> 
+                    <img src="{{ vich_uploader_asset(gafa, 'imageFile3') }}" alt="{{ gafa.imageName3 }}" width="80px">
+                </td>
+            </tr>
         </tbody>
     </table>
 

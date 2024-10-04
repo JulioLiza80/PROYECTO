@@ -21,6 +21,7 @@
                 <th>Stock</th>
                 <th>Destacado</th>
                 <th>actions</th>
+                 <th>Imagen1</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,11 @@
                 <td>{{ lentilla.descuento }}</td>
                 <td>{{ lentilla.stock }}</td>
                 <td>{{ lentilla.destacado }}</td>
+                 <td>
+                    {% if lentilla.imageName %}
+                    <img src="{{ vich_uploader_asset(lentilla, 'imageFile') }}" alt="{{ lentilla.imageName }}" width="80px">
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('app_lentillas_show', {'id': lentilla.id}) }}">show</a>
                     <a href="{{ path('app_lentillas_edit', {'id': lentilla.id}) }}">edit</a>
@@ -50,6 +56,7 @@
         {% endfor %}
         </tbody>
     </table>
+    
 
     <a href="{{ path('app_lentillas_new') }}">Create new</a>
 {% endblock %}

@@ -12,9 +12,9 @@ vich_uploader:
             delete_on_remove: true
 
 
-        products:
-            uri_prefix: /images/products
-            upload_destination: '%kernel.project_dir%/public/images/products'
+        gafas:
+            uri_prefix: /images/gafas
+            upload_destination: '%kernel.project_dir%/public/images/gafas'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
             inject_on_load: false
@@ -25,6 +25,16 @@ vich_uploader:
         campania:
             uri_prefix: /campania
             upload_destination: '%kernel.project_dir%/public/campania'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+
+        lentillas:
+            uri_prefix: /images/lentillas
+            upload_destination: '%kernel.project_dir%/public/images/lentillas'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
             inject_on_load: false

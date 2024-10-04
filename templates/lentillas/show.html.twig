@@ -55,6 +55,12 @@
                 <th>Destacado</th>
                 <td>{{ lentilla.destacado }}</td>
             </tr>
+             <tr>
+                <th>Imagen1</th>
+                <td> 
+                    <img src="{{ vich_uploader_asset(lentilla, 'imageFile') }}" alt="{{ lentilla.imageName }}" width="80px">
+                </td>
+            </tr>
         </tbody>
     </table>
 

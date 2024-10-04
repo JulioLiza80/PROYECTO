@@ -8,6 +8,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 class GafasType extends AbstractType
 {
@@ -31,11 +33,14 @@ class GafasType extends AbstractType
             ->add('descuento')
             ->add('stock')
             ->add('destacado')
-            ->add('detallePedidos', EntityType::class, [
+        /*    ->add('detallePedidos', EntityType::class, [
                 'class' => DetallePedido::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-            ])
+            ])*/
+            ->add('imageFile', VichImageType::class)
+            ->add('imageFile2', VichImageType::class)
+            ->add('imageFile3', VichImageType::class)
         ;
     }
 
