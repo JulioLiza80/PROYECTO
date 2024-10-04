@@ -27,24 +27,31 @@ class CampaniasCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-           // IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             //imagen1
-            ImageField::new('imageName', 'Campaña1')
-            ->onlyOnIndex()
-            ->setBasePath('campania'),
-            //subir Imagen1
-            ImageField::new('imageFile', 'campaña1')
-            ->setUploadDir('public'),
-
+           ImageField::new('imageName', 'Campaña1')
+            ->setBasePath('campania')
+            ->setUploadDir('public/campania')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired(false),
+            //imagen2
             ImageField::new('imageName2', 'Campaña2')
-            ->onlyOnIndex()
-            ->setBasePath('campania'),
+            ->setBasePath('campania')
+            ->setUploadDir('public/campania')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired(false),
+            //imagen3 
             ImageField::new('imageName3', 'Campaña3')
-            ->onlyOnIndex()
-            ->setBasePath('campania'),
+            ->setBasePath('campania')
+            ->setUploadDir('public/campania')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired(false),
+            //imagen4
             ImageField::new('imageName4', 'Campaña4')
-            ->onlyOnIndex()
-            ->setBasePath('campania'),
+            ->setBasePath('campania')
+            ->setUploadDir('public/campania')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired(false),
           
         ];
     }
