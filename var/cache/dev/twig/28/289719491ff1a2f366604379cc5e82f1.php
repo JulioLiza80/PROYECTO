@@ -210,9 +210,10 @@ class __TwigTemplate_e85b4398405e718d48916f842bdf8ad2 extends Template
         // line 57
         yield "        </tbody>
     </table>
+    
 
     <a href=\"";
-        // line 60
+        // line 61
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_lentillas_new");
         yield "\">Create new</a>
 ";
@@ -246,7 +247,7 @@ class __TwigTemplate_e85b4398405e718d48916f842bdf8ad2 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  216 => 60,  211 => 57,  202 => 53,  193 => 49,  189 => 48,  185 => 46,  177 => 44,  175 => 43,  170 => 41,  166 => 40,  162 => 39,  158 => 38,  154 => 37,  150 => 36,  146 => 35,  142 => 34,  138 => 33,  134 => 32,  130 => 31,  126 => 30,  123 => 29,  118 => 28,  94 => 6,  84 => 5,  64 => 3,  41 => 1,);
+        return array (  217 => 61,  211 => 57,  202 => 53,  193 => 49,  189 => 48,  185 => 46,  177 => 44,  175 => 43,  170 => 41,  166 => 40,  162 => 39,  158 => 38,  154 => 37,  150 => 36,  146 => 35,  142 => 34,  138 => 33,  134 => 32,  130 => 31,  126 => 30,  123 => 29,  118 => 28,  94 => 6,  84 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -309,6 +310,7 @@ class __TwigTemplate_e85b4398405e718d48916f842bdf8ad2 extends Template
         {% endfor %}
         </tbody>
     </table>
+    
 
     <a href=\"{{ path('app_lentillas_new') }}\">Create new</a>
 {% endblock %}

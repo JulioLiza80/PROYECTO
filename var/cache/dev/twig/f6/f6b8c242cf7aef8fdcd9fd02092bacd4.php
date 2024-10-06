@@ -201,8 +201,10 @@ class __TwigTemplate_9236f22cdeedc2779465dcac11e1a5d9 extends Template
         yield "        </tbody>
     </table>
 
+    
+
     <a href=\"";
-        // line 56
+        // line 58
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_campanias_new");
         yield "\">Create new</a>
 ";
@@ -236,7 +238,7 @@ class __TwigTemplate_9236f22cdeedc2779465dcac11e1a5d9 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  206 => 56,  201 => 53,  192 => 49,  183 => 45,  179 => 44,  175 => 42,  167 => 40,  165 => 39,  161 => 37,  153 => 35,  151 => 34,  147 => 32,  139 => 30,  137 => 29,  133 => 27,  125 => 25,  123 => 24,  118 => 22,  115 => 21,  110 => 20,  94 => 6,  84 => 5,  64 => 3,  41 => 1,);
+        return array (  208 => 58,  201 => 53,  192 => 49,  183 => 45,  179 => 44,  175 => 42,  167 => 40,  165 => 39,  161 => 37,  153 => 35,  151 => 34,  147 => 32,  139 => 30,  137 => 29,  133 => 27,  125 => 25,  123 => 24,  118 => 22,  115 => 21,  110 => 20,  94 => 6,  84 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -295,6 +297,8 @@ class __TwigTemplate_9236f22cdeedc2779465dcac11e1a5d9 extends Template
         {% endfor %}
         </tbody>
     </table>
+
+    
 
     <a href=\"{{ path('app_campanias_new') }}\">Create new</a>
 {% endblock %}
