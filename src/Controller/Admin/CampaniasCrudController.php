@@ -29,7 +29,7 @@ class CampaniasCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             //imagen1
-           ImageField::new('imageName', 'Campaña1')
+            ImageField::new('imageName', 'Campaña1')
             ->setBasePath('campania')
             ->setUploadDir('public/campania')
             ->setUploadedFileNamePattern('[randomhash].[extension]')
