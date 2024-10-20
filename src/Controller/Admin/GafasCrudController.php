@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class GafasCrudController extends AbstractCrudController
 {
@@ -42,6 +43,7 @@ class GafasCrudController extends AbstractCrudController
             NumberField::new('descuento'),
             NumberField::new('stock'),
             choiceField::new('destacado')->setChoices(['No destacado'=>0,'destacado'=>1]),
+          
             //imagen1
             ImageField::new('imageName', 'principal')
             ->setBasePath('images/gafas')
@@ -60,7 +62,20 @@ class GafasCrudController extends AbstractCrudController
             ->setUploadDir('public/images/gafas')
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),
+            ChoiceField::new('categoria')->setChoices(['gafas'=>1,]),
+            
         ];
     }
+
+            //BUSCADOR
+            public function configureCrud(Crud $crud): Crud
+            {
+                return $crud
+                    ->setEntityLabelInSingular('Producto')
+                    ->setEntityLabelInPlural('Productos')
+                    ->setSearchFields(['marca','modelo'])
+                    ->setDefaultSort(['id' => 'DESC'])
+                ;
+            }
     
 }

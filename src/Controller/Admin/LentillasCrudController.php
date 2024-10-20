@@ -12,6 +12,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Symfony\Component\Validator\Constraints\Choice;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+
 
 class LentillasCrudController extends AbstractCrudController
 {
@@ -42,8 +44,24 @@ class LentillasCrudController extends AbstractCrudController
             ->setUploadDir('public/images/lentillas')
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),
+            ChoiceField::new('categoria')->setChoices(['Lentillas Y Productos'=>2,]),
+
             
         ];
     }
-    
+
+         //BUSCADOR
+         public function configureCrud(Crud $crud): Crud
+         {
+             return $crud
+                 ->setEntityLabelInSingular('Producto')
+                 ->setEntityLabelInPlural('Productos')
+                 ->setSearchFields(['marca','tipoProducto'])
+                 ->setDefaultSort(['id' => 'DESC'])
+             ;
+         }
+
+         
+         
+         
 }
