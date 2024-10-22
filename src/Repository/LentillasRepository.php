@@ -30,14 +30,26 @@ class LentillasRepository extends ServiceEntityRepository
     //            ->getResult()
     //        ;
     //    }
+   
 
-    //    public function findOneBySomeField($value): ?Lentillas
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findOneById($value): ?Lentillas
+        {
+            return $this->createQueryBuilder('l')
+                ->andWhere('l.id = :val')
+                ->setParameter('val', $value)
+                ->getQuery()
+                ->getOneOrNullResult()
+            ;
+        }
+
+        //Actualizar stock
+        public function actualizarStock($cantidad, Lentillas $lentillas):void
+      {
+         $c=$lentillas->getStock()-$cantidad;
+          $lentillas->setStock($c);
+          $this->getEntityManager()->persist($lentillas);
+          $this->getEntityManager()->flush();
+        
+        
+       }
 }

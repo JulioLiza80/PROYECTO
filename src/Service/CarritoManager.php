@@ -31,14 +31,13 @@ class CarritoManager
         $carrito[]=['producto'=>$lentillas, 'cantidad'=>$cantidadLentillas];
         $session->set('carrito', $carrito);
     }
-
     
-    public function eliminarDel_Carrito($id): void
+    public function eliminarDel_Carrito($id, $cat): void
     {
         $session = $this->requestStack->getSession();
         $carrito = $session->get('carrito');
         foreach($carrito as $index => $elemento){
-            if($elemento['producto']->getId() == $id){
+            if($elemento['producto']->getId() == $id && $elemento['producto']->getCategoria()== $cat){
                 unset($carrito[$index]);
                 break;
             }

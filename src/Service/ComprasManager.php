@@ -41,7 +41,7 @@ class ComprasManager
 
   public function nuevaCompra(DetalleCompra $detallecompra, User $user): DetalleCompra
   {
-    $t=18; //este es el indicador de compra
+    $t=1; //este es el indicador de compra
     $detallecompra = new DetalleCompra();
     $detallecompra->setIdUsuario($user);
     $detallecompra->setIdTransaccion($t);//CAMPO RECIBIDO
@@ -50,7 +50,15 @@ class ComprasManager
     $detallecompra->setStatus('complete'); //CAMPO RECIBIDO
     $detallecompra->setEmail($user->getEmail());
     //$detallecompra->serIdCliente();CAMPO RECIBIDO
-    $detallecompra->setTotal(100); //CAMPO RECIBIDO
+    $session = $this->requestStack->getSession();
+    $carrito= $session->get('carrito');
+    $total=0;
+    foreach($carrito as $elemento){
+     
+      $precio=$elemento['producto']->getPrecio();
+      $total=$total+$precio;
+    }
+    $detallecompra->setTotal($total); 
     
     $this->detalleCompraRepository->save($detallecompra, true);
 
@@ -78,6 +86,27 @@ class ComprasManager
 
     return $pedido;
   }
+
+  public function stocks(){
+       //recuperamos carrito
+    $session = $this->requestStack->getSession();
+    $carrito= $session->get('carrito');
+    foreach($carrito as $elemento){
+     if($elemento['producto']->getCategoria()==1){
+          $gafas= New Gafas();
+          $gafas=$this->gafasRepository->findOneById($elemento['producto']->getId());
+          $this->gafasRepository->actualizarStock($elemento['cantidad'], $gafas);
+      
+       }if($elemento['producto']->getCategoria()==2){
+          $lentillas= New Lentillas();
+          $lentillas=$this->lentillasRepository->findOneById($elemento['producto']->getId());
+          $this->lentillasRepository->actualizarStock($elemento['cantidad'],$lentillas);
+         
+    }
+   
+  }
+}
+
   
   public function nuevoDetallePedido( Pedidos $pedido, DetallePedido $detallePedido, $t) :DetallePedido
   {
@@ -100,6 +129,7 @@ class ComprasManager
       $this->detallePedidoRepository->save($detallePedido, true);   
     
     }
+
 
     //vaciamos carrito
      $session->remove('carrito');

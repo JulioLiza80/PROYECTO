@@ -18,7 +18,7 @@ class CarritoController extends AbstractController
     #[Route('/{id}/aniadirCarritoGafas', name: 'app_carrito_aniadirGafas', methods: ['POST', 'GET'])]
     public function añadirGafasAction(Request $request, Gafas $gafas, CarritoManager $carritoManager): Response
     {
-        $cantidad = $request->request->get('cantidad', 1);//cambiar a null
+        $cantidad = $request->request->get('cantidad', 1);//cambiar a null cuando se establezcan las cantidades
 
       
         $carritoManager->añadirA_CarritoGafas($gafas, $cantidad);
@@ -30,7 +30,7 @@ class CarritoController extends AbstractController
     #[Route('/{id}/aniadirCarritoLentillas', name: 'app_carrito_aniadirLentillas', methods: ['POST', 'GET'])]
     public function añadirLentillasAction(Request $request, Lentillas $lentillas, CarritoManager $carritoManager): Response
     {
-        $cantidad = $request->request->get('cantidad',1);//cambiar a null
+        $cantidad = $request->request->get('cantidad', 1);//cambiar a null cuando se estableca las cantidades
 
         $carritoManager->añadirA_CarritoLentillas($lentillas, $cantidad);
 
@@ -39,12 +39,13 @@ class CarritoController extends AbstractController
     }
 
 
-    #[Route('/{id}/eliminarCarrito', name: 'app_carrito_eliminarProducto', methods: ['POST', 'GET'])]
+    #[Route('/{id}/eliminarCarrito/{cat}', name: 'app_carrito_eliminarProducto', methods: ['POST', 'GET'])]
     public function eliminarProductoAction($id, CarritoManager $carritoManager)//: Response
     {
-        $carritoManager->eliminarDel_Carrito($id);
+        $cat=$_GET['cat'];
+        $carritoManager->eliminarDel_Carrito($id, $cat);
 
-        return new JsonResponse(['suscess' => true]);
+        return $this->render('carrito.html.twig', []); 
     
        // return $this->redirectToRoute('app_carrito', [], Response::HTTP_SEE_OTHER);
     }
@@ -56,8 +57,8 @@ class CarritoController extends AbstractController
         $session = $request->getSession();
         $carrito= $session->get('carrito');
         
-        dd($carrito);
-        //return $this->render('producto/carrito.html.twig', []);   
+     
+       return $this->render('carrito.html.twig', []);   
       
         
     }

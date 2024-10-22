@@ -31,7 +31,7 @@ class CompraController extends AbstractController
       $session = $request->getSession();
     
     
-         //creació de detalles compra
+       //creació de detalles compra
           $compra=$comprasManager->nuevaCompra(new DetalleCompra(),$this->getUser());
          
 
@@ -52,9 +52,14 @@ class CompraController extends AbstractController
 
          $mailer->send($email);
 
-        //creacion de detallePedido
-         $detallePedido= $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
+        //actualizar stock
+        $prueba=$comprasManager->stocks();
         
+
+        //creacion de detallePedido
+        $detallePedido= $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
+        
+
        
          dd($session->get('carrito'));
 
