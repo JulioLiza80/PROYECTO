@@ -249,7 +249,7 @@ window.paypal
 
     reload.forEach(element => {
         element.addEventListener('click', function(){
-            console.log(reload)
+            location.reload();
         });
      });
     
