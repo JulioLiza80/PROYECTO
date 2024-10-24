@@ -18,7 +18,7 @@ class CarritoController extends AbstractController
     #[Route('/{id}/aniadirCarritoGafas', name: 'app_carrito_aniadirGafas', methods: ['POST', 'GET'])]
     public function añadirGafasAction(Request $request, Gafas $gafas, CarritoManager $carritoManager): Response
     {
-        $cantidad = $request->request->get('cantidad', 1);//cambiar a null cuando se establezcan las cantidades
+        $cantidad = $request->request->get('cantidad', 1);//cambiar a la variable recibida cuando se establezcan las cantidades
 
       
         $carritoManager->añadirA_CarritoGafas($gafas, $cantidad);
@@ -30,7 +30,7 @@ class CarritoController extends AbstractController
     #[Route('/{id}/aniadirCarritoLentillas', name: 'app_carrito_aniadirLentillas', methods: ['POST', 'GET'])]
     public function añadirLentillasAction(Request $request, Lentillas $lentillas, CarritoManager $carritoManager): Response
     {
-        $cantidad = $request->request->get('cantidad', 1);//cambiar a null cuando se estableca las cantidades
+        $cantidad = $request->request->get('cantidad', 1);//cambiar a la variable recibida cuando se estableca las cantidades
 
         $carritoManager->añadirA_CarritoLentillas($lentillas, $cantidad);
 

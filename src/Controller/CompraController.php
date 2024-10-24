@@ -62,49 +62,51 @@ class CompraController extends AbstractController
            
   
                   //creacion de correos
+                        //correo cliente
                         $email = (new TemplatedEmail())
-                          ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
-                          ->to((string) $this->getUser()->getUserIdentifier())
-                          ->subject('Pedido' . $pedido->getId() . ', Optica Nova')
-                          ->htmlTemplate('correoCompra/email.html.twig')
-                          ->context([
-                          'carrito' => $session->get('carrito'),
-                          ]);
-    
-  
-                          $mailer->send($email);
-  
-                    //actualizar stock
-                          $prueba=$comprasManager->stocks();
-          
-  
-                    //creacion de detallePedido
-                          $detallePedido= $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
-                          return $this->redirectToRoute('app_home');
-                          
-                      }else{
+                              ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
+                              ->to((string) $this->getUser()->getUserIdentifier())
+                              ->subject('Pedido' . $pedido->getId() . ', Optica Nova')
+                              ->htmlTemplate('correoCompra/clienteCompra.html.twig')
+                              ->context([
+                              'carrito' => $session->get('carrito'),
+                              ]);
+                        $mailer->send($email);
+                        //correo tienda
+                        // $email2=(new TemplatedEmail())
+                        //       ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova Pedidos'))
+                        //       ->to(correopedidos@.com)
+                        //       ->subject('Pedido' . $pedido->getId() . ', Optica Nova')
+                        //       ->htmlTemplate('correoCompra/pedido.html.twig')
+                        //       ->context([
+                        //       'carrito' => $session->get('carrito'),
+                        //       ]);
+                        // $mailer->send($email2);
+
+                  //actualizar stock
+                        $comprasManager->stocks();
+
+
+                  //creacion de detallePedido
+                        $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
+                        return $this->redirectToRoute('app_home');
+                  //supuesto de pago incompleto
+                  }else{
 
                             //generar pedido imcompleto
 
 
-                    }
-           }
-         }else{
+                  }
+            }
+      //si no exsisten las variables necesarias
+            }else{
             return $this->render('index.html.twig', []);
-          
-           }
-       }
-       
-  
-     
       
-     
-    
-    
-       
-    }
+            }
+      }
+}
 
-   
+      
 
 
 
