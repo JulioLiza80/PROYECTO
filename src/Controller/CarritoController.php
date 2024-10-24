@@ -45,9 +45,9 @@ class CarritoController extends AbstractController
         $cat=$_GET['cat'];
         $carritoManager->eliminarDel_Carrito($id, $cat);
 
-        return $this->render('carrito.html.twig', []); 
+        //return $this->render('carrito.html.twig', []); 
     
-       // return $this->redirectToRoute('app_carrito', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_carrito', [], Response::HTTP_SEE_OTHER);
     }
 
 
@@ -58,10 +58,16 @@ class CarritoController extends AbstractController
         $carrito= $session->get('carrito');
         
      
-       return $this->render('carrito.html.twig', []);   
+       return $this->render('carrito.html.twig', [
+
+        'idcliente'=>$_ENV["APP_PAYPAL"]
+       ]); 
+       
+     
       
         
     }
+
 
 
     /*{% for producto in app.session.get('carrito') %}

@@ -36,7 +36,7 @@ class Pedidos
     private ?string $precio = null;
 
     #[ORM\Column]
-    private ?int $IdTransaccion = null;
+    private ?string $IdTransaccion = null;
 
     
 
@@ -117,12 +117,12 @@ class Pedidos
         return $this;
     }
 
-    public function getIdTransaccion(): ?int
+    public function getIdTransaccion(): ?string
     {
         return $this->IdTransaccion;
     }
 
-    public function setIdTransaccion(int $IdTransaccion): static
+    public function setIdTransaccion(string $IdTransaccion): static
     {
         $this->IdTransaccion = $IdTransaccion;
 

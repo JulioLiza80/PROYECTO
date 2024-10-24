@@ -25,47 +25,86 @@ class CompraController extends AbstractController
     #[Route('/compra', name: 'app_compra', methods: ['POST', 'GET'])]
     public function crearCompra(RequestStack $request, ComprasManager $comprasManager, MailerInterface $mailer): Response
     { 
-  
-      //if(status == 'completed){
-      
-      $session = $request->getSession();
-    
-    
-       //creació de detalles compra
-          $compra=$comprasManager->nuevaCompra(new DetalleCompra(),$this->getUser());
+       $session = $request->getSession();
+       $carrito= $session->get('carrito');
+       $total=0;
+       foreach($carrito as $elemento){
+        
+         $precio=$elemento['producto']->getPrecio();
+         $total=$total+$precio;
+       }
+
+        if(isset($_POST['total'] ) && isset($_POST['detalles']))
+       {
+           $detalles= json_decode($_POST['detalles']);
+
+           if($_POST['total']>=$total){
+              $status=null;
+              $id=null;
+
+             foreach($detalles as $key => $valor){
+                if($key=='status'){
+                  $status=$valor;
+                }
+                if($key=='id'){
+                   $id=$valor;
+                }
+                  
+              }
+                   if($status=='COMPLETED'){
+
+                  //creació de detalles compra
+                        $compra=$comprasManager->nuevaCompra(new DetalleCompra(),$this->getUser(),$id);
          
 
-        //creación de pedido
-          $pedido=$comprasManager->nuevoPedido($compra, new Pedidos(), $this->getUser(),$compra->getIdTransaccion());
-         
-
-         //creacion de correos
-         $email = (new TemplatedEmail())
-         ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
-          ->to((string) $this->getUser()->getUserIdentifier())
-         ->subject('Pedido' . $pedido->getId() . ', Optica Nova')
-         ->htmlTemplate('correoCompra/email.html.twig')
-         ->context([
-          'carrito' => $session->get('carrito'),
-          ]);
+                  //creación de pedido
+                        $pedido=$comprasManager->nuevoPedido($compra, new Pedidos(), $this->getUser(),$compra->getIdTransaccion());
+           
   
+                  //creacion de correos
+                        $email = (new TemplatedEmail())
+                          ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
+                          ->to((string) $this->getUser()->getUserIdentifier())
+                          ->subject('Pedido' . $pedido->getId() . ', Optica Nova')
+                          ->htmlTemplate('correoCompra/email.html.twig')
+                          ->context([
+                          'carrito' => $session->get('carrito'),
+                          ]);
+    
+  
+                          $mailer->send($email);
+  
+                    //actualizar stock
+                          $prueba=$comprasManager->stocks();
+          
+  
+                    //creacion de detallePedido
+                          $detallePedido= $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
+                          return $this->redirectToRoute('app_home');
+                          
+                      }else{
 
-         $mailer->send($email);
+                            //generar pedido imcompleto
 
-        //actualizar stock
-        $prueba=$comprasManager->stocks();
-        
 
-        //creacion de detallePedido
-        $detallePedido= $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
-        
-
+                    }
+           }
+         }else{
+            return $this->render('index.html.twig', []);
+          
+           }
+       }
        
-         dd($session->get('carrito'));
-
-        
-        //}
-
+  
+     
       
+     
+    
+    
+       
     }
-}
+
+   
+
+
+

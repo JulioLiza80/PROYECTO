@@ -19,7 +19,7 @@ class DetalleCompra
     private ?User $idUsuario = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $IdTransaccion = null;
+    private ?string $IdTransaccion = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $fecha = null;
@@ -53,12 +53,12 @@ class DetalleCompra
         return $this;
     }
 
-    public function getIdTransaccion(): ?int
+    public function getIdTransaccion(): ?string
     {
         return $this->IdTransaccion;
     }
 
-    public function setIdTransaccion(?int $IdTransaccion): static
+    public function setIdTransaccion(?string $IdTransaccion): static
     {
         $this->IdTransaccion = $IdTransaccion;
 

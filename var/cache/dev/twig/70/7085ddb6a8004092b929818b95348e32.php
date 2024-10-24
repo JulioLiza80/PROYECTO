@@ -67,13 +67,13 @@ class __TwigTemplate_39752f94c583a3378dd1a71f0fbbcc91 extends Template
         ";
         // line 11
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 15
+        // line 16
         yield "    </head>
     <body>
         ";
-        // line 17
-        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
         // line 18
+        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
+        // line 19
         yield "    </body>
 </html>
 ";
@@ -140,10 +140,11 @@ class __TwigTemplate_39752f94c583a3378dd1a71f0fbbcc91 extends Template
 
         // line 12
         yield "        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"></script>
+        <script defer src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>
             ";
-        // line 13
-        yield from $this->unwrap()->yieldBlock('importmap', $context, $blocks);
         // line 14
+        yield from $this->unwrap()->yieldBlock('importmap', $context, $blocks);
+        // line 15
         yield "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -154,7 +155,7 @@ class __TwigTemplate_39752f94c583a3378dd1a71f0fbbcc91 extends Template
         return; yield '';
     }
 
-    // line 13
+    // line 14
     public function block_importmap($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -174,7 +175,7 @@ class __TwigTemplate_39752f94c583a3378dd1a71f0fbbcc91 extends Template
         return; yield '';
     }
 
-    // line 17
+    // line 18
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -206,7 +207,7 @@ class __TwigTemplate_39752f94c583a3378dd1a71f0fbbcc91 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  178 => 17,  158 => 13,  147 => 14,  145 => 13,  142 => 12,  132 => 11,  120 => 8,  110 => 7,  90 => 5,  77 => 18,  75 => 17,  71 => 15,  69 => 11,  66 => 10,  64 => 7,  59 => 5,  53 => 1,);
+        return array (  179 => 18,  159 => 14,  148 => 15,  146 => 14,  142 => 12,  132 => 11,  120 => 8,  110 => 7,  90 => 5,  77 => 19,  75 => 18,  71 => 16,  69 => 11,  66 => 10,  64 => 7,  59 => 5,  53 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -223,6 +224,7 @@ class __TwigTemplate_39752f94c583a3378dd1a71f0fbbcc91 extends Template
 
         {% block javascripts %}
         <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"></script>
+        <script defer src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js\"></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
@@ -230,6 +232,6 @@ class __TwigTemplate_39752f94c583a3378dd1a71f0fbbcc91 extends Template
         {% block body %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "C:\\Users\\stark\\Desktop\\proyecto\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\stark\\Desktop\\optica\\kraken\\proyecto\\templates\\base.html.twig");
     }
 }

@@ -39,9 +39,9 @@ class ComprasManager
   
   }
 
-  public function nuevaCompra(DetalleCompra $detallecompra, User $user): DetalleCompra
+  public function nuevaCompra(DetalleCompra $detallecompra, User $user, $t): DetalleCompra
   {
-    $t=1; //este es el indicador de compra
+   
     $detallecompra = new DetalleCompra();
     $detallecompra->setIdUsuario($user);
     $detallecompra->setIdTransaccion($t);//CAMPO RECIBIDO
