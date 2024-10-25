@@ -70,7 +70,7 @@ class __TwigTemplate_568ac36cf3d38b641e904216a34ed304 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Reset your password";
+        yield "Restablecer su contraseña";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -105,7 +105,7 @@ class __TwigTemplate_568ac36cf3d38b641e904216a34ed304 extends Template
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['flash_error'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 9
-        yield "    <h1>Reset your password</h1>
+        yield "    <h1>Restablecer su contraseña</h1>
 
     ";
         // line 11
@@ -117,12 +117,12 @@ class __TwigTemplate_568ac36cf3d38b641e904216a34ed304 extends Template
         yield "
         <div>
             <small>
-                Enter your email address, and we will send you a
-                link to reset your password.
+                Ingresa tu dirección de correo electrónico y te enviaremos un
+                enlace para restablecer tu contraseña.
             </small>
         </div>
 
-        <button class=\"btn btn-primary\">Send password reset email</button>
+        <button class=\"btn btn-primary\">Enviar correo electrónico de restablecimiento de contraseña</button>
     ";
         // line 21
         yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["requestForm"]) || array_key_exists("requestForm", $context) ? $context["requestForm"] : (function () { throw new RuntimeError('Variable "requestForm" does not exist.', 21, $this->source); })()), 'form_end');
@@ -165,26 +165,26 @@ class __TwigTemplate_568ac36cf3d38b641e904216a34ed304 extends Template
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Restablecer su contraseña{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('reset_password_error') %}
         <div class=\"alert alert-danger\" role=\"alert\">{{ flash_error }}</div>
     {% endfor %}
-    <h1>Reset your password</h1>
+    <h1>Restablecer su contraseña</h1>
 
     {{ form_start(requestForm) }}
         {{ form_row(requestForm.email) }}
         <div>
             <small>
-                Enter your email address, and we will send you a
-                link to reset your password.
+                Ingresa tu dirección de correo electrónico y te enviaremos un
+                enlace para restablecer tu contraseña.
             </small>
         </div>
 
-        <button class=\"btn btn-primary\">Send password reset email</button>
+        <button class=\"btn btn-primary\">Enviar correo electrónico de restablecimiento de contraseña</button>
     {{ form_end(requestForm) }}
 {% endblock %}
-", "reset_password/request.html.twig", "C:\\Users\\stark\\Desktop\\proyecto\\templates\\reset_password\\request.html.twig");
+", "reset_password/request.html.twig", "C:\\Users\\stark\\Desktop\\optica\\kraken\\proyecto\\templates\\reset_password\\request.html.twig");
     }
 }

@@ -73,7 +73,7 @@ class GafasCrudController extends AbstractCrudController
                 return $crud
                     ->setEntityLabelInSingular('Producto')
                     ->setEntityLabelInPlural('Productos')
-                    ->setSearchFields(['marca','modelo'])
+                    ->setSearchFields(['marca','modelo','id'])
                     ->setDefaultSort(['id' => 'DESC'])
                 ;
             }

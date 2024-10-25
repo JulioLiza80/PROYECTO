@@ -70,7 +70,7 @@ class __TwigTemplate_25237ff7f5aed5d32052dfb73a9fa79d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Register";
+        yield "Registro";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -106,7 +106,7 @@ class __TwigTemplate_25237ff7f5aed5d32052dfb73a9fa79d extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 9
         yield "
-    <h1>Register</h1>
+    <h1>Registro</h1>
 
     ";
         // line 12
@@ -131,7 +131,7 @@ class __TwigTemplate_25237ff7f5aed5d32052dfb73a9fa79d extends Template
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["registrationForm"]) || array_key_exists("registrationForm", $context) ? $context["registrationForm"] : (function () { throw new RuntimeError('Variable "registrationForm" does not exist.', 19, $this->source); })()), "agreeTerms", [], "any", false, false, false, 19), 'row');
         yield "
 
-        <button type=\"submit\" class=\"btn\">Register</button>
+        <button type=\"submit\" class=\"btn\">Registrar</button>
     ";
         // line 22
         yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["registrationForm"]) || array_key_exists("registrationForm", $context) ? $context["registrationForm"] : (function () { throw new RuntimeError('Variable "registrationForm" does not exist.', 22, $this->source); })()), 'form_end');
@@ -174,14 +174,14 @@ class __TwigTemplate_25237ff7f5aed5d32052dfb73a9fa79d extends Template
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Registro{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class=\"alert alert-danger\" role=\"alert\">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1>Registro</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -192,9 +192,9 @@ class __TwigTemplate_25237ff7f5aed5d32052dfb73a9fa79d extends Template
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type=\"submit\" class=\"btn\">Register</button>
+        <button type=\"submit\" class=\"btn\">Registrar</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
-", "registration/register.html.twig", "C:\\Users\\stark\\Desktop\\proyecto\\templates\\registration\\register.html.twig");
+", "registration/register.html.twig", "C:\\Users\\stark\\Desktop\\optica\\kraken\\proyecto\\templates\\registration\\register.html.twig");
     }
 }

@@ -47,9 +47,9 @@ class PedidosCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
 {
     return $crud
-        ->setEntityLabelInSingular('idUsuario')
-        ->setEntityLabelInPlural('idUsuarios')
-        ->setSearchFields(['idUsuario.id', 'Transaccion'])
+        ->setEntityLabelInSingular('Pedido')
+        ->setEntityLabelInPlural('Pedidos')
+        ->setSearchFields(['id'])
         ->setDefaultSort(['id' => 'DESC'])
     ;
 }

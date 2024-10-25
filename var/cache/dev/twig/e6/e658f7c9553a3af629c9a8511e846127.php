@@ -45,22 +45,22 @@ class __TwigTemplate_1b5597f3f28414095f860e6046fba3a2 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "registration/confirmation_email.html.twig"));
 
         // line 1
-        yield "<h1>Hi! Please confirm your email!</h1>
+        yield "<h1>Hola! Por favor confirme su Email!</h1>
 
 <p>
-    Please confirm your email address by clicking the following link: <br><br>
+   Por favor, confirme su dirección de correo electrónico haciendo clic en el siguiente enlace: <br><br>
     <a href=\"";
         // line 5
         yield (isset($context["signedUrl"]) || array_key_exists("signedUrl", $context) ? $context["signedUrl"] : (function () { throw new RuntimeError('Variable "signedUrl" does not exist.', 5, $this->source); })());
-        yield "\">Confirm my Email</a>.
-    This link will expire in ";
+        yield "\">Confirmar mi Email</a>.
+    Este enlace expira en  ";
         // line 6
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans((isset($context["expiresAtMessageKey"]) || array_key_exists("expiresAtMessageKey", $context) ? $context["expiresAtMessageKey"] : (function () { throw new RuntimeError('Variable "expiresAtMessageKey" does not exist.', 6, $this->source); })()), (isset($context["expiresAtMessageData"]) || array_key_exists("expiresAtMessageData", $context) ? $context["expiresAtMessageData"] : (function () { throw new RuntimeError('Variable "expiresAtMessageData" does not exist.', 6, $this->source); })()), "VerifyEmailBundle"), "html", null, true);
         yield ".
 </p>
 
 <p>
-    Cheers!
+    Suerte!
 </p>
 ";
         
@@ -98,17 +98,17 @@ class __TwigTemplate_1b5597f3f28414095f860e6046fba3a2 extends Template
 
     public function getSourceContext(): Source
     {
-        return new Source("<h1>Hi! Please confirm your email!</h1>
+        return new Source("<h1>Hola! Por favor confirme su Email!</h1>
 
 <p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href=\"{{ signedUrl|raw }}\">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+   Por favor, confirme su dirección de correo electrónico haciendo clic en el siguiente enlace: <br><br>
+    <a href=\"{{ signedUrl|raw }}\">Confirmar mi Email</a>.
+    Este enlace expira en  {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>
 
 <p>
-    Cheers!
+    Suerte!
 </p>
-", "registration/confirmation_email.html.twig", "C:\\Users\\stark\\Desktop\\proyecto\\templates\\registration\\confirmation_email.html.twig");
+", "registration/confirmation_email.html.twig", "C:\\Users\\stark\\Desktop\\optica\\kraken\\proyecto\\templates\\registration\\confirmation_email.html.twig");
     }
 }

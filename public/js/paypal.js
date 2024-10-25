@@ -249,8 +249,12 @@ window.paypal
 
     reload.forEach(element => {
         element.addEventListener('click', function(){
-            location.reload();
+          let id=element.dataset.id
+            if(element.dataset.id==id){
+                location.reload();
+            }
+           
         });
-     });
+    });
     
   

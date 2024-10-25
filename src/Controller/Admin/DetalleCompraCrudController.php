@@ -49,9 +49,9 @@ class DetalleCompraCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
 {
     return $crud
-        ->setEntityLabelInSingular('idUsuario')
-        ->setEntityLabelInPlural('idUsuarios')
-        ->setSearchFields(['idUsuario.id', 'email'])
+        ->setEntityLabelInSingular('Compra')
+        ->setEntityLabelInPlural('Compras')
+        ->setSearchFields(['idUsuario.id', 'email', 'IdTransaccion'])
         ->setDefaultSort(['id' => 'DESC'])
     ;
 }

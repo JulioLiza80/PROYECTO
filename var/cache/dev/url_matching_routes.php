@@ -52,27 +52,25 @@ return [
                     .')'
                 .')'
                 .'|/([^/]++)/(?'
-                    .'|aniadirCarrito(?'
-                        .'|Gafas(*:237)'
-                        .'|Lentillas(*:254)'
-                    .')'
-                    .'|eliminarCarrito(*:278)'
+                    .'|aniadirProducto/([^/]++)(*:239)'
+                    .'|eliminarCarrito/([^/]++)(*:271)'
                 .')'
                 .'|/detalle/compra/([^/]++)(?'
-                    .'|(*:314)'
-                    .'|/edit(*:327)'
-                    .'|(*:335)'
+                    .'|(*:307)'
+                    .'|/edit(*:320)'
+                    .'|(*:328)'
                 .')'
+                .'|/([^/]++)/show/([^/]++)(*:360)'
                 .'|/pedidos/([^/]++)(?'
-                    .'|(*:364)'
-                    .'|/edit(*:377)'
-                    .'|(*:385)'
+                    .'|(*:388)'
+                    .'|/edit(*:401)'
+                    .'|(*:409)'
                 .')'
-                .'|/reset\\-password/reset(?:/([^/]++))?(*:430)'
+                .'|/reset\\-password/reset(?:/([^/]++))?(*:454)'
                 .'|/user/([^/]++)(?'
-                    .'|(*:455)'
-                    .'|/edit(*:468)'
-                    .'|(*:476)'
+                    .'|(*:479)'
+                    .'|/edit(*:492)'
+                    .'|(*:500)'
                 .')'
             .')/?$}sDu',
     ],
@@ -85,19 +83,19 @@ return [
         168 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        237 => [[['_route' => 'app_carrito_aniadirGafas', '_controller' => 'App\\Controller\\CarritoController::añadirGafasAction'], ['id'], ['POST' => 0, 'GET' => 1], null, false, false, null]],
-        254 => [[['_route' => 'app_carrito_aniadirLentillas', '_controller' => 'App\\Controller\\CarritoController::añadirLentillasAction'], ['id'], ['POST' => 0, 'GET' => 1], null, false, false, null]],
-        278 => [[['_route' => 'app_carrito_eliminarProducto', '_controller' => 'App\\Controller\\CarritoController::eliminarProductoAction'], ['id'], ['POST' => 0, 'GET' => 1], null, false, false, null]],
-        314 => [[['_route' => 'app_detalle_compra_show', '_controller' => 'App\\Controller\\DetalleCompraController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        327 => [[['_route' => 'app_detalle_compra_edit', '_controller' => 'App\\Controller\\DetalleCompraController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        335 => [[['_route' => 'app_detalle_compra_delete', '_controller' => 'App\\Controller\\DetalleCompraController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        364 => [[['_route' => 'app_pedidos_show', '_controller' => 'App\\Controller\\PedidosController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        377 => [[['_route' => 'app_pedidos_edit', '_controller' => 'App\\Controller\\PedidosController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        385 => [[['_route' => 'app_pedidos_delete', '_controller' => 'App\\Controller\\PedidosController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        430 => [[['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null]],
-        455 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        468 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        476 => [
+        239 => [[['_route' => 'app_aniadir', '_controller' => 'App\\Controller\\CarritoController::show'], ['id', 'cat'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        271 => [[['_route' => 'app_carrito_eliminarProducto', '_controller' => 'App\\Controller\\CarritoController::eliminarProductoAction'], ['id', 'cat'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        307 => [[['_route' => 'app_detalle_compra_show', '_controller' => 'App\\Controller\\DetalleCompraController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        320 => [[['_route' => 'app_detalle_compra_edit', '_controller' => 'App\\Controller\\DetalleCompraController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        328 => [[['_route' => 'app_detalle_compra_delete', '_controller' => 'App\\Controller\\DetalleCompraController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        360 => [[['_route' => 'app_show', '_controller' => 'App\\Controller\\HomeController::show'], ['id', 'cat'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        388 => [[['_route' => 'app_pedidos_show', '_controller' => 'App\\Controller\\PedidosController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        401 => [[['_route' => 'app_pedidos_edit', '_controller' => 'App\\Controller\\PedidosController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        409 => [[['_route' => 'app_pedidos_delete', '_controller' => 'App\\Controller\\PedidosController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        454 => [[['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null]],
+        479 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        492 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        500 => [
             [['_route' => 'app_user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

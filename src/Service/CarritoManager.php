@@ -16,7 +16,7 @@ class CarritoManager
     }
 
 
-    public function añadirA_CarritoGafas(Gafas $gafas, int $cantidadGafas = 1): void
+    public function añadirA_CarritoGafas(Gafas $gafas, int $cantidadGafas ): void
     {
         $session = $this->requestStack->getSession();
         $carrito = $session->get('carrito', []);
@@ -24,7 +24,7 @@ class CarritoManager
         $session->set('carrito', $carrito);
     }
 
-    public function añadirA_CarritoLentillas(Lentillas $lentillas, int $cantidadLentillas = 1): void
+    public function añadirA_CarritoLentillas(Lentillas $lentillas, int $cantidadLentillas ): void
     {
         $session = $this->requestStack->getSession();
         $carrito = $session->get('carrito', []);

@@ -7,6 +7,7 @@ use App\Entity\Gafas;
 use App\Entity\Lentillas;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,5 +30,29 @@ class HomeController extends AbstractController
             'gafas' => $gafas,
             'lentillas' => $lentillas
         ]);
+    }
+
+
+    //ESTA VISTA PODRIA APUNTAR AL CARRITO
+    #[Route('/{id}/show/{cat}', name: 'app_show', methods: ['GET','POST'])]
+    public function show( $id, $cat, EntityManagerInterface $producto )//: Response
+    { 
+        if($cat==1){
+        $gafas=$producto->getRepository(Gafas::class)->findOneById($id);
+        // return $this->render('show.html.twig', [
+        //     'producto'=> $gafas 
+        // ]);
+
+        dd($gafas);
+        }else if ($cat==2){
+
+            $lentillas=$producto->getRepository(Lentillas::class)->findOneById($id);
+            // return $this->render('show.html.twig', [
+            //     'producto'=> $lentillas
+            // ]);
+
+        dd($lentillas);
+        }
+        
     }
 }

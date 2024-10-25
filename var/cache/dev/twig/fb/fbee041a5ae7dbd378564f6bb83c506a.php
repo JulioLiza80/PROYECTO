@@ -190,11 +190,14 @@ class __TwigTemplate_4995318066494cf6c75d7494561a4557 extends Template
               <div class=\"d-grid\">
               <button type=\"submit\" class=\"btn btn-outline-dark mt-4\">Login</button>
               </div> 
+            
 
 
           </form>
       </div>
+      
       <div class=\"modal-footer\">
+        
         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
       </div>
     </div>
@@ -313,17 +316,20 @@ class __TwigTemplate_4995318066494cf6c75d7494561a4557 extends Template
               <div class=\"d-grid\">
               <button type=\"submit\" class=\"btn btn-outline-dark mt-4\">Login</button>
               </div> 
+            
 
 
           </form>
       </div>
+      
       <div class=\"modal-footer\">
+        
         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-{%endblock%}", "comun/header.html.twig", "C:\\Users\\stark\\Desktop\\proyecto\\templates\\comun\\header.html.twig");
+{%endblock%}", "comun/header.html.twig", "C:\\Users\\stark\\Desktop\\optica\\kraken\\proyecto\\templates\\comun\\header.html.twig");
     }
 }

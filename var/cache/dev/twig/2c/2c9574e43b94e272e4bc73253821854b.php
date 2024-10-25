@@ -70,7 +70,7 @@ class __TwigTemplate_55a4551d8950c8c2276e4ff9ad8f98ef extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Reset your password";
+        yield "Restablecer su contraseña";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -91,7 +91,7 @@ class __TwigTemplate_55a4551d8950c8c2276e4ff9ad8f98ef extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "    <h1>Reset your password</h1>
+        yield "    <h1>Restablecer su contraseña</h1>
 
     ";
         // line 8
@@ -101,7 +101,7 @@ class __TwigTemplate_55a4551d8950c8c2276e4ff9ad8f98ef extends Template
         // line 9
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetForm"]) || array_key_exists("resetForm", $context) ? $context["resetForm"] : (function () { throw new RuntimeError('Variable "resetForm" does not exist.', 9, $this->source); })()), "plainPassword", [], "any", false, false, false, 9), 'row');
         yield "
-        <button class=\"btn btn-primary\">Reset password</button>
+        <button class=\"btn btn-primary\">Restablecer contraseña</button>
     ";
         // line 11
         yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["resetForm"]) || array_key_exists("resetForm", $context) ? $context["resetForm"] : (function () { throw new RuntimeError('Variable "resetForm" does not exist.', 11, $this->source); })()), 'form_end');
@@ -144,16 +144,16 @@ class __TwigTemplate_55a4551d8950c8c2276e4ff9ad8f98ef extends Template
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Restablecer su contraseña{% endblock %}
 
 {% block body %}
-    <h1>Reset your password</h1>
+    <h1>Restablecer su contraseña</h1>
 
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
-        <button class=\"btn btn-primary\">Reset password</button>
+        <button class=\"btn btn-primary\">Restablecer contraseña</button>
     {{ form_end(resetForm) }}
 {% endblock %}
-", "reset_password/reset.html.twig", "C:\\Users\\stark\\Desktop\\proyecto\\templates\\reset_password\\reset.html.twig");
+", "reset_password/reset.html.twig", "C:\\Users\\stark\\Desktop\\optica\\kraken\\proyecto\\templates\\reset_password\\reset.html.twig");
     }
 }
