@@ -43,7 +43,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    {% set total = 0 %}
                                     {% set contador= 0%}
                                     {% for producto in app.session.get('carrito') %}
 
@@ -92,7 +92,22 @@
                                     </tr>
 
                                     {% endfor %}
-                                   
+                                    {% set total = 0%}
+                                    {% for producto in app.session.get('carrito') %}
+                                    {% set total = total+producto['producto'].precio%}
+
+                                    {% endfor %}
+
+                                    <tr>
+                                        <td colspan="3">
+                                            <input id="total" type='hidden' value={{total}} />
+                                            <p class="h3">Total</p>
+                                        </td>
+                                        <td>
+                                            {{total|number_format(2, '.', ',') }}
+                                        </td>
+                                    </tr>
+                                    {% if total >0 %}
                                     <tr>
                                         <td colspan="4">
                                             <div class="col-md-12 border-start">
@@ -128,11 +143,10 @@
                                                                 <div>
                                                                     <strong>Total</strong>
                                                                     <strong>
-                                                                        <input id="total" type='hidden' value={{total}} />
-                                                                        <p class="h3">Total (Incluye Iva)</p>
+                                                                        <p class="mb-0">(incluye IVA)</p>
                                                                     </strong>
                                                                 </div>
-                                                                <span><strong> {{total|number_format(2, '.', ',') }}</strong></span>
+                                                                <span><strong>€{{total}}</strong></span>
                                                             </li>
                                                         </ul>
 
@@ -146,7 +160,6 @@
 
 
                     </tr>
-                     {% if total >0 %}
                     <tr>
                         <td coolspan="4">
                             <div style="margin-left: 200px" id="paypal-button-container">
@@ -183,24 +196,3 @@
 
     </td>
 </body>
-    
-    {% endblock %}
-
-</html>
-
-
-
-
-
-
-
-
-
-   
-     
-    
-
-
-
-
-

@@ -251,10 +251,9 @@ window.paypal
         element.addEventListener('click', function(){
           let id=element.dataset.id
             if(element.dataset.id==id){
-                location.reload();
-            }
+               window.location.reload();
            
-        });
-    });
+        };
+   });
     
-  
+ });

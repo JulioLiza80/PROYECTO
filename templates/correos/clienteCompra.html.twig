@@ -10,11 +10,12 @@
       {% for producto in carrito %}
         <li>
           {% if producto['producto'].categoria==1 %}
-                Marca: {{producto['producto'].marca}} , Modelo: {{producto['producto'].modelo}}, Tipo: {{producto['producto'].tipo}}, (x{{ producto['cantidad']  }})
-                <span>€{{ (producto['producto'].precio * producto['cantidad']) }}</span>
+                Marca: {{producto['producto'].marca}} , Modelo: {{producto['producto'].modelo}}, Tipo: {{producto['producto'].tipo}}, (x{{ producto['cantidad']  }}, x {{producto['producto'].precio}})
           {% endif %}
+                <span>€{{ (producto['producto'].precio * producto['cantidad']) }}</span>
+          
           {% if producto['producto'].categoria==2 %}
-                Marca: {{producto['producto'].marca}} , Tipo: {{producto['producto'].tipoProducto}}, (x{{ producto['cantidad']  }})
+                Marca: {{producto['producto'].marca}} , Tipo: {{producto['producto'].tipoProducto}}, (x{{ producto['cantidad']  }}, x {{producto['producto'].precio}})
           {% endif %}  
                <span>€{{ (producto['producto'].precio * producto['cantidad']) }}</span>
           {% set total = total + (producto['producto'].precio * producto['cantidad']) %}

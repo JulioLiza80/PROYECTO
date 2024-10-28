@@ -17,5 +17,6 @@
                <span>€{{ (producto['producto'].precio * producto['cantidad']) }}</span>
           {% set total = total + (producto['producto'].precio * producto['cantidad']) %}
         </li>
+        <li>Pago Realizado: {{cantidadPagada}}.
        </ul>
         {% endfor %}

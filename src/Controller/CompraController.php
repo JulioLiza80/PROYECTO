@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+
 class CompraController extends AbstractController
 {
       #[Route('/compra', name: 'app_compra', methods: ['POST', 'GET'])]
@@ -36,9 +37,19 @@ class CompraController extends AbstractController
             
             if(isset($_POST['total'] ) && isset($_POST['detalles']))
       {
-            $detalles= json_decode($_POST['detalles']);
+            $detalles= json_decode($_POST['detalles'], true);
+            //recuperar precio pagado en plataforma
+            foreach($detalles as $key => $valor){
+                  if($key=='purchase_units'){
+                  $p=$valor;
+                  }
+                  
+              }
+              foreach($p as $v => $valor){
+                   $c=$valor['amount']['value'];
+              }
 
-            if($_POST['total']>=$total){
+            if($c>=$total){
                   $status=null;
                   $id=null;
 
@@ -143,7 +154,7 @@ class CompraController extends AbstractController
                         ->subject('Compra :' . $compra->getId() . ', Optica Nova')
                         ->htmlTemplate('correos/pagoIncorrecto.html.twig')
                         ->context([
-                        'carrito' => $session->get('carrito'),
+                        'carrito' => $session->get('carrito'),'cantidadPagada' =>$c
                         ]);
                   $mailer->send($email);
                   //correo tienda
