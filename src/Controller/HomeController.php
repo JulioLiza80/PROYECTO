@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         
         //dd($publicidad,$gafas,$lentillas);
         return $this->render('index.html.twig', [
-            'controller_name' => 'Incio',
+            'controller_name' => 'inicio',
             'publicidad' => $publicidad,
             'gafas' => $gafas,
             'lentillas' => $lentillas
