@@ -16,8 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[Vich\Uploadable]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
-
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -78,16 +77,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     #[ORM\Column(nullable: true)]
     private ?string $documentName = null;
 
-
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
-
 
     public function __construct()
     {
         $this->detalleCompras = new ArrayCollection();
         $this->pedidos = new ArrayCollection();
-      
     }
 
     public function getId(): ?int
@@ -309,18 +305,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         return $this;
     }
 
-    //documentos
+    // Document management
     public function setDocumentFile(?File $documentFile = null): void
     {
         $this->documentFile = $documentFile;
 
         if (null !== $documentFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
+            // Ensure at least one field changes if using Doctrine to trigger events
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
-  
+
     public function getDocumentFile(): ?File
     {
         return $this->documentFile;
@@ -335,44 +330,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     {
         return $this->documentName;
     }
-    
-    
-   /** @see \Serializable::serialize() */
-public function serialize()
-{
-    return serialize(array(
-        $this->id,
-        $this->email,
-        $this->roles,
-        $this->password,
-        $this->nombre,
-        $this->apellido1,
-        $this->isVerified,
-        $this->documentName,
-       $this->password,
-       $this->direccion,
-       $this->ciudad,
-       $this->cp,
-    ));
-}
 
-/** @see \Serializable::unserialize() */
-public function unserialize($serialized)
-{
-    list (
-        $this->id,
-        $this->email,
-        $this->roles,
-        $this->password,
-        $this->nombre,
-        $this->apellido1,
-        $this->isVerified,
-        $this->documentName,
-       $this->password,
-       $this->direccion,
-       $this->ciudad,
-       $this->cp,
-    ) = unserialize($serialized, array('allowed_classes' => false));
-}
-}
+    // Replacement for Serializable methods
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'roles' => $this->roles,
+            'password' => $this->password,
+            'nombre' => $this->nombre,
+            'apellido1' => $this->apellido1,
+            'isVerified' => $this->isVerified,
+            'documentName' => $this->documentName,
+            'direccion' => $this->direccion,
+            'ciudad' => $this->ciudad,
+            'cp' => $this->cp,
+        ];
+    }
 
+    public function __unserialize(array $data): void
+    {
+        $this->id = $data['id'];
+        $this->email = $data['email'];
+        $this->roles = $data['roles'];
+        $this->password = $data['password'];
+        $this->nombre = $data['nombre'];
+        $this->apellido1 = $data['apellido1'];
+        $this->isVerified = $data['isVerified'];
+        $this->documentName = $data['documentName'];
+        $this->direccion = $data['direccion'];
+        $this->ciudad = $data['ciudad'];
+        $this->cp = $data['cp'];
+    }
+}

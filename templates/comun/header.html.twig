@@ -23,7 +23,6 @@
                         {% else %}
                             <button id="open-modal" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</button>
                             <a href="{{ path('app_register') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Registro</a>
-                            <a href="{{ path('app_forgot_password_request') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">He olvidado mi contraseña</a>
                         {% endif %}
                     </div>
                 </div>
@@ -52,7 +51,6 @@
                 {% else %}
                     <button id="open-modal" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 w-full text-left py-2 rounded-md text-base font-medium">Login</button>
                     <a href="{{ path('app_register') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Registro</a>
-                    <a href="{{ path('app_forgot_password_request') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">He olvidado mi contraseña</a>
                 {% endif %}
             </div>
         </div>
@@ -89,6 +87,7 @@
                 <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600">Login</button>
             </div>
         </form>
+            <a href="{{ path('app_forgot_password_request') }}" class="text-sm font-medium text-gray-700 px-3">He olvidado mi contraseña</a>
         <div class="flex justify-end">
             <button id="close-modal" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Close</button>
         </div>
