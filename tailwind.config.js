@@ -4,7 +4,13 @@ module.exports = {
         './assets/**/*.js',      // Any JavaScript files in assets
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                novapurple: '#712282',
+                novagreen: '#D2D813',
+            },
+        },
+
     },
     plugins: [],
 };

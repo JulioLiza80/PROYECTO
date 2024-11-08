@@ -1,48 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Optica Nova{% endblock %}
+{% block title %}Optica Nova
+{% endblock %}
 
 {% block body %}
-<style>
+	<style></style>
 
-</style>
+	{{include('comun/header.html.twig')}}
 
-{{include('comun/header.html.twig')}}
+	<div class="example-wrapper">
+		<h1 class="text-2xl">Esta es la página de inicio</h1>
 
-<div class="example-wrapper">
-   <h1 class="text-2xl">Esta es la página de inicio</h1>
+		<div class="container mx-auto px-4 py-8">
 
-   <div class="container mx-auto px-4 py-8">
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-700">Card Title</h2>
-                    <p class="text-gray-600 mt-2">This is a brief description of the card. It provides some additional information.</p>
-                    <a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Read More</a>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-700">Another Card Title</h2>
-                    <p class="text-gray-600 mt-2">This is another brief description of the card. It can contain different content.</p>
-                    <a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Learn More</a>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-700">Third Card Title</h2>
-                    <p class="text-gray-600 mt-2">This is a brief description of the third card. Each card can be unique.</p>
-                    <a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Discover More</a>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+				<div class="bg-white rounded-lg shadow-md overflow-hidden">
+					<img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h2 class="text-xl font-semibold text-gray-700">Card Title</h2>
+						<p class="text-gray-600 mt-2">This is a brief description of the card. It provides some additional information.</p>
+						<a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Read More</a>
+					</div>
+				</div>
+
+				<div class="bg-white rounded-lg shadow-md overflow-hidden">
+					<img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h2 class="text-xl font-semibold text-gray-700">Another Card Title</h2>
+						<p class="text-gray-600 mt-2">This is another brief description of the card. It can contain different content.</p>
+						<a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Learn More</a>
+					</div>
+				</div>
+
+				<div class="bg-white rounded-lg shadow-md overflow-hidden">
+					<img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
+					<div class="p-4">
+						<h2 class="text-xl font-semibold text-gray-700">Third Card Title</h2>
+						<p class="text-gray-600 mt-2">This is a brief description of the third card. Each card can be unique.</p>
+						<a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Discover More</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
-{% endblock %}
+	{% endblock %}

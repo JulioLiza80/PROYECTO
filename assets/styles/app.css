@@ -12,3 +12,8 @@ body {
 .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
