@@ -38,6 +38,7 @@ Encore
     })
     .addPlugin(new BrowserSyncPlugin({
         host: 'localhost',
+        open: false,
         port: 3000,
         proxy: 'http://localhost:8000',
         files: [
@@ -46,7 +47,7 @@ Encore
             'public/build/**/*.css',
         ],
     }, {
-        reload: false,
+        reload: true,
     }))
     .addPlugin(new WebpackObfuscator({}, ['excluded_bundle_name.js'])); // Exclude any files you don't want obfuscated
 

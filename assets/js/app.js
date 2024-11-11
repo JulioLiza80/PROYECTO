@@ -13,6 +13,28 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 /* Alternar la visibilidad del menú de navegación para pantallas de menor resolución */
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const openModalButton = document.getElementById('open-modal');
+    const closeModalButton = document.getElementById('close-modal');
+    const modal = document.getElementById('loginmodal');
+    
+    // Open the modal when clicking the Login button
+    openModalButton.addEventListener('click', function () {
+        modal.classList.remove('hidden'); // Show the modal
+    });
+    
+    // Close the modal when clicking the close button
+    closeModalButton.addEventListener('click', function () {
+        modal.classList.add('hidden'); // Hide the modal
+    });
+    
+    // Close the modal when clicking outside of it
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
     const toggleButton = document.getElementById('navbar-toggle');
     const navbar = document.getElementById('navbar');
     
@@ -22,22 +44,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* Abrir/Cerrar el modal de login */
 
-    const openModalButton = document.getElementById('open-modal');
-    const closeModalButton = document.getElementById('close-modal');
-    const modal = document.getElementById('loginmodal');
-
-    openModalButton.addEventListener('click', function () {
-        modal.classList.remove('hidden'); // Show the modal
-    });
-
-    closeModalButton.addEventListener('click', function () {
-        modal.classList.add('hidden'); // Hide the modal
-    });
-
-    /* Cierra el modal al hacer click fuera de él */
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
 });
+
