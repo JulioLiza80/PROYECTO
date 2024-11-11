@@ -10361,7 +10361,7 @@
                     "url": "https://github.com/symfony/webpack-encore"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\WebpackEncoreBundle\\": "src"
