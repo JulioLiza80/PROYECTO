@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class GafasCrudController extends AbstractCrudController
 {
@@ -32,7 +33,7 @@ class GafasCrudController extends AbstractCrudController
             ChoiceField::new('tipo')->setChoices(['Gafas de sol'=>'gafas sol', 'Gafas graduadas'=>'gafas graduadas']),
             NumberField::new('aro'),
             NumberField::new('puente'),
-            NumberField::new('talla'),
+            ChoiceField::new('talla')->setChoices(['XL'=>'XL','L'=>'L','M'=>'M','S'=>'S',]),
             NumberField::new('varilla'),
             TextField::new('colorMontura'),
             TextField::new('colorLentes'),
@@ -63,6 +64,7 @@ class GafasCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),
             ChoiceField::new('categoria')->setChoices(['gafas'=>1,]),
+            BooleanField::new('estado')
             
         ];
     }

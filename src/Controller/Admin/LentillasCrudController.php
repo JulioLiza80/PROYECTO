@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class LentillasCrudController extends AbstractCrudController
 {
@@ -45,7 +45,7 @@ class LentillasCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),
             ChoiceField::new('categoria')->setChoices(['Lentillas Y Productos'=>2,]),
-
+            BooleanField::new('estado')
             
         ];
     }

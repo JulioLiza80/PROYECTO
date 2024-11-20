@@ -39,7 +39,7 @@ class Gafas
     private ?int $puente = null;
 
     #[ORM\Column]
-    private ?int $talla = null;
+    private ?string $talla = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $varilla = null;
@@ -113,6 +113,9 @@ class Gafas
 
     #[ORM\Column]
     private ?int $categoria = null;
+
+    #[ORM\Column]
+    private ?bool $estado = null;
  
     public function getId(): ?int
     {
@@ -191,12 +194,12 @@ class Gafas
         return $this;
     }
 
-    public function getTalla(): ?int
+    public function getTalla(): ?string
     {
         return $this->talla;
     }
 
-    public function setTalla(int $talla): static
+    public function setTalla(string $talla): static
     {
         $this->talla = $talla;
 
@@ -444,6 +447,18 @@ class Gafas
       public function setCategoria(int $categoria): static
       {
           $this->categoria = $categoria;
+
+          return $this;
+      }
+
+      public function isEstado(): ?bool
+      {
+          return $this->estado;
+      }
+
+      public function setEstado(bool $estado): static
+      {
+          $this->estado = $estado;
 
           return $this;
       }
