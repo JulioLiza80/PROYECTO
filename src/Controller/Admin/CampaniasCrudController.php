@@ -19,18 +19,18 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class CampaniasCrudController extends AbstractCrudController
 {
+    
     public static function getEntityFqcn(): string
     {
         return Campanias::class;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
             //imagen1
-            ImageField::new('imageName', 'Campaña1')
+            ImageField::new('imageName', 'Imagen')
             ->setBasePath('campania')
             ->setUploadDir('public/campania')
             ->setUploadedFileNamePattern('[randomhash].[extension]')
