@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Gafas;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,9 +14,9 @@ class GafasController extends AbstractController
     #[Route('/', name: 'app_gafas_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        // Obtener todas las gafas desde la base de datos
+        // Obtener todas las gafas
         $gafas = $entityManager->getRepository(Gafas::class)->findAll();
-        
+
         return $this->render('gafas.html.twig', [
             'gafas' => $gafas,
         ]);

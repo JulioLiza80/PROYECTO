@@ -1,0 +1,20 @@
+.gafas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.gafas-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    height: 280px;
+}
+
+.gafas-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
