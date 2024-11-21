@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GafasRepository;
-use Doctrine\DBAL\Types\Types;  // Asegúrate de tener esta línea para los tipos
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -29,28 +29,28 @@ class Gafas
     #[ORM\Column(length: 255)]
     private ?string $tipo = null;
 
-    #[ORM\Column]
-    private ?int $aro = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $aro = null;
 
-    #[ORM\Column]
-    private ?int $puente = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $puente = null;
 
-    #[ORM\Column]
-    private ?int $talla = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $talla = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $varilla = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $varilla = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $colorMontura = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $colorLentes = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $materialMontura = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $tipoMontura = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
@@ -68,7 +68,6 @@ class Gafas
     #[ORM\Column(nullable: true)]
     private ?int $destacado = null;
 
-    // imágenes
     #[Vich\UploadableField(mapping: 'gafas', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
@@ -81,7 +80,8 @@ class Gafas
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    // Getter y Setter de propiedades
+    // Métodos getters y setters...
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,6 +95,7 @@ class Gafas
     public function setMarca(string $marca): static
     {
         $this->marca = $marca;
+
         return $this;
     }
 
@@ -106,6 +107,7 @@ class Gafas
     public function setModelo(string $modelo): static
     {
         $this->modelo = $modelo;
+
         return $this;
     }
 
@@ -117,6 +119,115 @@ class Gafas
     public function setDescripcion(?string $descripcion): static
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getTipo(): ?string
+    {
+        return $this->tipo;
+    }
+
+    public function setTipo(string $tipo): static
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    public function getAro(): ?string
+    {
+        return $this->aro;
+    }
+
+    public function setAro(?string $aro): static
+    {
+        $this->aro = $aro;
+
+        return $this;
+    }
+
+    public function getPuente(): ?string
+    {
+        return $this->puente;
+    }
+
+    public function setPuente(?string $puente): static
+    {
+        $this->puente = $puente;
+
+        return $this;
+    }
+
+    public function getTalla(): ?string
+    {
+        return $this->talla;
+    }
+
+    public function setTalla(?string $talla): static
+    {
+        $this->talla = $talla;
+
+        return $this;
+    }
+
+    public function getVarilla(): ?string
+    {
+        return $this->varilla;
+    }
+
+    public function setVarilla(?string $varilla): static
+    {
+        $this->varilla = $varilla;
+
+        return $this;
+    }
+
+    public function getColorMontura(): ?string
+    {
+        return $this->colorMontura;
+    }
+
+    public function setColorMontura(?string $colorMontura): static
+    {
+        $this->colorMontura = $colorMontura;
+
+        return $this;
+    }
+
+    public function getColorLentes(): ?string
+    {
+        return $this->colorLentes;
+    }
+
+    public function setColorLentes(?string $colorLentes): static
+    {
+        $this->colorLentes = $colorLentes;
+
+        return $this;
+    }
+
+    public function getMaterialMontura(): ?string
+    {
+        return $this->materialMontura;
+    }
+
+    public function setMaterialMontura(?string $materialMontura): static
+    {
+        $this->materialMontura = $materialMontura;
+
+        return $this;
+    }
+
+    public function getTipoMontura(): ?string
+    {
+        return $this->tipoMontura;
+    }
+
+    public function setTipoMontura(?string $tipoMontura): static
+    {
+        $this->tipoMontura = $tipoMontura;
+
         return $this;
     }
 
@@ -128,6 +239,7 @@ class Gafas
     public function setPrecio(string $precio): static
     {
         $this->precio = $precio;
+
         return $this;
     }
 
@@ -139,6 +251,19 @@ class Gafas
     public function setIva(int $iva): static
     {
         $this->iva = $iva;
+
+        return $this;
+    }
+
+    public function getDescuento(): ?int
+    {
+        return $this->descuento;
+    }
+
+    public function setDescuento(?int $descuento): static
+    {
+        $this->descuento = $descuento;
+
         return $this;
     }
 
@@ -150,6 +275,7 @@ class Gafas
     public function setStock(int $stock): static
     {
         $this->stock = $stock;
+
         return $this;
     }
 
@@ -161,59 +287,41 @@ class Gafas
     public function setDestacado(?int $destacado): static
     {
         $this->destacado = $destacado;
+
         return $this;
-    }
-
-    // Getter y Setter para las imágenes
-
-    // imageName
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function setImageName(?string $imageName): static
-    {
-        $this->imageName = $imageName;
-        return $this;
-    }
-
-    // imageSize
-    public function getImageSize(): ?int
-    {
-        return $this->imageSize;
-    }
-
-    public function setImageSize(?int $imageSize): static
-    {
-        $this->imageSize = $imageSize;
-        return $this;
-    }
-
-    // updatedAt
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
-    // Getter y Setter para imageFile (usado por Vich Uploader)
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
     }
 
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 
-        if ($imageFile !== null) {
+        if (null !== $imageFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
     }
 }

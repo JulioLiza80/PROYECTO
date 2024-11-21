@@ -8,9 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;  // Añadir esta línea
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class GafasCrudController extends AbstractCrudController
@@ -20,7 +19,6 @@ class GafasCrudController extends AbstractCrudController
         return Gafas::class;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -29,53 +27,34 @@ class GafasCrudController extends AbstractCrudController
             TextField::new('modelo'),
             TextEditorField::new('descripcion'),
             TextField::new('tipo'),
-            ChoiceField::new('tipo')->setChoices(['Gafas de sol'=>'gafas sol', 'Gafas graduadas'=>'gafas graduadas']),
             NumberField::new('aro'),
             NumberField::new('puente'),
             NumberField::new('talla'),
             NumberField::new('varilla'),
             TextField::new('colorMontura'),
             TextField::new('colorLentes'),
-            ChoiceField::new('materialMontura')->setChoices(['Acetato'=>'acetato','Aluminio'=>'aluminio','Titanio'=>'titanio','Metal'=>'metal']),
-            ChoiceField::new('tipoMontura')->setChoices(['Sin montura'=>'sin','Montura completa'=>'completa','Semi completa'=>'semi','Clip'=>'clip']),
+            TextField::new('materialMontura'),
+            TextField::new('tipoMontura'),
             NumberField::new('precio')->setNumDecimals(2),
-            choiceField::new('iva')->setChoices(['21%'=>21,'10%'=>10]),
+            NumberField::new('iva'),
             NumberField::new('descuento'),
             NumberField::new('stock'),
-            choiceField::new('destacado')->setChoices(['No destacado'=>0,'destacado'=>1]),
-          
+            ChoiceField::new('destacado')->setChoices(['No destacado' => 0, 'Destacado' => 1]),
             //imagen1
-            ImageField::new('imageName', 'principal')
-            ->setBasePath('images/gafas')
-            ->setUploadDir('public/images/gafas')
-            ->setUploadedFileNamePattern('[randomhash].[extension]')
-            ->setRequired(false),
-            //imagen2
-            ImageField::new('imageName2', 'imagen2')
-            ->setBasePath('images/gafas')
-            ->setUploadDir('public/images/gafas')
-            ->setUploadedFileNamePattern('[randomhash].[extension]')
-            ->setRequired(false),
-             //imagen3
-            ImageField::new('imageName3', 'imagen3')
-            ->setBasePath('images/gafas')
-            ->setUploadDir('public/images/gafas')
-            ->setUploadedFileNamePattern('[randomhash].[extension]')
-            ->setRequired(false),
-            ChoiceField::new('categoria')->setChoices(['gafas'=>1,]),
-            
+            ImageField::new('imageName', 'Imagen principal')
+                ->setBasePath('images/gafas')
+                ->setUploadDir('public/images/gafas')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
         ];
     }
 
-            //BUSCADOR
-            public function configureCrud(Crud $crud): Crud
-            {
-                return $crud
-                    ->setEntityLabelInSingular('Producto')
-                    ->setEntityLabelInPlural('Productos')
-                    ->setSearchFields(['marca','modelo','id'])
-                    ->setDefaultSort(['id' => 'DESC'])
-                ;
-            }
-    
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Gafa')
+            ->setEntityLabelInPlural('Gafas')
+            ->setSearchFields(['marca', 'modelo', 'id'])
+            ->setDefaultSort(['id' => 'DESC']);
+    }
 }
