@@ -35,7 +35,11 @@ class Gafas
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $puente = null;
 
+<<<<<<< HEAD
     #[ORM\Column(length: 255, nullable: true)]
+=======
+    #[ORM\Column]
+>>>>>>> origin/master
     private ?string $talla = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -82,6 +86,28 @@ class Gafas
 
     // Métodos getters y setters...
 
+<<<<<<< HEAD
+=======
+    //imagen3
+    #[Vich\UploadableField(mapping: 'gafas', fileNameProperty: 'imageName3', size: 'imageSize3')]
+    private ?File $imageFile3 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName3 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize3 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt3 = null;
+
+    #[ORM\Column]
+    private ?int $categoria = null;
+
+    #[ORM\Column]
+    private ?bool $estado = null;
+ 
+>>>>>>> origin/master
     public function getId(): ?int
     {
         return $this->id;
@@ -164,7 +190,11 @@ class Gafas
         return $this->talla;
     }
 
+<<<<<<< HEAD
     public function setTalla(?string $talla): static
+=======
+    public function setTalla(string $talla): static
+>>>>>>> origin/master
     {
         $this->talla = $talla;
 
@@ -324,4 +354,106 @@ class Gafas
     {
         return $this->imageSize;
     }
+<<<<<<< HEAD
+=======
+
+     //imagen2
+     public function setImageFile2(?File $imageFile2 = null): void
+     {
+         $this->imageFile2 = $imageFile2;
+ 
+         if (null !== $imageFile2) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAt = new \DateTimeImmutable();
+         }
+     }
+ 
+     public function getImageFile2(): ?File
+     {
+         return $this->imageFile2;
+     }
+ 
+     public function setImageName2(?string $imageName2): void
+     {
+         $this->imageName2 = $imageName2;
+     }
+ 
+     public function getImageName2(): ?string
+     {
+         return $this->imageName2;
+     }
+ 
+     public function setImageSize2(?int $imageSize2): void
+     {
+         $this->imageSize2 = $imageSize2;
+     }
+ 
+     public function getImageSize2(): ?int
+     {
+         return $this->imageSize2;
+     }
+
+      //imagen3
+      public function setImageFile3(?File $imageFile3 = null): void
+      {
+          $this->imageFile3 = $imageFile3;
+  
+          if (null !== $imageFile3) {
+              // It is required that at least one field changes if you are using doctrine
+              // otherwise the event listeners won't be called and the file is lost
+              $this->updatedAt = new \DateTimeImmutable();
+          }
+      }
+  
+      public function getImageFile3(): ?File
+      {
+          return $this->imageFile3;
+      }
+  
+      public function setImageName3(?string $imageName3): void
+      {
+          $this->imageName3 = $imageName3;
+      }
+  
+      public function getImageName3(): ?string
+      {
+          return $this->imageName3;
+      }
+  
+      public function setImageSize3(?int $imageSize3): void
+      {
+          $this->imageSize3 = $imageSize3;
+      }
+  
+      public function getImageSize3(): ?int
+      {
+          return $this->imageSize3;
+      }
+
+      public function getCategoria(): ?int
+      {
+          return $this->categoria;
+      }
+
+      public function setCategoria(int $categoria): static
+      {
+          $this->categoria = $categoria;
+
+          return $this;
+      }
+
+      public function isEstado(): ?bool
+      {
+          return $this->estado;
+      }
+
+      public function setEstado(bool $estado): static
+      {
+          $this->estado = $estado;
+
+          return $this;
+      }
+
+>>>>>>> origin/master
 }

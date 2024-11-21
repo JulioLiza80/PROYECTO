@@ -69,6 +69,9 @@ class Lentillas
 
     #[ORM\Column]
     private ?int $categoria = null;
+
+    #[ORM\Column]
+    private ?bool $estado = null;
     
     
     //METODOS....
@@ -260,6 +263,18 @@ class Lentillas
     public function setCategoria(int $categoria): static
     {
         $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    public function isEstado(): ?bool
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(bool $estado): static
+    {
+        $this->estado = $estado;
 
         return $this;
     }
