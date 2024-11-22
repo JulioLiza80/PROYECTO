@@ -34,3 +34,8 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> images ###
+/public/campania/
+/public/images/gafas/
+/public/images/lentillas/

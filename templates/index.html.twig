@@ -8,40 +8,94 @@
 
 	{{include('comun/header.html.twig')}}
 
-	<div class="example-wrapper">
-		<h1 class="text-2xl">Esta es la página de inicio</h1>
-
-		<div class="container mx-auto px-4 py-8">
-
-			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-				<div class="bg-white rounded-lg shadow-md overflow-hidden">
-					<img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
-					<div class="p-4">
-						<h2 class="text-xl font-semibold text-gray-700">Card Title</h2>
-						<p class="text-gray-600 mt-2">This is a brief description of the card. It provides some additional information.</p>
-						<a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Read More</a>
-					</div>
-				</div>
-
-				<div class="bg-white rounded-lg shadow-md overflow-hidden">
-					<img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
-					<div class="p-4">
-						<h2 class="text-xl font-semibold text-gray-700">Another Card Title</h2>
-						<p class="text-gray-600 mt-2">This is another brief description of the card. It can contain different content.</p>
-						<a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Learn More</a>
-					</div>
-				</div>
-
-				<div class="bg-white rounded-lg shadow-md overflow-hidden">
-					<img src="https://via.placeholder.com/300" alt="Placeholder Image" class="w-full h-48 object-cover">
-					<div class="p-4">
-						<h2 class="text-xl font-semibold text-gray-700">Third Card Title</h2>
-						<p class="text-gray-600 mt-2">This is a brief description of the third card. Each card can be unique.</p>
-						<a href="#" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Discover More</a>
-					</div>
-				</div>
+	<div
+		class="relative w-full max-w-5xl mx-auto px-4 md:px-0 mt-4">
+		<!-- Carousel wrapper -->
+		<div class="overflow-hidden relative rounded-lg">
+			<div class="flex transition-transform duration-500 ease-in-out transform" id="carousel">
+				{% set imageCount = 0 %}
+				{% for campaign in publicidad %}
+					{# Check and display the first image (imageName) #}
+					{% if campaign.imageName is not null %}
+						<div class="min-w-full">
+							<img src="{{ asset('campania/' ~ campaign.imageName) }}" alt="Image 1" class="w-full h-full object-cover">
+							{% set imageCount = imageCount + 1 %}
+						</div>
+					{% endif %}
+				{% endfor %}
 			</div>
+
+			<!-- Navigation buttons for image selection (dots) -->
+			<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+				{% for i in 0..(imageCount - 1) %}
+					<button id="dot-{{ i }}" class="w-8 h-3 rounded-full bg-gray-200 hover:bg-white transition-all duration-300 focus:outline-none" onclick="scrollToImage({{ i }})"></button>
+				{% endfor %}
+			</div>
+
+			<!-- Navigation buttons -->
+			<button class="absolute top-1/2 left-0 transform -translate-y-1/2 p-3 text-white hover:text-gray-600 hover:bg-opacity-75 focus:outline-none" onclick="scrollCarousel(-1)">
+				<svg class="w-12 h-12 hover:stroke-novagreen" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path stroke-width="2" d="M15 19l-7-7 7-7"></path>
+				</svg>
+			</button>
+			<button class="absolute top-1/2 right-0 transform -translate-y-1/2 p-3 text-white hover:bg-opacity-75 focus:outline-none" onclick="scrollCarousel(1)">
+				<svg class="w-12 h-12 hover:stroke-novagreen" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path stroke-width="2" d="M9 5l7 7-7 7"></path>
+				</svg>
+			</button>
 		</div>
 
+		<div class="my-16 text-center px-4">
+			<h2 class="text-2xl text-gray-800 font-semibold mb-4">
+				En Nova Ópticos miramos por ti
+			</h2>
+			<p class="text-gray-800 text-lg leading-relaxed">
+				Cuidamos de tu visión ofreciéndote las mejores soluciones en gafas graduadas, gafas de sol y lentillas para garantizar siempre tu satisfacción.
+			</p>
+			<p class="mt-4 text-gray-800 text-lg leading-relaxed">
+				Nuestro objetivo es ofrecer a nuestros clientes la mejor atención en todos los sentidos: asesoramiento personalizado, servicios de revisión de la vista, y productos que se adaptan a las necesidades de todos los bolsillos gracias a nuestras ofertas y promociones.
+			</p>
+		</div>
+	</div>
 
-	{% endblock %}
+	{{include('comun/footer.html.twig')}}
+
+	<script>
+		let currentIndex = 0;
+
+// Function to update the active class on the dots
+function updateDotStatus() { // Remove the 'active-dot' class from all dots
+const dots = document.querySelectorAll('button[id^="dot-"]');
+dots.forEach(dot => dot.classList.remove('active-dot'));
+
+// Add the 'active-dot' class to the current dot
+const currentDot = document.getElementById('dot-' + currentIndex);
+if (currentDot) {
+currentDot.classList.add('active-dot');
+}
+}
+
+function scrollCarousel(direction) {
+const carousel = document.getElementById("carousel");
+const totalSlides = carousel.children.length;
+currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+carousel.style.transform = `translateX(-${
+currentIndex * 100
+}%)`;
+updateDotStatus(); // Update the dot when scrolling
+}
+
+function scrollToImage(index) {
+const carousel = document.getElementById("carousel");
+const totalSlides = carousel.children.length;
+currentIndex = index; // Set to the selected image index
+carousel.style.transform = `translateX(-${
+currentIndex * 100
+}%)`;
+updateDotStatus(); // Update the dot when selecting a dot
+}
+
+// Initialize the first dot as active on page load
+updateDotStatus();
+	</script>
+{% endblock %}

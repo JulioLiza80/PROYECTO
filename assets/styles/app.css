@@ -4,9 +4,31 @@
 @tailwind utilities;
 
 
-body {
-    @apply bg-blue-500 text-white;
+/* ===== Custom Fonts ===== */
+
+@font-face {
+    font-family: 'Railway';
+    src: url('../../public/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900; /* Soporta pesos entre 100 y 900 */
+    font-style: normal;
 }
+  
+@font-face {
+    font-family: 'Railway';
+    src: url('../../public/fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900; /* Soporta pesos entre 100 y 900 */
+    font-style: italic;
+}
+
+body {
+    @apply bg-[#FAFAFA] text-white;
+}
+
+@layer utilities {
+    .railway {
+      font-family: 'Railway', sans-serif;
+    }
+  }
 
 .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
 .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -17,3 +39,20 @@ body {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
+@layer components {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+               .carousel::-webkit-scrollbar {
+                   display: none;
+               }
+               /* Hide scrollbar for IE, Edge and Firefox */
+               .carousel {
+                   -ms-overflow-style: none; /* IE and Edge */
+                   scrollbar-width: none; /* Firefox */
+               }
+   }
+
+   .active-dot {
+    @apply bg-novagreen w-12 ;
+}
+

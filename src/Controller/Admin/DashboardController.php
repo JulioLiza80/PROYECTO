@@ -49,7 +49,6 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linktoRoute('Optica Nova', 'fas fa-home', 'app_home');
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Gafas', 'fas fa-list', Gafas::class);
