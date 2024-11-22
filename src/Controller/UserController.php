@@ -42,13 +42,13 @@ final class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
+    // #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    // public function show(User $user): Response
+    // {
+    //     return $this->render('user/show.html.twig', [
+    //         'user' => $user,
+    //     ]);
+    // }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
@@ -77,5 +77,13 @@ final class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+    
+    //area personal
+    #[Route('/personal', name: 'app_user_personal', methods: ['GET'])]
+    public function ir_areaPersonal(): Response
+    {  
+        $user= $this->getUser();
+        return $this->render('user/show.html.twig', ['user'=>$user]);
     }
 }

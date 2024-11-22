@@ -12,14 +12,7 @@
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Nombre</th>
-                <th>Apellido1</th>
-                <th>Apellido2</th>
-                <th>IsVerified</th>
                 <th>Documento</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,21 +20,21 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.nombre }}</td>
                 <td>{{ user.apellido1 }}</td>
                 <td>{{ user.apellido2 }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td> #}
                 <td>
                     
                     <a href="{{ vich_uploader_asset(user, 'documentFile') }}" alt="{{ user.documentName }}">Descarga </a>
                   
                 </td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                {# <td>
+                    <a href="{{ path('app_user_personal', {'id': user.id}) }}">show</a>
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
+                </td> #}
             </tr>
         {% else %}
             <tr>
@@ -51,5 +44,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+    {# <a href="{{ path('app_user_new') }}">Create new</a> #}
 {% endblock %}

@@ -14,7 +14,7 @@
 
 				<!-- Categorías -->
 				<div class="hidden md:block">
-					<div class="flex text-sm md:px-4 railway font-semibold items-center lg:space-x-8 lg:px-0">
+					<div class="flex text-sm railway font-semibold items-center md:space-x-4 lg:space-x-8">
 						<a href="#promos" class="text-novapurple hover:text-novagreen font-black px-3 py-2">Nuestras Promos</a>
 						<a href="#gafas-sol" class="text-black hover:text-gray-600 px-3 py-2">Gafas de Sol</a>
 						<a href="{{ path('app_gafas_index') }}" class="text-black hover:text-gray-600 px-3 py-2">Gafas Graduadas</a>
@@ -32,12 +32,12 @@
 
 						<div class="absolute left-0 w-40 bg-white shadow-lg rounded-lg py-2 hidden group-hover:flex group-hover:top-full flex-col transition-all duration-150 ease-in-out">
 							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-								<a href="{{ path('app_logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
 								{% if is_granted('ROLE_ADMIN') %}
 									<a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-bold">Admin</a>
 								{% else %}
-									<a href="#appuserpersonal" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-bold">Sin Acceso Admin</a>
+									<a href="{{ path('app_user_personal') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-bold">User</a>
 								{% endif %}
+								<a href="{{ path('app_logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
 							{% else %}
 								<button id="open-modal" class="block text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</button>
 								<a href="{{ path('app_register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register</a>

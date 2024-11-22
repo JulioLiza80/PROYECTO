@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -41,14 +42,30 @@ class UserCrudController extends AbstractCrudController
            
           
             //documento
-            TextField::new('documentName', 'documento')
+            TextField::new('documentName', 'documento')->hideOnIndex()
             ->setFormType( FileUploadType::class )
             ->setFormTypeOptions(['upload_dir' => 'public/documentos/usuarios/'])
             ->setCustomOption('basePath', 'documentos/usuarios')
             ->setCustomOption('uploadDir', 'public/documentos/usuarios')
             ->setCustomOption('uploadedFileNamePattern', '[randomhash].[extension]')
             ->setCustomOption('download_path', 'documentos/usuarios'),
+            //descarga
+            TextField::new('documentName', 'Descargas')->setTemplatePath('fields/descarga_link.html.twig')->onlyOnIndex(),
         ];
+
+        
     }
+
+     //BUSCADOR
+     public function configureCrud(Crud $crud): Crud
+     {
+         return $crud
+             ->setEntityLabelInSingular('Usuario')
+             ->setEntityLabelInPlural('Usuarios')
+             ->setSearchFields(['email','id'])
+             ->setDefaultSort(['id' => 'DESC'])
+         ;
+     }
+
     
 }
