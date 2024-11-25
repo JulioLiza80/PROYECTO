@@ -1,38 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Optica Nova - Gafas{% endblock %}
+{% block title %}Optica Nova - Gafas
+{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/gafas.css') }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/gafas.css') }}">
 {% endblock %}
 
 {% block body %}
-    {{ include('comun/header.html.twig') }}
+	{{ include('comun/header.html.twig') }}
 
-    <div class="example-wrapper">
-        <div class="px-6 py-12">
-            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-10">Descubre nuestra colección</h2>
+	<div class="example-wrapper px-6 py-12">
+		<h2 class="text-3xl font-semibold text-center text-gray-800 mb-10">Descubre nuestra colección</h2>
+		
+		<div class="flex flex-row">
+			<!-- Filtros de búsqueda -->
+			<div class="flex flex-col w-[30%] min-w-[30%] bg-white me-10 rounded-lg border-solid border-[0.5px] border-gray-300 shadow">
 
-            <!-- Grid de gafas con 4 columnas en pantallas grandes, 2 en medianas y 1 en móviles -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {% for gafa in gafas %}
-                        <!-- Card de gafas -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                        <!-- Imagen de las gafas -->
-                        <img src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 object-cover">
-                        
-                        <!-- Contenido de la card -->
-                        <div class="p-6">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ gafa.marca }} {{ gafa.modelo }}</h3>
-                            <p class="text-sm text-gray-600 mb-4">{{ gafa.descripcion }}</p>
-                            <p class="text-lg font-semibold text-gray-900 mb-4">{{ gafa.precio }}€</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+			</div>
+			<!-- Grid de gafas con 4 columnas en pantallas grandes, 2 en medianas y 1 en móviles -->
+			<div class="flex flex-row flex-wrap justify-start gap-8">
+				{% for gafa in gafas %}
+					<!-- Card de gafas -->
+					<div
+						class="bg-white rounded-lg shadow overflow-hidden transform transition max-w-60 max-h-60 duration-300 hover:scale-105 hover:shadow-xl">
+						<!-- Imagen de las gafas -->
+						<img
+						src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 object-cover">
 
-    {{ include('comun/footer.html.twig') }}
+						<!-- Contenido de la card -->
+						<div class="p-6">
+							<h3 class="text-lg font-semibold text-gray-800 mb-2">{{ gafa.marca }}
+								{{ gafa.modelo }}</h3>
+							<p class="text-sm text-gray-600 mb-4">{{ gafa.descripcion }}</p>
+							<p class="text-lg font-semibold text-gray-900 mb-4">{{ gafa.precio }}€</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	{{ include('comun/footer.html.twig') }}
 {% endblock %}
