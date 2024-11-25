@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -14,7 +15,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -48,7 +48,7 @@ class UserCrudController extends AbstractCrudController
             ->setCustomOption('basePath', 'documentos/usuarios')
             ->setCustomOption('uploadDir', 'public/documentos/usuarios')
             ->setCustomOption('uploadedFileNamePattern', '[randomhash].[extension]')
-             ->setCustomOption('download_path', 'documentos/usuarios'),
+            ->setCustomOption('download_path', 'documentos/usuarios'),
             //descarga
             TextField::new('documentName', 'Descargas')->setTemplatePath('fields/descarga_link.html.twig')->onlyOnIndex(),
         ];
@@ -67,6 +67,5 @@ class UserCrudController extends AbstractCrudController
          ;
      }
 
-    
     
 }

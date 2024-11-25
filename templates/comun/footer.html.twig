@@ -1,0 +1,51 @@
+{% block body%}
+
+<footer class="bg-gray-900 text-white py-8 rounded-t-2xl">
+    <!-- Encabezado del footer -->
+    <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold inline-flex items-center">
+            Síguenos en redes
+            <a href="https://www.instagram.com/nova.opticos/" target="_blank" class="ml-2 text-gray-400 hover:text-pink-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                    <path d="M12 2.2c3.2 0 3.584.013 4.85.07 1.17.056 1.98.247 2.62.526a5.4 5.4 0 0 1 1.948 1.253 5.4 5.4 0 0 1 1.253 1.948c.279.641.47 1.451.526 2.62.057 1.265.07 1.65.07 4.85s-.013 3.584-.07 4.85c-.056 1.17-.247 1.98-.526 2.62a5.4 5.4 0 0 1-1.253 1.948 5.4 5.4 0 0 1-1.948 1.253c-.641.279-1.451.47-2.62.526-1.265.057-1.65.07-4.85.07s-3.584-.013-4.85-.07c-1.17-.056-1.98-.247-2.62-.526a5.4 5.4 0 0 1-1.948-1.253 5.4 5.4 0 0 1-1.253-1.948c-.279-.641-.47-1.451-.526-2.62C2.213 15.584 2.2 15.2 2.2 12s.013-3.584.07-4.85c.056-1.17.247-1.98.526-2.62a5.4 5.4 0 0 1 1.253-1.948 5.4 5.4 0 0 1 1.948-1.253c.641-.279 1.451-.47 2.62-.526C8.416 2.213 8.8 2.2 12 2.2zM12 0C8.735 0 8.332.014 7.052.072 5.767.129 4.66.332 3.768.748A7.4 7.4 0 0 0 1.505 2.933 7.4 7.4 0 0 0 .748 3.768C.332 4.66.129 5.767.072 7.052.014 8.332 0 8.735 0 12c0 3.265.014 3.668.072 4.948.057 1.285.26 2.392.676 3.284a7.4 7.4 0 0 0 2.183 2.183c.892.417 1.999.62 3.284.676C8.332 23.986 8.735 24 12 24c3.265 0 3.668-.014 4.948-.072 1.285-.057 2.392-.26 3.284-.676a7.4 7.4 0 0 0 2.183-2.183c.417-.892.62-1.999.676-3.284.057-1.28.072-1.683.072-4.948 0-3.265-.014-3.668-.072-4.948-.057-1.285-.26-2.392-.676-3.284A7.4 7.4 0 0 0 20.232.748C19.34.332 18.233.129 16.948.072 15.668.014 15.265 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.8-12.2a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0z"></path>
+                </svg>
+            </a>
+        </h2>
+    </div>
+
+    <!-- Contenido del footer -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left max-w-5xl mx-auto px-4">
+        <!-- Columna 1: Contacto -->
+        <div>
+            <h3 class="text-lg font-bold mb-2">Contacto</h3>
+            <ul>
+                <li class="text-gray-300">Teléfono:</li>
+                <li class="text-gray-300 mt-2">612345678</li>
+                <li class="text-gray-300 mt-4">Dirección:</li>
+                <li class="text-gray-300 mt-2"> Av. Lope de Vega, s/n, 30011 Los Dolores, Murcia</li>
+            </ul>
+        </div>
+        <!-- Columna 2: Categorías -->
+        <div>
+            <h3 class="text-lg font-bold mb-2">Categorías</h3>
+            <ul>
+                <li class="text-gray-300"><a href="#gafasSol">Gafas de Sol</a></li>
+                <li class="text-gray-300"><a href="{{ path('app_gafas_index') }}">Gafas Graduadas</a></li>
+                <li class="text-gray-300"><a href="#lentillas">Lentillas</a></li>
+            </ul>
+        </div>
+        <!-- Columna 3: Info Legal -->
+        <div>
+            <h3 class="text-lg font-bold mb-2">Info Legal</h3>
+            <ul>
+                <li class="text-gray-300"><a href="avisoLegal"></a>Aviso Legal</li>
+                <li class="text-gray-300"><a href="politicaPrivacidad"></a>Política de privacidad</li>
+                <li class="text-gray-300"><a href="#politicaEnvio"></a>Política de envío</li>
+                <li class="text-gray-300"><a href="#terminosServicio"></a>Términos de servicio</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+{%endblock%}

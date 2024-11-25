@@ -6,8 +6,6 @@
         "browser-sync": "^2.29.3",
         "browser-sync-webpack-plugin": "^2.3.0",
         "core-js": "^3.38.0",
-        "javascript-obfuscator": "^4.1.1",
-        "postcss-loader": "^8.1.0",
         "regenerator-runtime": "^0.13.9",
         "webpack": "^5.74.0",
         "webpack-cli": "^5.1.0",
@@ -32,6 +30,7 @@
         "autoprefixer": "^10.4.20",
         "bootstrap": "^5.3.3",
         "postcss": "^8.4.47",
+        "swiper": "^11.1.15",
         "tailwindcss": "^3.4.14"
     }
 }
