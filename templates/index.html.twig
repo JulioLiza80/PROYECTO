@@ -6,7 +6,7 @@
 {% block body %}
 	<style></style>
 
-	{{include('comun/header.html.twig')}}
+	{{ include('comun/header.html.twig') }}
 
 	<div
 		class="relative w-full max-w-5xl mx-auto px-4 md:px-0 mt-4">
@@ -45,6 +45,30 @@
 			</button>
 		</div>
 
+		<!-- Logos Carousel using Swiper -->
+		<div class="my-16">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					{% for marca in marcas %}
+						<div class="swiper-slide">
+							<img src="{{ asset('images/marcas/' ~ marca) }}" alt="marca" class="h-10 w-auto object-contain">
+						</div>
+					{% endfor %}
+				</div>
+
+				<!-- Navigation buttons -->
+				<div class="swiper-button-next">
+					<i class="fas fa-chevron-right"></i>
+					<!-- Right Arrow Icon -->
+				</div>
+				<div class="swiper-button-prev">
+					<i class="fas fa-chevron-left"></i>
+					<!-- Left Arrow Icon -->
+				</div>
+			</div>
+		</div>
+
+
 		<div class="my-16 text-center px-4">
 			<h2 class="text-2xl text-gray-800 font-semibold mb-4">
 				En Nova Ópticos miramos por ti
@@ -58,17 +82,15 @@
 		</div>
 	</div>
 
-	{{include('comun/footer.html.twig')}}
+	{{ include('comun/footer.html.twig') }}
 
 	<script>
 		let currentIndex = 0;
 
 // Function to update the active class on the dots
-function updateDotStatus() { // Remove the 'active-dot' class from all dots
+function updateDotStatus() {
 const dots = document.querySelectorAll('button[id^="dot-"]');
 dots.forEach(dot => dot.classList.remove('active-dot'));
-
-// Add the 'active-dot' class to the current dot
 const currentDot = document.getElementById('dot-' + currentIndex);
 if (currentDot) {
 currentDot.classList.add('active-dot');
@@ -82,20 +104,21 @@ currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
 carousel.style.transform = `translateX(-${
 currentIndex * 100
 }%)`;
-updateDotStatus(); // Update the dot when scrolling
+updateDotStatus();
 }
 
 function scrollToImage(index) {
 const carousel = document.getElementById("carousel");
 const totalSlides = carousel.children.length;
-currentIndex = index; // Set to the selected image index
+currentIndex = index;
 carousel.style.transform = `translateX(-${
 currentIndex * 100
 }%)`;
-updateDotStatus(); // Update the dot when selecting a dot
+updateDotStatus();
 }
 
 // Initialize the first dot as active on page load
 updateDotStatus();
 	</script>
+
 {% endblock %}

@@ -1,4 +1,5 @@
 import './bootstrap.js';
+import Swiper from 'swiper/bundle';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -7,7 +8,6 @@ import './bootstrap.js';
  */
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
-
 
 /* HEADER FUNCTIONS */
 
@@ -44,5 +44,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* Abrir/Cerrar el modal de login */
 
+});
+
+/* CUSTOM CAROUSEL FUNCTIONALITY */
+
+// Initialize variables for the custom carousel
+
+
+
+
+/* Initialize Swiper for Logos Carousel */
+const swiper = new Swiper('.swiper-container', {
+    slidesPerView: 6,
+    spaceBetween: 2,
+    loop: true,
+    // autoplay: {                      // añade animación automática
+    //     delay: 2000,
+    // },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+});
+
+const campaignCarousel = new Swiper('#campaign-carousel', {
+    slidesPerView: 1,   // Show one image at a time
+    spaceBetween: 0,    // Space between slides
+    loopAddBlankSlides: true,
+    navigation: {
+        nextEl: '#campaign-carousel .swiper-button-next',
+        prevEl: '#campaign-carousel .swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination', // Add this element to your HTML for the dots
+        clickable: true,
+        renderBullet: function (index, className) {
+            return (
+                '<button class="' +
+                className +
+                ' dot w-8 h-3 rounded-full bg-gray-200 hover:bg-white transition-all duration-300 focus:outline-none"></button>'
+            );
+        },
+    },
 });
 
