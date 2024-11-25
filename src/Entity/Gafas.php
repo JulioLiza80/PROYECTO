@@ -35,11 +35,7 @@ class Gafas
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $puente = null;
 
-<<<<<<< HEAD
-    #[ORM\Column(length: 255, nullable: true)]
-=======
     #[ORM\Column]
->>>>>>> origin/master
     private ?string $talla = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -86,8 +82,6 @@ class Gafas
 
     // Métodos getters y setters...
 
-<<<<<<< HEAD
-=======
     //imagen3
     #[Vich\UploadableField(mapping: 'gafas', fileNameProperty: 'imageName3', size: 'imageSize3')]
     private ?File $imageFile3 = null;
@@ -107,7 +101,6 @@ class Gafas
     #[ORM\Column]
     private ?bool $estado = null;
  
->>>>>>> origin/master
     public function getId(): ?int
     {
         return $this->id;
@@ -190,11 +183,7 @@ class Gafas
         return $this->talla;
     }
 
-<<<<<<< HEAD
-    public function setTalla(?string $talla): static
-=======
     public function setTalla(string $talla): static
->>>>>>> origin/master
     {
         $this->talla = $talla;
 
@@ -354,8 +343,6 @@ class Gafas
     {
         return $this->imageSize;
     }
-<<<<<<< HEAD
-=======
 
      //imagen2
      public function setImageFile2(?File $imageFile2 = null): void
@@ -455,5 +442,4 @@ class Gafas
           return $this;
       }
 
->>>>>>> origin/master
 }
