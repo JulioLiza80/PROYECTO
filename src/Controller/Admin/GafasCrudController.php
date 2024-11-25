@@ -8,8 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;  // Añadir esta línea
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
@@ -20,6 +21,7 @@ class GafasCrudController extends AbstractCrudController
         return Gafas::class;
     }
 
+    
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -28,19 +30,21 @@ class GafasCrudController extends AbstractCrudController
             TextField::new('modelo'),
             TextEditorField::new('descripcion'),
             TextField::new('tipo'),
+            ChoiceField::new('tipo')->setChoices(['Gafas de sol'=>'gafas sol', 'Gafas graduadas'=>'gafas graduadas']),
             NumberField::new('aro'),
             NumberField::new('puente'),
             ChoiceField::new('talla')->setChoices(['XL'=>'XL','L'=>'L','M'=>'M','S'=>'S',]),
             NumberField::new('varilla'),
             TextField::new('colorMontura'),
             TextField::new('colorLentes'),
-            TextField::new('materialMontura'),
-            TextField::new('tipoMontura'),
+            ChoiceField::new('materialMontura')->setChoices(['Acetato'=>'acetato','Aluminio'=>'aluminio','Titanio'=>'titanio','Metal'=>'metal']),
+            ChoiceField::new('tipoMontura')->setChoices(['Sin montura'=>'sin','Montura completa'=>'completa','Semi completa'=>'semi','Clip'=>'clip']),
             NumberField::new('precio')->setNumDecimals(2),
-            NumberField::new('iva'),
+            choiceField::new('iva')->setChoices(['21%'=>21,'10%'=>10]),
             NumberField::new('descuento'),
             NumberField::new('stock'),
-            ChoiceField::new('destacado')->setChoices(['No destacado' => 0, 'Destacado' => 1]),
+            choiceField::new('destacado')->setChoices(['No destacado'=>0,'destacado'=>1]),
+          
             //imagen1
             ImageField::new('imageName', 'principal')
             ->setBasePath('images/gafas')
@@ -65,12 +69,15 @@ class GafasCrudController extends AbstractCrudController
         ];
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
-            ->setEntityLabelInSingular('Gafa')
-            ->setEntityLabelInPlural('Gafas')
-            ->setSearchFields(['marca', 'modelo', 'id'])
-            ->setDefaultSort(['id' => 'DESC']);
-    }
+            //BUSCADOR
+            public function configureCrud(Crud $crud): Crud
+            {
+                return $crud
+                    ->setEntityLabelInSingular('Producto')
+                    ->setEntityLabelInPlural('Productos')
+                    ->setSearchFields(['marca','modelo','id'])
+                    ->setDefaultSort(['id' => 'DESC'])
+                ;
+            }
+    
 }

@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\GafasRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: GafasRepository::class)]
 #[Vich\Uploadable]
@@ -29,28 +32,28 @@ class Gafas
     #[ORM\Column(length: 255)]
     private ?string $tipo = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $aro = null;
+    #[ORM\Column]
+    private ?int $aro = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $puente = null;
+    #[ORM\Column]
+    private ?int $puente = null;
 
     #[ORM\Column]
     private ?string $talla = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $varilla = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $varilla = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $colorMontura = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $colorLentes = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $materialMontura = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $tipoMontura = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
@@ -68,6 +71,8 @@ class Gafas
     #[ORM\Column(nullable: true)]
     private ?int $destacado = null;
 
+    
+    //imagen1
     #[Vich\UploadableField(mapping: 'gafas', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
@@ -80,7 +85,18 @@ class Gafas
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    // Métodos getters y setters...
+     //imagen2
+     #[Vich\UploadableField(mapping: 'gafas', fileNameProperty: 'imageName2', size: 'imageSize2')]
+     private ?File $imageFile2 = null;
+ 
+     #[ORM\Column(nullable: true)]
+     private ?string $imageName2 = null;
+ 
+     #[ORM\Column(nullable: true)]
+     private ?int $imageSize2 = null;
+ 
+     #[ORM\Column(nullable: true)]
+     private ?\DateTimeImmutable $updatedAt2 = null;
 
     //imagen3
     #[Vich\UploadableField(mapping: 'gafas', fileNameProperty: 'imageName3', size: 'imageSize3')]
@@ -154,24 +170,24 @@ class Gafas
         return $this;
     }
 
-    public function getAro(): ?string
+    public function getAro(): ?int
     {
         return $this->aro;
     }
 
-    public function setAro(?string $aro): static
+    public function setAro(int $aro): static
     {
         $this->aro = $aro;
 
         return $this;
     }
 
-    public function getPuente(): ?string
+    public function getPuente(): ?int
     {
         return $this->puente;
     }
 
-    public function setPuente(?string $puente): static
+    public function setPuente(int $puente): static
     {
         $this->puente = $puente;
 
@@ -190,12 +206,12 @@ class Gafas
         return $this;
     }
 
-    public function getVarilla(): ?string
+    public function getVarilla(): ?int
     {
         return $this->varilla;
     }
 
-    public function setVarilla(?string $varilla): static
+    public function setVarilla(?int $varilla): static
     {
         $this->varilla = $varilla;
 
@@ -207,7 +223,7 @@ class Gafas
         return $this->colorMontura;
     }
 
-    public function setColorMontura(?string $colorMontura): static
+    public function setColorMontura(string $colorMontura): static
     {
         $this->colorMontura = $colorMontura;
 
@@ -231,7 +247,7 @@ class Gafas
         return $this->materialMontura;
     }
 
-    public function setMaterialMontura(?string $materialMontura): static
+    public function setMaterialMontura(string $materialMontura): static
     {
         $this->materialMontura = $materialMontura;
 
@@ -243,7 +259,7 @@ class Gafas
         return $this->tipoMontura;
     }
 
-    public function setTipoMontura(?string $tipoMontura): static
+    public function setTipoMontura(string $tipoMontura): static
     {
         $this->tipoMontura = $tipoMontura;
 
@@ -310,11 +326,16 @@ class Gafas
         return $this;
     }
 
+
+    //añadir imagenes
+    //imagen1
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 
         if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
