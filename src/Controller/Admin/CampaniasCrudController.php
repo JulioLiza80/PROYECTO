@@ -36,7 +36,7 @@ class CampaniasCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),
             //descripcion
-            TextEditorField::new('imageDescription'),
+            TextField::new('imageDescription'),
             BooleanField::new('estado')
           
         ];

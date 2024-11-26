@@ -1,5 +1,6 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import '../../node_modules/swiper/swiper-bundle.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,30 +9,113 @@
 /* ===== Custom Fonts ===== */
 
 @font-face {
-    font-family: 'Railway';
+    font-family: 'Raleway';
     src: url('../../public/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900; /* Soporta pesos entre 100 y 900 */
+    font-weight: 100 900;
     font-style: normal;
 }
   
 @font-face {
-    font-family: 'Railway';
+    font-family: 'Raleway';
     src: url('../../public/fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900; /* Soporta pesos entre 100 y 900 */
+    font-weight: 100 900;
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Yeseva-one';
+    src: url('../../public/fonts/YesevaOne-Regular.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+.roboto-thin {
+    font-family: "Roboto", serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  .roboto-light {
+    font-family: "Roboto", serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .roboto-regular {
+    font-family: "Roboto", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .roboto-medium {
+    font-family: "Roboto", serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .roboto-bold {
+    font-family: "Roboto", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .roboto-black {
+    font-family: "Roboto", serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .roboto-thin-italic {
+    font-family: "Roboto", serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  .roboto-light-italic {
+    font-family: "Roboto", serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .roboto-regular-italic {
+    font-family: "Roboto", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .roboto-medium-italic {
+    font-family: "Roboto", serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  .roboto-bold-italic {
+    font-family: "Roboto", serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .roboto-black-italic {
+    font-family: "Roboto", serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+
 body {
-    @apply bg-[#FAFAFA] text-white;
+    @apply bg-[#FAFAFA] raleway;
 }
 
 @layer utilities {
-    .railway {
-      font-family: 'Railway', sans-serif;
+    .raleway {
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .yeseva-one {
+      font-family: 'Yeseva-one', sans-serif;
     }
 }
 
-.example-wrapper { margin: 1em auto; width: 95%; font: 18px/1.5 sans-serif; }
+.example-wrapper { margin: 1em auto; width: 95%; font: 18px/1.5; }
 .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
@@ -66,24 +150,8 @@ body {
 }
 
 
-.swiper-button-next,
-.swiper-button-prev {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    font-size: 20px; /* Adjust icon size */
-    color: #fff;
-    z-index: 10;
-    user-select: none; /* Prevent text selection */
-}
 
-.swiper-button-next {
-    @apply pl-36 /* Position the next button to the right */
-}
 
-.swiper-button-prev {
-    @apply pr-36 /* Position the previous button to the left */
-}
+
 
 

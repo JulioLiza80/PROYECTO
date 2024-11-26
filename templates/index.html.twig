@@ -9,16 +9,16 @@
 	{{ include('comun/header.html.twig') }}
 
 	<div
-		class="relative w-full max-w-5xl mx-auto px-4 md:px-0 mt-4">
+		class="relative w-full mx-auto md:px-0">
 		<!-- Carousel wrapper -->
-		<div class="overflow-hidden relative rounded-lg">
+		<div class="overflow-hidden max-h-[500px] relative">
 			<div class="flex transition-transform duration-500 ease-in-out transform" id="carousel">
 				{% set imageCount = 0 %}
 				{% for campaign in publicidad %}
 					{# Check and display the first image (imageName) #}
 					{% if campaign.imageName is not null %}
-						<div class="min-w-full">
-							<img src="{{ asset('campania/' ~ campaign.imageName) }}" alt="Image 1" class="w-full h-full object-cover">
+						<div class="min-w-full h-[500px] flex items-center justify-center overflow-hidden">
+							<img src="{{ asset('campania/' ~ campaign.imageName) }}" alt="{{ campaign.imageDescription }}" class="object-cover w-full h-full">
 							{% set imageCount = imageCount + 1 %}
 						</div>
 					{% endif %}
@@ -31,22 +31,10 @@
 					<button id="dot-{{ i }}" class="w-8 h-3 rounded-full bg-gray-200 hover:bg-white transition-all duration-300 focus:outline-none" onclick="scrollToImage({{ i }})"></button>
 				{% endfor %}
 			</div>
-
-			<!-- Navigation buttons -->
-			<button class="absolute top-1/2 left-0 transform -translate-y-1/2 p-3 text-white hover:text-gray-600 hover:bg-opacity-75 focus:outline-none" onclick="scrollCarousel(-1)">
-				<svg class="w-12 h-12 hover:stroke-novagreen" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path stroke-width="2" d="M15 19l-7-7 7-7"></path>
-				</svg>
-			</button>
-			<button class="absolute top-1/2 right-0 transform -translate-y-1/2 p-3 text-white hover:bg-opacity-75 focus:outline-none" onclick="scrollCarousel(1)">
-				<svg class="w-12 h-12 hover:stroke-novagreen" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path stroke-width="2" d="M9 5l7 7-7 7"></path>
-				</svg>
-			</button>
 		</div>
 
 		<!-- Logos Carousel using Swiper -->
-		<div class="my-16">
+		<div class="my-10">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					{% for marca in marcas %}
@@ -56,29 +44,163 @@
 					{% endfor %}
 				</div>
 
-				<!-- Navigation buttons -->
-				<div class="swiper-button-next">
-					<i class="fas fa-chevron-right"></i>
-					<!-- Right Arrow Icon -->
-				</div>
-				<div class="swiper-button-prev">
-					<i class="fas fa-chevron-left"></i>
-					<!-- Left Arrow Icon -->
-				</div>
 			</div>
 		</div>
 
+		<div class="flex flex-col w-full mx-auto justify-center max-w-5xl">
+			<div class="my-20 text-center px-4">
+				<h2 class="text-2xl text-gray-800 yeseva-one font-semibold mb-6">
+					En Nova Ópticos
+					<span class="bg-novagreen pl-0 pt-0 pr-3 pb-2">miramos por ti</span>
+				</h2>
+				<p class="text-gray-800 text-lg leading-relaxed">
+					Cuidamos de tu visión ofreciéndote las mejores soluciones en gafas graduadas, gafas de sol y lentillas para garantizar siempre tu satisfacción.
+				</p>
+				<p class="mt-4 text-gray-800 text-lg leading-relaxed">
+					Nuestro objetivo es ofrecer a nuestros clientes la mejor atención en todos los sentidos: asesoramiento personalizado, servicios de revisión de la vista, y productos que se adaptan a las necesidades de todos los bolsillos gracias a nuestras ofertas y promociones.
+				</p>
+			</div>
 
-		<div class="my-16 text-center px-4">
-			<h2 class="text-2xl text-gray-800 font-semibold mb-4">
-				En Nova Ópticos miramos por ti
-			</h2>
-			<p class="text-gray-800 text-lg leading-relaxed">
-				Cuidamos de tu visión ofreciéndote las mejores soluciones en gafas graduadas, gafas de sol y lentillas para garantizar siempre tu satisfacción.
-			</p>
-			<p class="mt-4 text-gray-800 text-lg leading-relaxed">
-				Nuestro objetivo es ofrecer a nuestros clientes la mejor atención en todos los sentidos: asesoramiento personalizado, servicios de revisión de la vista, y productos que se adaptan a las necesidades de todos los bolsillos gracias a nuestras ofertas y promociones.
-			</p>
+			<div class="flex flex-col justify-center items-center my-4">
+				<h2 class="text-2xl text-gray-800 font-semibold">
+					Destacados
+				</h2>
+
+				<div class="w-full h-px max-w-6xl mx-auto mt-3 mb-6" style="background-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 1.46%, rgba(128, 128, 128, 0.6) 40.83%, rgba(128, 128, 128, 0.3) 65.57%, rgba(128, 128, 128, 0) 107.92%);"></div>
+
+				<div class="flex flex-row gap-12 md:gap-20">
+					{% set gafasCount = 0 %}
+					{% for gafa in gafas %}
+						{% if gafasCount < 3 %}
+							<!-- Card de gafas -->
+							<div
+								class="bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl">
+								<!-- Imagen de las gafas -->
+								<img
+								src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 my-2 object-cover">
+
+								<!-- Contenido de la card -->
+								<div class="px-4 py-2">
+									<h3 class="text-gray-800 raleway font-light mb-2 text-sm">{{ gafa.marca }}
+										{{ gafa.modelo }}</h3>
+									<p class="text-gray-900 raleway font-semibold mb-2 text-lg">{{ gafa.precio|number_format(2, ',', '') }}€</p>
+								</div>
+							</div>
+							{% set gafasCount = gafasCount + 1 %}
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+
+			<div
+				class="flex space-x-4 my-20">
+				<!-- Imagen 1 -->
+				<a href="#gafas-sol" class="relative group flex-1">
+					<img src="{{ asset('images/categorias/gafas-sol.jpg') }}" alt="Categoría 1" class="w-full h-[400px] object-cover rounded-lg">
+					<span class="absolute bottom-4 right-4 tracking-[0.25em] text-white font-bold bg-black/30 backdrop-blur-md px-2 py-1 rounded group-hover:bg-black/70 transition-all yeseva-one uppercase">
+						Gafas de Sol
+					</span>
+				</a>
+
+				<!-- Imagen 2 -->
+				<a href="{{ path('app_gafas_index') }}" class="relative group flex-1">
+					<img src="{{ asset('images/categorias/gafas-graduadas.jpg') }}" alt="Categoría 2" class="w-full h-[400px] object-cover rounded-lg">
+					<span class="absolute bottom-4 right-4 tracking-[0.25em] text-white font-bold bg-black/30 backdrop-blur-md px-2 py-1 rounded group-hover:bg-black/70 transition-all yeseva-one uppercase">
+						Gafas Graduadas
+					</span>
+				</a>
+
+				<!-- Imagen 3 -->
+				<a href="#lentillas" class="relative group flex-1">
+					<img src="{{ asset('images/categorias/lentillas.jpg') }}" alt="Categoría 3" class="w-full h-[400px] object-cover rounded-lg">
+					<span class="absolute bottom-4 right-4 tracking-[0.25em] text-white font-bold bg-black/30 backdrop-blur-md px-2 py-1 rounded group-hover:bg-black/70 transition-all yeseva-one uppercase">
+						Lentillas
+					</span>
+				</a>
+			</div>
+			<div
+				class="flex flex-wrap gap-10 md:gap-8 justify-center my-10">
+
+				<div class="flex flex-col items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shield-check">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						<path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"/>
+						<path d="M15 19l2 2l4 -4"/>
+					</svg>
+					<h3 class="text-center font-medium text-lg max-w-[120px] mt-2">
+						Garantía 3 años
+					</h3>
+				</div>
+
+				<div class="flex flex-col items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-building-store">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						<path d="M3 21l18 0"/>
+						<path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4"/>
+						<path d="M5 21l0 -10.15"/>
+						<path d="M19 21l0 -10.15"/>
+						<path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4"/>
+					</svg>
+					<h3 class="text-center font-medium text-lg max-w-[120px] mt-2">
+						Recogida en tienda
+					</h3>
+				</div>
+
+				<div class="flex flex-col items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-heart-handshake">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						<path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/>
+						<path d="M12 6l-3.293 3.293a1 1 0 0 0 0 1.414l.543 .543c.69 .69 1.81 .69 2.5 0l1 -1a3.182 3.182 0 0 1 4.5 0l2.25 2.25"/>
+						<path d="M12.5 15.5l2 2"/>
+						<path d="M15 13l2 2"/>
+					</svg>
+					<h3 class="text-center font-medium text-lg max-w-[120px] mt-2">
+						Ayuda telemática y personal
+					</h3>
+				</div>
+
+				<div class="flex flex-col items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-truck-delivery">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						<path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/>
+						<path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/>
+						<path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"/>
+						<path d="M3 9l4 0"/>
+					</svg>
+					<h3 class="text-center font-medium text-lg max-w-[70px] mt-2">
+						Envío gratis<span>*</span>
+					</h3>
+				</div>
+
+				<div class="flex flex-col items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-lock">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						<path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z"/>
+						<path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"/>
+						<path d="M8 11v-4a4 4 0 1 1 8 0v4"/>
+					</svg>
+					<h3 class="text-center font-medium text-lg max-w-[120px] mt-2">
+						Pagos seguros
+					</h3>
+				</div>
+
+				<div class="flex flex-col items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card-refund">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						<path d="M12 19h-6a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5"/>
+						<path d="M3 10h18"/>
+						<path d="M7 15h.01"/>
+						<path d="M11 15h2"/>
+						<path d="M16 19h6"/>
+						<path d="M19 16l-3 3l3 3"/>
+					</svg>
+					<h3 class="text-center font-medium text-lg max-w-[120px] mt-2">
+						Devolución 60 días
+					</h3>
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 
@@ -95,16 +217,6 @@ const currentDot = document.getElementById('dot-' + currentIndex);
 if (currentDot) {
 currentDot.classList.add('active-dot');
 }
-}
-
-function scrollCarousel(direction) {
-const carousel = document.getElementById("carousel");
-const totalSlides = carousel.children.length;
-currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-carousel.style.transform = `translateX(-${
-currentIndex * 100
-}%)`;
-updateDotStatus();
 }
 
 function scrollToImage(index) {

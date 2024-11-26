@@ -55,36 +55,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* Initialize Swiper for Logos Carousel */
 const swiper = new Swiper('.swiper-container', {
-    slidesPerView: 6,
-    spaceBetween: 2,
+    slidesPerView: 2, // Default for smaller screens
+    spaceBetween: 2,  // Default for smaller screens
+    centeredSlides: true, // Center slides within the container
     loop: true,
-    // autoplay: {                      // añade animación automática
-    //     delay: 2000,
-    // },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+    autoplay: {                      // añade animación automática
+        delay: 1500,
     },
-});
-
-const campaignCarousel = new Swiper('#campaign-carousel', {
-    slidesPerView: 1,   // Show one image at a time
-    spaceBetween: 0,    // Space between slides
-    loopAddBlankSlides: true,
-    navigation: {
-        nextEl: '#campaign-carousel .swiper-button-next',
-        prevEl: '#campaign-carousel .swiper-button-prev',
-    },
-    pagination: {
-        el: '.swiper-pagination', // Add this element to your HTML for the dots
-        clickable: true,
-        renderBullet: function (index, className) {
-            return (
-                '<button class="' +
-                className +
-                ' dot w-8 h-3 rounded-full bg-gray-200 hover:bg-white transition-all duration-300 focus:outline-none"></button>'
-            );
+    breakpoints: {
+        // Tailwind's sm breakpoint (>= 640px)
+        640: {
+            slidesPerView: 3,
+            spaceBetween: 8,
+        },
+        // Tailwind's md breakpoint (>= 768px)
+        768: {
+            slidesPerView: 4,
+            spaceBetween: 12,
+        },
+        // Tailwind's lg breakpoint (>= 1024px)
+        1024: {
+            slidesPerView: 5,
+            spaceBetween: 16,
+        },
+        // Tailwind's xl breakpoint (>= 1280px)
+        1280: {
+            slidesPerView: 6,
+            spaceBetween: 20,
         },
     },
 });
+
 
