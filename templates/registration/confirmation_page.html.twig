@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmación Email{% endblock %}
+
+{% block body %}
+	{{ include('comun/header.html.twig') }}
+	<div
+		class="flex items-center justify-center min-h-screen bg-gray-50">
+		<!-- Flexbox to center content -->
+		<div
+			class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+			<!-- Box with padding, shadow, and border -->
+			{% if ## Email ok pero no confirmado ## %}
+
+			{% else %}
+					<div class="text-center p-4 bg-white border rounded-lg space-y-4">
+						<p><strong></strong></p>
+					</div>
+			{% endif %}
+		</div>
+	</div>
+	{{ include('comun/footer.html.twig') }}
+{% endblock %}

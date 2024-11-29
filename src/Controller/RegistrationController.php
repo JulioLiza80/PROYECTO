@@ -29,10 +29,21 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $emailVerifiedMessage1 = null;
+        $emailVerifiedMessage2 = null;
+        $showForm = true;
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
+            /** @var string $passwordConfirm */
+            $passwordConfirm = $form->get('passwordConfirm')->getData();  // Get password confirm
+
+            // Validate that passwords match
+            if ($plainPassword !== $passwordConfirm) {
+                $this->addFlash('error', 'Las contraseñas no coinciden');
+                return $this->redirectToRoute('app_register');
+            }
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
@@ -43,19 +54,28 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
+                    ->from(new Address('opticanovaproyecto@gmail.com', 'Nova Opticos'))
                     ->to((string) $user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Confirma tu email en Nova Opticos')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            // If the user is registered successfully, show a message to verify the email
+            return $this->render('registration/register.html.twig', [
+                'registrationForm' => $form->createView(),
+                'showForm' => false,
+                'emailVerifiedMessage1' => 'Se ha enviado un email de verificación a la cuenta de correo electrónico indicada.',
+                'emailVerifiedMessage2' => 'Por favor, comprueba tu bandeja de entrada y verifica tu email antes de iniciar sesión.'
+            ]);
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
+            'emailVerifiedMessage1' => $emailVerifiedMessage1,
+            'emailVerifiedMessage2' => $emailVerifiedMessage2,
+            'showForm' => $showForm
         ]);
     }
 

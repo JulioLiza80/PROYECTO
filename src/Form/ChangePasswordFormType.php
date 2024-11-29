@@ -27,27 +27,39 @@ class ChangePasswordFormType extends AbstractType
                 'first_options' => [
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Please enter a password',
+                            'message' => 'Introduce una contraseña',
                         ]),
                         new Length([
                             'min' => 6,
-                            'minMessage' => 'Your password should be at least {{ limit }} characters',
+                            'minMessage' => 'La contraseña debe tener, al menos, {{ limit }} caracteres.',
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
                         new PasswordStrength(),
                         new NotCompromisedPassword(),
                     ],
-                    'label' => 'New password',
+                    'label' => 'Nueva contraseña',
+                    'label_attr' => [
+                        'class' => 'font-semibold', // Clases Tailwind para labels
+                    ],
+                    'attr' => [
+                        'class' => 'ml-2 border border-gray-300 rounded-md p-2',
+                    ],
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'label' => 'Repite la contraseña',
+                    'label_attr' => [
+                        'class' => 'font-semibold', // Clases Tailwind para labels
+                    ],
+                    'attr' => [
+                        'class' => 'ml-2 border border-gray-300 rounded-md p-2',
+                    ],
                 ],
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Las contraseñas no coinciden.',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-            ])
+            ]);
         ;
     }
 

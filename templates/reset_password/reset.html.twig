@@ -1,12 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Restablecer su contraseña{% endblock %}
+{% block title %}Restablecer su contraseña
+{% endblock %}
 
 {% block body %}
-    <h1>Restablecer su contraseña</h1>
+	{{ include('comun/header.html.twig') }}
+	<div
+		class="flex items-center justify-center min-h-screen bg-gray-50">
+		<!-- Flexbox para centrar el contenido -->
+		<div
+			class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg border border-gray-200 text-center">
+			<!-- Caja con padding, sombra y borde -->
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Restablecer contraseña</button>
-    {{ form_end(resetForm) }}
+			<h1 class="text-2xl font-semibold text-gray-800 mb-6">Restablecer su contraseña</h1>
+
+			{{ form_start(resetForm) }}
+			<div class="space-y-4 mb-6">
+				{{ form_row(resetForm.plainPassword, { 'label': 'Nueva contraseña', 'label_attr': {'class': 'font-semibold'}, 'attr': {'class': 'border border-gray-300 rounded-md p-2 w-full'} }) }}
+			</div>
+
+			<button type="submit" class="w-full py-2 px-4 hover:bg-novapurple text-white font-semibold rounded-lg  bg-[#9736af] transition duration-200">
+				Restablecer contraseña
+			</button>
+			{{ form_end(resetForm) }}
+
+		</div>
+	</div>
+	{{ include('comun/footer.html.twig') }}
 {% endblock %}

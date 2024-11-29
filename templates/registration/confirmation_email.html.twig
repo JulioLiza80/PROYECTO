@@ -1,11 +1,74 @@
-<h1>Hola! Por favor confirme su Email!</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #555555;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #9736af;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            width: auto;
+        }
+        .btn:hover {
+            background-color: #712282;
+        }
+        .expired {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Hola! Por favor, confirma tu dirección de correo electrónico.</h1>
 
-<p>
-   Por favor, confirme su dirección de correo electrónico haciendo clic en el siguiente enlace: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirmar mi Email</a>.
-    Este enlace expira en  {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
+        <p>Para completar tu registro, por favor haz clic en el siguiente botón para confirmar tu dirección de correo electrónico:</p>
 
-<p>
-    Suerte!
-</p>
+        <p>
+            <a href="{{ signedUrl|raw }}" class="btn">Confirmar mi Email</a>
+        </p>
+
+        <p class="expired">Este enlace expirará en 1 hora.</p>
+
+        <p class="footer">¡Gracias por registrarte!</p>
+    </div>
+</body>
+</html>
