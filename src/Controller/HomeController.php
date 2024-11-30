@@ -18,6 +18,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $entityPublicidad,EntityManagerInterface $entityGafas,EntityManagerInterface $entityLentillas): Response
     {
+        if(isset($_GET['error']) && str_contains($_GET['error'],' Todavía no has verificado tu cuenta.')){
+            return $this->render('/registration/confirmation_page.html.twig');
+        }else{
         $publicidad= $entityPublicidad->getRepository(Campanias::class)->findAll();
         $gafas= $entityGafas->getRepository(Gafas::class)->findAll();
         $lentillas= $entityLentillas->getRepository(Lentillas::class)->findAll();
@@ -40,6 +43,7 @@ class HomeController extends AbstractController
             'lentillas' => $lentillas,
             'marcas' => $marcas,
         ]);
+    } 
     }
 
 

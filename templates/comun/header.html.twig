@@ -47,7 +47,8 @@
 					</div>
 
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<a href="{{ path('app_user_personal') }}" class="text-black mt-1 mx-2">Hola, Nombre</a>
+							<a href="{{ path('app_user_personal') }}" class="text-black mt-1 mx-2"> Hola, {{ app.user.nombre }}</a>	
+						
 
 						<!-- Wishlist Icon -->
 						<a href="#wishlist" class="text-black hover:text-gray-600 mx-2">
