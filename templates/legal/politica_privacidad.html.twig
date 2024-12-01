@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Política de privacidad{% endblock %}
+
+{% block body %}
+	{{ include('comun/header.html.twig') }}
+	<div class="container mx-auto px-4 m-8">
+		<h1 class="title">Política de Privacidad</h1>
+		<p class="last-updated">Última actualización: 01/12/2024</p>
+		<div class="content">
+			<h2 class="subtitle">1. Recopilación de Datos</h2>
+			<p>Recopilamos información personal únicamente para los siguientes fines:</p>
+			<ul class="list">
+				<li>Procesar y enviar los pedidos realizados en nuestra tienda online.</li>
+				<li>Gestionar las consultas enviadas a través de nuestro formulario de contacto.</li>
+				<li>Enviar información promocional con el consentimiento del usuario.</li>
+			</ul>
+
+			<h2 class="subtitle">2. Protección de los Datos</h2>
+			<p>Nos comprometemos a proteger tus datos personales y a no compartirlos con terceros, salvo cuando sea necesario para cumplir con servicios esenciales (por ejemplo, empresas de transporte).</p>
+
+			<h2 class="subtitle">3. Derechos del Usuario</h2>
+			<p>En cualquier momento, el usuario puede ejercer sus derechos de acceso, rectificación, cancelación y oposición enviando un correo electrónico a
+				<a href="mailto:opticanovaproyecto@gmail.com" class="link">opticanovaproyecto@gmail.com</a>.</p>
+
+			<h2 class="subtitle">4. Legislación</h2>
+			<p>Esta política cumple con el Reglamento General de Protección de Datos (GDPR) y otras normativas aplicables en España.</p>
+		</div>
+	</div>
+	{{ include('comun/footer.html.twig') }}
+{% endblock %}

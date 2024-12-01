@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Términos de servicio{% endblock %}
+
+{% block body %}
+	{{ include('comun/header.html.twig') }}
+    <div class="container mx-auto px-4 m-8">
+		<h1 class="title">Términos de Servicio</h1>
+		<p class="last-updated">Última actualización: 01/12/2024</p>
+		<div class="content">
+			<h2 class="subtitle">1. Condiciones Generales</h2>
+			<ul class="list">
+				<li>El usuario debe proporcionar información precisa al realizar un pedido.</li>
+				<li>Todos los precios publicados incluyen IVA y están sujetos a cambios sin previo aviso.</li>
+				<li>Los productos ofertados están sujetos a disponibilidad en el momento del pedido.</li>
+			</ul>
+
+			<h2 class="subtitle">2. Devoluciones</h2>
+			<p>Las devoluciones deben realizarse dentro de los 14 días posteriores a la recepción del producto. Los productos devueltos deben estar en su estado original.</p>
+
+			<h2 class="subtitle">3. Garantías</h2>
+			<p>Ofrecemos garantía de 2 años para defectos de fabricación en todos nuestros productos. Los daños por uso indebido no están cubiertos.</p>
+
+			<h2 class="subtitle">4. Contacto</h2>
+			<p>Para cualquier duda sobre estos términos, contáctanos en
+				<a href="mailto:opticanovaproyecto@gmail.com" class="link">opticanovaproyecto@gmail.com</a>.</p>
+		</div>
+	</div>
+	{{ include('comun/footer.html.twig') }}
+{% endblock %}

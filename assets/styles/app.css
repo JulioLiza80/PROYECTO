@@ -150,6 +150,37 @@ body {
 }
 
 
+/* ===== Vistas Legales ===== */
+
+.title {
+  @apply text-3xl font-bold text-center text-gray-800 mb-2;
+}
+
+.subtitle {
+  @apply text-xl font-semibold text-gray-800 pt-6 mb-4;
+}
+
+.last-updated {
+  @apply text-xs text-gray-500 italic mb-8 text-center;
+}
+
+.container {
+  @apply p-6 max-w-4xl;
+}
+
+.content {
+  @apply text-gray-700 leading-relaxed space-y-4 pb-12;
+}
+
+.link {
+  @apply text-novapurple font-semibold;
+}
+
+.list {
+  @apply list-disc pl-6 space-y-2;
+}
+
+
 
 
 
