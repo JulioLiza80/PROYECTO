@@ -15,11 +15,21 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 document.addEventListener('DOMContentLoaded', function () {
     
     const openModalButton = document.getElementById('open-modal');
+    const openModalButtonMobile = document.getElementById('open-modal-mobile');
     const closeModalButton = document.getElementById('close-modal');
     const modal = document.getElementById('loginmodal');
-    
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
     // Open the modal when clicking the Login button
     openModalButton.addEventListener('click', function () {
+        modal.classList.remove('hidden'); // Show the modal
+    });
+
+    openModalButtonMobile.addEventListener('click', function () {
         modal.classList.remove('hidden'); // Show the modal
     });
     
@@ -28,19 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.classList.add('hidden'); // Hide the modal
     });
     
-    // Close the modal when clicking outside of it
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
-
-    const toggleButton = document.getElementById('navbar-toggle');
-    const navbar = document.getElementById('navbar');
-    
-    toggleButton.addEventListener('click', function () {
-        navbar.classList.toggle('hidden');
-    });
 
 /* Abrir/Cerrar el modal de login */
 
