@@ -46,6 +46,30 @@ class HomeController extends AbstractController
     } 
     }
 
+    #[Route('/aviso-legal', name: 'app_aviso_legal', methods: ['GET'])]
+    public function avisoLegal(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('legal/aviso_legal.html.twig', []);
+    }
+
+    #[Route('/politica-de-envio', name: 'app_politica_envio', methods: ['GET'])]
+    public function politicaEnvio(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('legal/politica_envio.html.twig', []);
+    }
+
+    #[Route('/politica-de-privacidad', name: 'app_politica_privacidad', methods: ['GET'])]
+    public function politicaPrivacidad(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('legal/politica_privacidad.html.twig', []);
+    }
+
+    #[Route('/terminos_de_servicio', name: 'app_terminos_servicio', methods: ['GET'])]
+    public function terminosServicio(EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('legal/terminos_servicio.html.twig', []);
+    }
+
 
     //ESTA VISTA PODRIA APUNTAR AL CARRITO
     #[Route('/{id}/show/{cat}', name: 'app_show', methods: ['GET','POST'])]
