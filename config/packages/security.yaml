@@ -27,7 +27,7 @@ security:
             user_checker: App\Security\UserIsVerified
             #ataques de fuerza
             login_throttling:
-                max_attempts: 3
+                max_attempts: 6
                 interval: '15 minutes'
 
             # activate different ways to authenticate

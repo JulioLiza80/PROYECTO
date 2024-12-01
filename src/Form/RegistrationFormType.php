@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,16 @@ class RegistrationFormType extends AbstractType
         ->add('nombre')
         ->add('apellido1')
         ->add('apellido2')
-            ->add('email')
+        ->add('email',EmailType::class, [
+            "required" => true,
+            /* "error_bubbling" => true, */ //Permite que los errores aparezcan arriba del formulario
+            "constraints" => [
+                new NotBlank([
+                    'message'=> 'Introduce email'
+                ]),
+               
+            ]
+        ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

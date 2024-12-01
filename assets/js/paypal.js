@@ -230,7 +230,7 @@ window.paypal
         },
         onApprove: function(data,actions){ //pago realizado, muestra todo lo relacionado con el pago
             actions.order.capture().then(function(detalles){
-                console.log(detalles)
+    
               let paypalform=document.getElementById('paypal-form');
               let detallesInput= document.getElementById('detalles-input');
               let jsonDetalles= JSON.stringify(detalles);

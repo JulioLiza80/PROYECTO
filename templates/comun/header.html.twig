@@ -12,8 +12,9 @@
 					</a>
 				</div>
 
+
 				<!-- Categorías -->
-				<div class="hidden md:block">
+				<div class="hidden lg:block">
 					<div class="flex text-sm raleway font-semibold items-center md:space-x-4 lg:space-x-8">
 						<a href="#promos" class="text-novapurple hover:text-novagreen font-black px-3 py-2">Nuestras Promos</a>
 						<a href="#gafas-sol" class="text-black hover:text-gray-600 px-3 py-2">Gafas de Sol</a>
@@ -23,8 +24,16 @@
 				</div>
 
 				<div class="flex justify-center text-center items-center space-x-2 md:space-x-4">
+					<!-- Hamburger icon for mobiles -->
+					<div class="flex justify-center text-center items-center lg:hidden mx-2">
+						<button id="menu-button" class="text-black hover:text-gray-600 focus:outline-none">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"/>
+							</svg>
+						</button>
+					</div>
 					<div
-						class="relative group">
+						class="relative group hidden lg:block">
 						<!-- Login Icon -->
 						<a class="text-black hover:text-gray-600 cursor-pointer">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z"/><path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z"/></svg>
@@ -47,7 +56,10 @@
 					</div>
 
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<a href="{{ path('app_user_personal') }}" class="text-black mt-1 mx-2">Hola, Nombre</a>
+						<a href="{{ path('app_user_personal') }}" class="hidden lg:block text-black mt-1 mx-2">
+							Hola,
+							{{ app.user.nombre }}</a>
+
 
 						<!-- Wishlist Icon -->
 						<a href="#wishlist" class="text-black hover:text-gray-600 mx-2">
@@ -70,6 +82,32 @@
 						</a>
 					{% endif %}
 				</div>
+
+			</div>
+			<!-- Menú desplegable móvil -->
+			<div id="mobile-menu" class="hidden lg:hidden">
+			<hr>
+				<div class="py-2">
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<a href="{{ path('app_user_personal') }}" class="text-gray-700 pb-4">Hola, {{ app.user.nombre }}</a></a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="/admin" class="block w-full px-4 py-2 text-gray-700 font-bold">Admin</a>
+						{% else %}
+							<a href="{{ path('app_user_personal') }}" class="block w-full px-4 py-2 text-gray-700 font-bold">User</a>
+						{% endif %}
+						<a href="{{ path('app_logout') }}" class="block w-full px-4 py-2 text-gray-700">Logout</a>
+					{% else %}
+						<button id="open-modal-mobile" class="block px-4 py-2 text-gray-700">Login</button>
+						<a href="{{ path('app_register') }}" class="block px-4 py-2 text-gray-700">Register</a>
+					{% endif %}
+				</div>
+				<hr>
+				<div class="px-2 pt-2 pb-3 space-y-1">
+					<a href="#promos" class="block w-full text-novapurple hover:text-novagreen font-black px-3 py-2">Nuestras Promos</a>
+					<a href="#gafas-sol" class="block w-full text-black hover:text-gray-600 px-3 py-2">Gafas de Sol</a>
+					<a href="{{ path('app_gafas_index') }}" class="block w-full text-black hover:text-gray-600 px-3 py-2">Gafas Graduadas</a>
+					<a href="#lentillas" class="block w-full text-black hover:text-gray-600 px-3 py-2">Lentillas</a>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -77,7 +115,10 @@
 
 <!-- Login Modal -->
 <div id="loginmodal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex justify-center items-center">
-	<div class="bg-white rounded-lg shadow-lg max-w-md w-full mx-auto p-6">
+	<div class="bg-white rounded-lg shadow-lg max-w-md w-full mx-2 p-6">
+		<div class="flex justify-end">
+			<button id="close-modal" class="bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold py-1 px-2 rounded">X</button>
+		</div>
 		<h2 class="text-lg font-bold mb-4 text-black">Usuarios</h2>
 		<form action="{{ path('app_login') }}" method="post">
 			<div class="mb-4">
@@ -95,13 +136,10 @@
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 			<div class="d-grid mb-4">
-				<button type="submit" class="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600">Iniciar sesión</button>
+				<button type="submit" class="w-full py-2 px-4 hover:bg-novapurple text-white font-semibold rounded-lg  bg-[#9736af] transition duration-200">Iniciar sesión</button>
 			</div>
 		</form>
 		<a href="{{ path('app_forgot_password_request') }}" class="text-sm font-medium text-gray-700 px-3">He olvidado mi contraseña</a>
-		<div class="flex justify-end">
-			<button id="close-modal" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Close</button>
-		</div>
 	</div>
 </div>
 
