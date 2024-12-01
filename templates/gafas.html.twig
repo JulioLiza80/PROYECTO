@@ -83,20 +83,6 @@
 					<hr class="w-[90%] justify-center border-t-1 border-gray-600">
 				</div>
 
-				<!-- Filtro Categoría -->
-				<div class="flex flex-col items-center mt-8">
-					<button id="categorias-btn" class="text-[24px] font-semibold focus:outline-none">
-						Categorías
-					</button>
-					<div id="categorias-list" class="hidden mt-1 ml-3">
-						<ul class="list-none text-lg">
-							<li class="text-gray-700 cursor-pointer">Gafas graduadas</li>
-							<li class="text-gray-700 cursor-pointer">Gafas de sol</li>
-							<li class="text-gray-700 cursor-pointer">Lentillas</li>
-						</ul>
-					</div>
-				</div>
-
 				<!-- Filtro Marca -->
 				<div class="flex flex-col items-center mt-8">
 					<button id="marcas-btn" class="text-[24px] font-semibold focus:outline-none">
@@ -108,7 +94,7 @@
 								<li class="flex items-center text-gray-700 cursor-pointer">
 									<input type="checkbox" class="marca-checkbox" data-marca="{{ marca }}" id="marca-{{ loop.index }}" class="mr-2">
 									<label for="marca-{{ loop.index }}" class="text-gray-700">
-										{{ marca }}
+										&nbsp;{{ marca|capitalize }}
 									</label>
 								</li>
 							{% endfor %}
@@ -123,19 +109,51 @@
 					</button>
 					<div
 						id="precio-range" class="hidden mt-1 ml-3 w-full">
-						<!-- Rango de precios con dos inputs (minimo y máximo) -->
-						<div class="flex justify-between">
+						<!-- Rango de precios con dos inputs (mínimo y máximo) -->
+						<div class="flex justify-between items-center">
 							<input type="number" id="precio-min" class="w-[45%] border border-gray-400 rounded p-2" placeholder="Min" min="0"/>
 							<input type="number" id="precio-max" class="w-[45%] border border-gray-400 rounded p-2" placeholder="Max" min="0"/>
+							<button id="precio-buscar" class="ml-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Buscar</button>
 						</div>
-						<!-- Slider de precio -->
-						<div class="w-full mt-3">
-							<input type="range" id="precio-slider" min="0" max="1000" step="10" value="1000" class="w-full"/>
-							<div class="flex justify-between">
-								<span id="precio-min-value">0</span>
-								<span id="precio-max-value">1000</span>
-							</div>
-						</div>
+					</div>
+				</div>
+
+
+				<!-- Filtro Material Montura -->
+				<div class="flex flex-col items-center mt-8">
+					<button id="material-btn" class="text-[24px] font-semibold focus:outline-none">
+						Material Montura
+					</button>
+					<div id="material-list" class="hidden mt-1 ml-3">
+						<ul class="list-none text-lg">
+							{% for material in materiales %}
+								<li class="flex items-center text-gray-700 cursor-pointer">
+									<input type="checkbox" class="material-checkbox" data-material="{{ material }}" id="material-{{ loop.index }}" class="mr-2">
+									<label for="material-{{ loop.index }}" class="text-gray-700">
+										&nbsp;{{ material|capitalize }}
+									</label>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+
+				<!-- Filtro Tipo Montura -->
+				<div class="flex flex-col items-center mt-8">
+					<button id="tipo-btn" class="text-[24px] font-semibold focus:outline-none">
+						Tipo Montura
+					</button>
+					<div id="tipo-list" class="hidden mt-1 ml-3">
+						<ul class="list-none text-lg">
+							{% for tipo in tiposMontura %}
+								<li class="flex items-center text-gray-700 cursor-pointer">
+									<input type="checkbox" class="tipo-checkbox" data-tipo="{{ tipo }}" id="tipo-{{ loop.index }}" class="mr-2">
+									<label for="tipo-{{ loop.index }}" class="text-gray-700">
+										&nbsp;{{ tipo|capitalize }}
+									</label>
+								</li>
+							{% endfor %}
+						</ul>
 					</div>
 				</div>
 
@@ -149,7 +167,7 @@
 
 					<!-- Card de gafas -->
 					<div
-						class="gafa-card bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl" data-marca="{{ gafa.marca }}">
+						class="gafa-card bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl" data-marca="{{ gafa.marca }}" data-material="{{ gafa.materialMontura }}" data-tipo="{{ gafa.tipoMontura }}">
 
 						<!-- Imagen de las gafas -->
 						<img
@@ -183,7 +201,6 @@
 		}
 
 		// Inicializar los botones de Categorías y Marca
-		toggleList('categorias-btn', 'categorias-list');
 		toggleList('marcas-btn', 'marcas-list');
 
 		document.querySelectorAll('.marca-checkbox').forEach(checkbox => {
@@ -209,42 +226,93 @@
 			}
 		}
 
-
 		// FILTRO DE PRECIO
-		document.getElementById('precio-btn').addEventListener('click', function() {
-		const rangeDiv = document.getElementById('precio-range');
-		rangeDiv.classList.toggle('hidden');
+		
+		// Alternar la visibilidad del rango de precios
+		document.getElementById('precio-btn').addEventListener('click', function () {
+			const rangeDiv = document.getElementById('precio-range');
+			rangeDiv.classList.toggle('hidden');
 		});
-	
-		// Actualizar el valor del slider en los inputs de min y max
-		const precioSlider = document.getElementById('precio-slider');
-		const precioMinValue = document.getElementById('precio-min-value');
-		const precioMaxValue = document.getElementById('precio-max-value');
-		const precioMinInput = document.getElementById('precio-min');
-		const precioMaxInput = document.getElementById('precio-max');
-	
-		precioSlider.addEventListener('input', function() {
-			const value = precioSlider.value;
-			precioMinValue.textContent = value - 1000 > 0 ? value - 1000 : 0; // Mínimo de 0
-			precioMaxValue.textContent = value;
-			precioMinInput.value = value - 1000 > 0 ? value - 1000 : 0;
-			precioMaxInput.value = value;
+
+		// Filtrar las gafas por rango de precio
+		document.getElementById('precio-buscar').addEventListener('click', function () {
+			const minPrice = parseFloat(document.getElementById('precio-min').value) || 0;
+			const maxPrice = parseFloat(document.getElementById('precio-max').value) || Infinity;
+
+			const gafas = document.querySelectorAll('.gafa-card');
+
+			gafas.forEach(gafa => {
+				const gafaPrice = parseFloat(gafa.querySelector('.raleway.font-semibold.mb-2.text-lg').textContent.replace('€', '').replace(',', '.'));
+
+				if (gafaPrice >= minPrice && gafaPrice <= maxPrice) {
+					gafa.style.display = 'block';
+				} else {
+					gafa.style.display = 'none';
+				}
+			});
 		});
-	
-		// Actualizar el slider con los valores de los inputs
-		precioMinInput.addEventListener('input', function() {
-			const minValue = precioMinInput.value;
-			const maxValue = precioMaxInput.value;
-			precioSlider.value = maxValue;
-			precioMinValue.textContent = minValue;
+
+		// FILTRO DE MATERIAL DE MONTURA
+
+		// Alternar visibilidad del filtro Material Montura
+		toggleList('material-btn', 'material-list');
+
+		// Función para filtrar por Material Montura
+		function filterGafasByMaterial() {
+			const selectedMaterials = Array.from(document.querySelectorAll('.material-checkbox:checked')).map(checkbox => checkbox.dataset.material);
+			const gafas = document.querySelectorAll('.gafa-card');
+
+			// Mostrar todas las gafas si no hay materiales seleccionados
+			if (selectedMaterials.length === 0) {
+				gafas.forEach(gafa => gafa.style.display = 'block');
+			} else {
+				gafas.forEach(gafa => {
+					const gafaMaterial = gafa.dataset.material;
+					if (selectedMaterials.includes(gafaMaterial)) {
+						gafa.style.display = 'block';
+					} else {
+						gafa.style.display = 'none';
+					}
+				});
+			}
+		}
+
+		// Añadir evento a los checkboxes de Material Montura
+		document.querySelectorAll('.material-checkbox').forEach(checkbox => {
+			checkbox.addEventListener('change', filterGafasByMaterial);
 		});
-	
-		precioMaxInput.addEventListener('input', function() {
-			const maxValue = precioMaxInput.value;
-			const minValue = precioMinInput.value;
-			precioSlider.value = maxValue;
-			precioMaxValue.textContent = maxValue;
+
+		// FILTRO DE TIPO DE MONTURA
+
+		// Alternar visibilidad del filtro Tipo Montura
+		toggleList('tipo-btn', 'tipo-list');
+
+		// Función para filtrar por Tipo Montura
+		function filterGafasByTipo() {
+			const selectedTipos = Array.from(document.querySelectorAll('.tipo-checkbox:checked')).map(checkbox => checkbox.dataset.tipo);
+			const gafas = document.querySelectorAll('.gafa-card');
+
+			// Mostrar todas las gafas si no hay tipos seleccionados
+			if (selectedTipos.length === 0) {
+				gafas.forEach(gafa => gafa.style.display = 'block');
+			} else {
+				gafas.forEach(gafa => {
+					const gafaTipo = gafa.dataset.tipo; // Asegúrate de tener un atributo data-tipo en las tarjetas
+					if (selectedTipos.includes(gafaTipo)) {
+						gafa.style.display = 'block';
+					} else {
+						gafa.style.display = 'none';
+					}
+				});
+			}
+		}
+
+		// Añadir evento a los checkboxes de Tipo Montura
+		document.querySelectorAll('.tipo-checkbox').forEach(checkbox => {
+			checkbox.addEventListener('change', filterGafasByTipo);
 		});
-		</script>
+
+
+	</script>
 
 {% endblock %}
