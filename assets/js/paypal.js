@@ -257,3 +257,4 @@ window.paypal
    });
     
  });
+
