@@ -206,6 +206,12 @@
 
 	{{ include('comun/footer.html.twig') }}
 
+	
+  <script>
+   
+  </script>
+
+
 	<script>
 		let currentIndex = 0;
 
@@ -231,6 +237,13 @@ updateDotStatus();
 
 // Initialize the first dot as active on page load
 updateDotStatus();
+
+{% if app.request.query.get('error') is not null %}
+   const modal = document.getElementById('loginmodal');
+     modal.classList.remove('hidden'); // Show the modal
+{% endif %}
+
 	</script>
+	
 
 {% endblock %}
