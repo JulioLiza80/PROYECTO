@@ -17,8 +17,14 @@ class GafasController extends AbstractController
         // Obtener todas las gafas
         $gafas = $entityManager->getRepository(Gafas::class)->findAll();
 
+        // Extraer las marcas únicas
+        $marcas = array_unique(array_map(function ($gafa) {
+            return $gafa->getMarca();  // Asegúrate de que el método getMarca() exista en tu entidad
+        }, $gafas));
+
         return $this->render('gafas.html.twig', [
             'gafas' => $gafas,
+            'marcas' => $marcas,  // Pasar las marcas únicas
         ]);
     }
 

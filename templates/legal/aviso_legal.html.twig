@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aviso Legal{% endblock %}
+
+{% block body %}
+	{{ include('comun/header.html.twig') }}
+    <div class="container mx-auto px-4 m-8">
+        <h1 class="title">Aviso Legal</h1>
+        <p class="last-updated">Última actualización: 01/12/2024</p>
+        <div class="content">
+            <p>Este sitio web pertenece a <strong>Nova Opticos</strong>, con domicilio en <strong>Av. Lope de Vega, s/n, 30011 Los Dolores, Murcia</strong>, inscrita en el Registro Mercantil de Murcia, con CIF B-12345678. Para consultas, puedes contactarnos a través del correo <a href="mailto:opticanovaproyecto@gmail.com" class="link">opticanovaproyecto@gmail.com</a>.</p>
+
+            <h2 class="subtitle">1. Condiciones Generales de Uso</h2>
+            <p>El acceso y uso de este sitio web están sujetos a las siguientes condiciones:</p>
+            <ul class="list">
+                <li>Los usuarios deben usar este sitio web de forma legal y respetuosa, evitando cualquier acción que pueda dañar los intereses de <strong>Nova Ópticos</strong> o de terceros.</li>
+                <li>El contenido de este sitio, incluyendo textos, imágenes y logotipos, está protegido por derechos de propiedad intelectual. Está prohibida su reproducción total o parcial sin autorización previa.</li>
+                <li>El acceso al sitio no implica ninguna relación comercial entre el usuario y Nova Opticos, salvo que se formalice una compra a través de los canales habilitados.</li>
+            </ul>
+
+            <h2 class="subtitle">2. Propiedad Intelectual</h2>
+            <p>Todos los derechos de propiedad intelectual de este sitio web pertenecen a Nova Opticos. Esto incluye, pero no se limita a, diseños gráficos, código fuente, textos e imágenes.</p>
+
+            <h2 class="subtitle">3. Limitación de Responsabilidad</h2>
+            <p>Nova Ópticos no se responsabiliza de los daños que puedan surgir por el uso de este sitio web, incluyendo interrupciones en el servicio, errores técnicos o virus informáticos. El usuario asume cualquier riesgo derivado del uso del sitio.</p>
+
+            <h2 class="subtitle">4. Legislación Aplicable</h2>
+            <p>Este aviso legal se rige por la legislación española. Para cualquier disputa, los usuarios aceptan someterse a la jurisdicción de los tribunales de Murcia.</p>
+        </div>
+    </div>
+	{{ include('comun/footer.html.twig') }}
+{% endblock %}

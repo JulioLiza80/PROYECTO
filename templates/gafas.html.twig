@@ -11,30 +11,155 @@
 {% block body %}
 	{{ include('comun/header.html.twig') }}
 
-	<div class="example-wrapper px-6 py-12">
-		<h2 class="text-3xl font-semibold text-center text-gray-800 mb-10">Descubre nuestra colección</h2>
-		
-		<div class="flex flex-row">
+	<div
+		class="example-wrapper py-12">
+
+		<!-- Imagen de Banner -->
+		<div class="banner-gafas-graduadas w-full h-[342px] relative mb-4">
+			<img src="{{ asset('images/gafas-graduadas-banner.jpg') }}" alt="Banner Gafas Graduadas" class="absolute inset-0 w-full h-full object-cover object-center">
+		</div>
+
+		<!-- Contenedor breadcrumbs y filtros básicos -->
+		<div
+			class="flex items-center justify-between mb-8">
+
+			<!-- Breadcrumbs (Alineado a la izquierda) -->
+			<div class="flex mb-2">
+				<button class="w-[124px] h-[42px] text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl mr-3">Inicio</button>
+				<p class="w-[150px] h-[42px] text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl">Gafas Graduadas</p>
+			</div>
+
+			<!-- Filtros básicos (Alineado a la derecha) -->
+			<div
+				class="flex items-center shadow w-[1147px] h-[42px] rounded mb-2">
+				<!-- Filtros y número de gafas -->
+				<div class="flex items-center mr-4 ml-4 ">
+					<p class="mr-2">Resultados:
+						{{ gafas|length }}
+						gafas</p>
+				</div>
+
+				<!-- Paginación central -->
+				<div
+					class="text-center flex-grow mx-4 flex items-center justify-center">
+					<!-- Flecha izquierda -->
+					<i class="fa-solid fa-circle-left"></i>
+
+					<p class="text-sm">
+						Página 1 de 8
+					</p>
+
+					<!-- Flecha derecha -->
+					<i class="fa-solid fa-circle-right"></i>
+				</div>
+
+
+				<!-- Ordenar por -->
+				<div class="flex items-center mr-4">
+					<label for="order" class="mr-2">Ordenar por:</label>
+					<select id="order" class="border border-gray-300 rounded-lg p-1">
+						<option value="precio-asc">Precio de más bajo a más alto</option>
+						<option value="precio-desc">Precio de más alto a más bajo</option>
+						<option value="relevancia">Relevancia</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="flex flex-row">
+
 			<!-- Filtros de búsqueda -->
-			<div class="flex flex-col w-[30%] min-w-[30%] bg-white me-10 rounded-lg border-solid border-[0.5px] border-gray-300 shadow">
+			<div
+				class="flex flex-col w-[25%] min-w-[25%] bg-white me-10 rounded-lg shadow">
+
+				<!-- Titulo filtros -->
+				<div class="flex ml-3 mt-2">
+					<p class="font-semibold text-[36px]">Filtros</p>
+				</div>
+
+				<!-- Contenedor centrado del hr -->
+				<div class="w-full flex mt-2">
+					<hr class="w-[90%] justify-center border-t-1 border-gray-600">
+				</div>
+
+				<!-- Filtro Categoría -->
+				<div class="flex flex-col items-center mt-8">
+					<button id="categorias-btn" class="text-[24px] font-semibold focus:outline-none">
+						Categorías
+					</button>
+					<div id="categorias-list" class="hidden mt-1 ml-3">
+						<ul class="list-none text-lg">
+							<li class="text-gray-700 cursor-pointer">Gafas graduadas</li>
+							<li class="text-gray-700 cursor-pointer">Gafas de sol</li>
+							<li class="text-gray-700 cursor-pointer">Lentillas</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Filtro Marca -->
+				<div class="flex flex-col items-center mt-8">
+					<button id="marcas-btn" class="text-[24px] font-semibold focus:outline-none">
+						Marca
+					</button>
+					<div id="marcas-list" class="hidden mt-1 ml-3">
+						<ul class="list-none text-lg">
+							{% for marca in marcas %}
+								<li class="flex items-center text-gray-700 cursor-pointer">
+									<input type="checkbox" class="marca-checkbox" data-marca="{{ marca }}" id="marca-{{ loop.index }}" class="mr-2">
+									<label for="marca-{{ loop.index }}" class="text-gray-700">
+										{{ marca }}
+									</label>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+
+				<!-- Filtro Precio -->
+				<div class="flex flex-col items-center mt-8">
+					<button id="precio-btn" class="text-[24px] font-semibold focus:outline-none">
+						Precio
+					</button>
+					<div
+						id="precio-range" class="hidden mt-1 ml-3 w-full">
+						<!-- Rango de precios con dos inputs (minimo y máximo) -->
+						<div class="flex justify-between">
+							<input type="number" id="precio-min" class="w-[45%] border border-gray-400 rounded p-2" placeholder="Min" min="0"/>
+							<input type="number" id="precio-max" class="w-[45%] border border-gray-400 rounded p-2" placeholder="Max" min="0"/>
+						</div>
+						<!-- Slider de precio -->
+						<div class="w-full mt-3">
+							<input type="range" id="precio-slider" min="0" max="1000" step="10" value="1000" class="w-full"/>
+							<div class="flex justify-between">
+								<span id="precio-min-value">0</span>
+								<span id="precio-max-value">1000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 			</div>
+
+
 			<!-- Grid de gafas con 4 columnas en pantallas grandes, 2 en medianas y 1 en móviles -->
-			<div class="flex flex-row flex-wrap justify-start gap-8">
+			<div class="flex flex-row flex-wrap justify-center gap-8">
 				{% for gafa in gafas %}
+
 					<!-- Card de gafas -->
 					<div
-						class="bg-white rounded-lg shadow overflow-hidden transform transition max-w-60 max-h-60 duration-300 hover:scale-105 hover:shadow-xl">
+						class="gafa-card bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl" data-marca="{{ gafa.marca }}">
+
 						<!-- Imagen de las gafas -->
 						<img
-						src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 object-cover">
+						src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 my-2 object-cover">
 
 						<!-- Contenido de la card -->
-						<div class="p-6">
-							<h3 class="text-lg font-semibold text-gray-800 mb-2">{{ gafa.marca }}
+						<div class="px-4 py-2">
+							<h3 class="text-gray-800 raleway font-light mb-2 text-sm">{{ gafa.marca }}
 								{{ gafa.modelo }}</h3>
-							<p class="text-sm text-gray-600 mb-4">{{ gafa.descripcion }}</p>
-							<p class="text-lg font-semibold text-gray-900 mb-4">{{ gafa.precio }}€</p>
+							<p class="text-gray-900 raleway font-semibold mb-2 text-lg">{{ gafa.precio|number_format(2, ',', '') }}€</p>
 						</div>
 					</div>
 				{% endfor %}
@@ -43,4 +168,83 @@
 	</div>
 
 	{{ include('comun/footer.html.twig') }}
+
+	 <script>
+		// LISTAS CATEGORIAS Y MARCAS
+
+		// Función para alternar la visibilidad de las listas
+		function toggleList(buttonId, listId) {
+			const button = document.getElementById(buttonId);
+			const list = document.getElementById(listId);
+
+			button.addEventListener('click', () => {
+				list.classList.toggle('hidden');
+			});
+		}
+
+		// Inicializar los botones de Categorías y Marca
+		toggleList('categorias-btn', 'categorias-list');
+		toggleList('marcas-btn', 'marcas-list');
+
+		document.querySelectorAll('.marca-checkbox').forEach(checkbox => {
+			checkbox.addEventListener('change', filterGafasByMarca);
+		});
+
+		function filterGafasByMarca() {
+			const selectedMarcas = Array.from(document.querySelectorAll('.marca-checkbox:checked')).map(checkbox => checkbox.dataset.marca);
+			const gafas = document.querySelectorAll('.gafa-card');
+
+			// Mostrar todas las gafas si no hay marcas seleccionadas
+			if (selectedMarcas.length === 0) {
+				gafas.forEach(gafa => gafa.style.display = 'block');
+			} else {
+				gafas.forEach(gafa => {
+					const gafaMarca = gafa.dataset.marca;
+					if (selectedMarcas.includes(gafaMarca)) {
+						gafa.style.display = 'block';
+					} else {
+						gafa.style.display = 'none';
+					}
+				});
+			}
+		}
+
+
+		// FILTRO DE PRECIO
+		document.getElementById('precio-btn').addEventListener('click', function() {
+		const rangeDiv = document.getElementById('precio-range');
+		rangeDiv.classList.toggle('hidden');
+		});
+	
+		// Actualizar el valor del slider en los inputs de min y max
+		const precioSlider = document.getElementById('precio-slider');
+		const precioMinValue = document.getElementById('precio-min-value');
+		const precioMaxValue = document.getElementById('precio-max-value');
+		const precioMinInput = document.getElementById('precio-min');
+		const precioMaxInput = document.getElementById('precio-max');
+	
+		precioSlider.addEventListener('input', function() {
+			const value = precioSlider.value;
+			precioMinValue.textContent = value - 1000 > 0 ? value - 1000 : 0; // Mínimo de 0
+			precioMaxValue.textContent = value;
+			precioMinInput.value = value - 1000 > 0 ? value - 1000 : 0;
+			precioMaxInput.value = value;
+		});
+	
+		// Actualizar el slider con los valores de los inputs
+		precioMinInput.addEventListener('input', function() {
+			const minValue = precioMinInput.value;
+			const maxValue = precioMaxInput.value;
+			precioSlider.value = maxValue;
+			precioMinValue.textContent = minValue;
+		});
+	
+		precioMaxInput.addEventListener('input', function() {
+			const maxValue = precioMaxInput.value;
+			const minValue = precioMinInput.value;
+			precioSlider.value = maxValue;
+			precioMaxValue.textContent = maxValue;
+		});
+		</script>
+
 {% endblock %}
