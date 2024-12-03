@@ -112,10 +112,7 @@ class RegistrationController extends AbstractController
 
 
     #[Route('/request-verify-email', name: 'app_request_verify_email')]
-    public function requestVerifyUserEmail(
-        Request $request,
-        UserRepository $userRepository
-    ): Response {
+    public function requestVerifyUserEmail(Request $request,UserRepository $userRepository): Response {
 
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
@@ -123,28 +120,32 @@ class RegistrationController extends AbstractController
 
         $form = $this->createForm(RequestVerifyUserEmailFormType::class);
         $form->handleRequest($request);
+       
         if ($form->isSubmitted() && $form->isValid()) {
-            // generate a signed url and email it to the user
+            // generar una URL firmada y enviarla por correo electrónico al usuario
             $user =  $userRepository->findOneByEmail($form->get('email')->getData());
             if ($user) {
                 $this->emailVerifier->sendEmailConfirmation(
                     'app_verify_email',
                     $user,
                     (new TemplatedEmail())
-                        ->from(new Address('email@example.com', 'Sender'))
+                        ->from(new Address('opticanovaproyecto@gmail.com', 'Nova Opticos'))
                         ->to($user->getEmail())
-                        ->subject('Validation Link')
-                        ->htmlTemplate('security/registration/confirmation_email.html.twig')
+                        ->subject('Confirma tu email en Nova Opticos')
+                        ->htmlTemplate('registration/confirmation_email.html.twig')
                 );
-                // do anything else you need here, like flash message
+                //Haz cualquier otra cosa que necesites aquí, como un mensaje flash.
+
                 $this->addFlash('success', 'blabla.');
                 return $this->redirectToRoute('app_home');
             } else {
                 $this->addFlash('error',  'Email inconnu.');
             }
         }
-        return $this->render('security/registration/request.html.twig', [
+        return $this->render('/registration/confirmation_page.html.twig', [
             'requestForm' => $form->createView(),
-        ]);
+             ]);
+
+        
     }
 }

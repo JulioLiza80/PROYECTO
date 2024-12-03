@@ -4,19 +4,19 @@
 
 {% block body %}
 	{{ include('comun/header.html.twig') }}
-	<div
-		class="flex items-center justify-center min-h-screen bg-gray-50">
+	<div class="flex items-center justify-center min-h-screen bg-gray-50">
+		
 		<!-- Flexbox to center content -->
-		<div
-			class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-			<!-- Box with padding, shadow, and border -->
-		{#	{% if Email ok pero no confirmado %}
-
-			{% else %}
-					<div class="text-center p-4 bg-white border rounded-lg space-y-4">
-						<p><strong></strong></p>
-					</div>
-			{% endif %}#}
+		<div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+			<h1 class="text-center text-2xl font-semibold mb-6">Envio de nuevo Link</h1>
+			<div class="alert alert-danger text-red-600">
+			<p>Hemos detectado que aún no ha validado su cuenta de correo. Por favor revise su bandeja de entrada y vuelva a hacer login. Si no ha recibido el correo cumplimente el siguiente formulario</p>
+		    </div>
+			{{ form_start(requestForm, { 'attr': { 'class': 'space-y-4' } }) }}
+			{{ form_row(requestForm.email, { 'label': 'Email', 'label_attr': {'class': 'font-semibold'}, 'attr': {'class': 'border border-gray-300 rounded-md p-2 w-full'}}) }}
+			{{ form_widget(requestForm) }}
+			<button type="submit" href="/request-verify-email" class="w-full py-2 px-4 hover:bg-novapurple text-white font-semibold rounded-lg  bg-[#9736af] transition duration-200">Nuevo Link</button>
+			{{ form_end(requestForm) }}
 		</div>
 	</div>
 	{{ include('comun/footer.html.twig') }}

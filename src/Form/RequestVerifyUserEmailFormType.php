@@ -14,11 +14,12 @@ class RequestVerifyUserEmailFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => ['autocomplete' => 'email'],
+                'attr' => ['autocomplete' => 'email', 'placeholder' => 'Introduzca su Email'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Merci de saisir votre email',
+                        'message' => 'Por favor introduzca Email',
                     ]),
+                    
                 ],
             ])
         ;
