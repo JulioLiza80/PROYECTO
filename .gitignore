@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+/.vscode/
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -39,3 +40,4 @@ yarn-error.log
 /public/campania/
 /public/images/gafas/
 /public/images/lentillas/
+/public/documentos/

@@ -1,0 +1,145 @@
+
+{% block content %}
+	<form method="POST" action="{{ path('app_user_edit', {'id': user.id}) }}" enctype="multipart/form-data">
+		{{ form_start(form) }}
+		<!-- Aquí empieza el formulario con Symfony -->
+
+		<!-- Información personal -->
+			<div class="mb-12"> <h2 class="text-lg font-semibold text-gray-700 mb-4">Información Personal</h2>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="col-span-2">
+					{{ form_label(form.nombre, 'Nombre', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+					{{ form_widget(form.nombre, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
+				</div>
+				<div>
+					{{ form_label(form.apellido1, 'Primer Apellido', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+					{{ form_widget(form.apellido1, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
+				</div>
+				<div>
+					{{ form_label(form.apellido2, 'Segundo Apellido', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+					{{ form_widget(form.apellido2, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
+				</div>
+				<div class="col-span-2">
+					{{ form_label(form.email, 'Email', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+					{{ form_widget(form.email, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
+				</div>
+				{# <div class="col-span-2 mb-6">
+				
+												<div>
+													{{ form_label(form.password, 'Contraseña', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+													{{ form_widget(form.password, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'disabled': 'true', 'type': 'password'}}) }}
+												</div>
+				
+												<button type="button" class="mt-2 text-sm text-blue-600 hover:underline" onclick="togglePasswordFields()">Cambiar contraseña</button>
+				
+												<div id="passwordFields" class="hidden mt-4">
+													<div>
+														{{ form_label(form.newPassword, 'Nueva contraseña', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+														{{ form_widget(form.newPassword, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'placeholder': 'Nueva contraseña'}}) }}
+													</div>
+				
+													<div>
+														{{ form_label(form.repeatPassword, 'Repetir nueva contraseña', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+														{{ form_widget(form.repeatPassword, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'placeholder': 'Repetir nueva contraseña'}}) }}
+													</div>
+												</div>
+											</div> #}
+			</div>
+		</div>
+
+		<hr
+		class="my-4">
+
+		<!-- Dirección -->
+		<div class="mb-12">
+			<h2 class="text-lg font-semibold text-gray-700 mb-4">Dirección</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				<div>
+					{{ form_label(form.direccion, 'Calle, número', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+					{{ form_widget(form.direccion, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
+				</div>
+				<div>
+					{{ form_label(form.ciudad, 'Ciudad', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+					{{ form_widget(form.ciudad, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
+				</div>
+				<div>
+					{{ form_label(form.cp, 'Código Postal', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+					{{ form_widget(form.cp, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
+				</div>
+			</div>
+		</div>
+
+		<hr
+		class="my-4">
+
+		<!-- Documento -->
+		<div class="mb-12">
+			<h2 class="text-lg font-semibold text-gray-700 mb-4">Documento</h2>
+
+			{# Si ya existe un archivo subido, mostrar el nombre y un enlace para descargarlo #}
+			{% if user.documentFile %}
+				<p class="text-sm text-gray-600 mb-2">Documento actual:
+					{{ user.documentFile }}
+					{# Nombre del archivo #}
+				</p>
+				<a href="{{ asset('uploads/documents/' ~ user.documentFile) }}" target="_blank" class="text-sm text-blue-600 hover:underline">Ver documento</a>
+			{% endif %}
+
+			{# El campo para cargar un nuevo archivo con el form_label y form_widget #}
+			<div class="mt-4">
+				{{ form_label(form.documentFile, 'Subir un nuevo documento') }}
+				{{ form_widget(form.documentFile, {'attr': {'class': 'form-control'}}) }}
+			</div>
+
+			{# Si el documento ya fue subido, puedes ofrecer una opción para eliminarlo o gestionar el archivo #}
+			{% if user.documentFile %}
+				<button type="button" class="mt-2 text-sm text-red-600 hover:underline" onclick="alert('Función para eliminar documento aún no implementada.')">Eliminar Documento</button>
+			{% endif %}
+		</div>
+
+
+		<!-- Botón de guardar -->
+		<div class="mt-2">
+			<button type="submit" class="py-2 px-4 hover:bg-novapurple text-white font-semibold rounded-lg  bg-[#9736af] transition duration-200">Guardar Cambios</button>
+		</div>
+
+		<div class="flex items-center justify-center mt-12">
+			<button type="button" onclick="confirmarEliminarCuenta()" class="ml-4 bg-red-600 text-white font-semibold rounded-lg py-2 px-4 hover:bg-red-700">Eliminar Cuenta</button>
+		</div>
+		<!-- Aquí termina el formulario con Symfony -->
+		{{ form_end(form) }}
+	</form>
+
+	<script>
+		function confirmarEliminarCuenta() {
+if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) {
+fetch('{{ path('app_user_delete', {'id': user.id}) }}', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/x-www-form-urlencoded'
+},
+body: new URLSearchParams(
+{
+'_token': '{{ csrf_token('delete' ~ user.id) }}' // Asegúrate de que el CSRF token se envíe aquí
+}
+)
+}).then(response => {
+if (response.ok) {
+window.location.href = '{{ path('app_home') }}';
+} else {
+response.text().then(text => {
+alert('Hubo un error al eliminar la cuenta: ' + text);
+});
+}
+});
+}
+}
+
+// Función para mostrar los campos de nueva contraseña
+function togglePasswordFields() {
+const passwordFields = document.getElementById('passwordFields');
+passwordFields.classList.toggle('hidden'); // Mostrar o esconder los campos
+}
+	</script>
+
+{% endblock %}
