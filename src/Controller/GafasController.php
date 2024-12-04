@@ -50,7 +50,7 @@ class GafasController extends AbstractController
             throw $this->createNotFoundException('La gafa no existe.');
         }
 
-        return $this->render('gafas/show.html.twig', [
+        return $this->render('showDetallesGafas.html.twig', [
             'gafa' => $gafa,
         ]);
     }

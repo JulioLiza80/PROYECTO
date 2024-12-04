@@ -1,3 +1,9 @@
+/* Animacion icono recargar filtros  */
+.hover\:rotate-animation:hover {
+    transition: transform 0.4s ease;
+    transform: rotate(360deg);
+}
+
 .gafas-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
