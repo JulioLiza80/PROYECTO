@@ -31,9 +31,9 @@
 						<div class="flex items-center">
 							{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'h-4 w-4 text-blue-500 border-gray-300 rounded'}}) }}
 							<label for="{{ registrationForm.agreeTerms.vars.id }}" class="ml-2 text-sm text-gray-700">He leído y acepto la
-								<a class="underline" href="#privacyPolicy">Política de Privacidad</a>
+								<a class="underline" href="{{ path('app_politica_privacidad') }}">Política de Privacidad</a>
 								y los
-								<a class="underline" href="#serviceTerms">Términos de Servicio</a>
+								<a class="underline" href="{{ path('app_terminos_servicio') }}">Términos de Servicio</a>
 							</label>
 						</div>
 					</div>

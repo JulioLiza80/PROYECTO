@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     public function index(EntityManagerInterface $entityPublicidad,EntityManagerInterface $entityGafas,EntityManagerInterface $entityLentillas): Response
     {
         if(isset($_GET['error']) && str_contains($_GET['error'],' Todavía no has verificado tu cuenta.')){
-            return $this->render('/registration/confirmation_page.html.twig');
+            return $this->redirectToRoute('app_request_verify_email');
         }else{
         $publicidad= $entityPublicidad->getRepository(Campanias::class)->findAll();
         $gafas= $entityGafas->getRepository(Gafas::class)->findAll();
