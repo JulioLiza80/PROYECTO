@@ -28,6 +28,13 @@
                             Mis Pedidos
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ path('app_forgot_password_request', {'activeTab': 'contraseña'}) }}" class="block py-2 px-2 md:px-4
+						                            {% if activeTab == 'contraseña' %}bg-gray-200 text-gray-800 font-bold{% else %}text-gray-600{% endif %}
+						                            rounded text-sm md:text-md">
+                            cambiar contraseña
+                        </a>
+                    </li>
 				</ul>
 			</nav>
 
@@ -37,9 +44,11 @@
                     {% if activeTab == 'cuenta' %}
                         {# Renderiza la plantilla cuenta.html.twig para Mi Cuenta #}
                         {{ include('cuenta.html.twig') }}
-                    {% else %}
+                    {% elseif activeTab == 'pedidos' %}
                         {# Renderiza el template para Mis Pedidos #}
                         {{ include('pedidos.html.twig') }}
+                        {% else %}
+                         {{ include('reset_password\request.html.html.twig') }}
                     {% endif %}
                 {% endblock %}
             </div>
