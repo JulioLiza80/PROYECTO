@@ -37,6 +37,7 @@ class DetallePedidoCrudController extends AbstractCrudController
             IdField::new('categoriaProducto'),
             NumberField::new('cantidad'),
             NumberField::new('Precio'),
+            IdField::new('Idusuario'),
             
         ];
     }

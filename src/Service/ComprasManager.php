@@ -110,10 +110,11 @@ class ComprasManager
   
   public function nuevoDetallePedido( Pedidos $pedido, DetallePedido $detallePedido, $t) :DetallePedido
   {
-    
+   
     //recuperamos Pedido
     $pedido= new Pedidos();
     $pedido= $this->pedidosRepository->findOneByIdTransaccion($t);
+    //recuperamos usuario
     //recuperamos carrito
     $session = $this->requestStack->getSession();
     $carrito= $session->get('carrito');
@@ -126,6 +127,7 @@ class ComprasManager
       $detallePedido->setCategoriaProducto($elemento['producto']->getCategoria());
       $detallePedido->setCantidad($elemento['cantidad']);
       $detallePedido->setPrecio($elemento['producto']->getPrecio());
+      $detallePedido->setIdusuario($pedido->getIdUsuarioPedidos()->getId());
       $this->detallePedidoRepository->save($detallePedido, true);   
     
     }

@@ -19,17 +19,16 @@ class DetallePedidoRepository extends ServiceEntityRepository
     //    /**
     //     * @return DetallePedido[] Returns an array of DetallePedido objects
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('d')
-    //            ->andWhere('d.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('d.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       public function findPedidosById($value): array
+       {
+           return $this->createQueryBuilder('d')
+               ->andWhere('d.Idusuario = :val')
+               ->setParameter('val', $value)
+               ->orderBy('d.id', 'ASC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?DetallePedido
     //    {

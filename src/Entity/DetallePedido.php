@@ -28,6 +28,9 @@ class DetallePedido
     #[ORM\Column]
     private ?int $Precio = null;
 
+    #[ORM\Column]
+    private ?int $Idusuario = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class DetallePedido
     public function setPrecio(int $Precio): static
     {
         $this->Precio = $Precio;
+
+        return $this;
+    }
+
+    public function getIdusuario(): ?int
+    {
+        return $this->Idusuario;
+    }
+
+    public function setIdusuario(int $Idusuario): static
+    {
+        $this->Idusuario = $Idusuario;
 
         return $this;
     }

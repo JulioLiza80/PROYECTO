@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\DetallePedido;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Gafas;
+use App\Entity\Lentillas;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -120,12 +123,11 @@ final class UserController extends AbstractController
 
     // Configuración
     #[Route('/configuracion', name: 'app_user_config', methods: ['GET'])]
-    public function configuration(Request $request, EntityManagerInterface $entityManager): Response
+    public function configuration(Request $request, EntityManagerInterface $entityManager, EntityManagerInterface $entityGafas, EntityManagerInterface $entityLentillas, EntityManagerInterface $entityPedidos, EntityManagerInterface $entityUsuario  ): Response
     {
         $activeTab = $request->query->get('activeTab', 'cuenta');
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -133,10 +135,21 @@ final class UserController extends AbstractController
 
             return $this->redirectToRoute('app_user_config');
         }
+
+        //recuperacion de todos los productos para despues filtrar;
+        $gafas= $entityGafas->getRepository(Gafas::class)->findAll();
+        $lentillas= $entityLentillas->getRepository(Lentillas::class)->findAll();
+        $usuarioPedido= $entityUsuario->getRepository((User::class))->findOneByEmail($user->getUserIdentifier());
+        $pedidosUsuario= $entityPedidos->getRepository(DetallePedido::class)->findPedidosById($usuarioPedido->getId());
+        
+        
         return $this->render('configuracion.html.twig', [
             'activeTab' => $activeTab,
             'user' => $user,
             'form' => $form->createView(),
+            'gafas'=> $gafas,
+            'lentillas'=> $lentillas,
+            'pedidos' => $pedidosUsuario,
         ]);
     }
 }
