@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class UserType extends AbstractType
 {
@@ -34,9 +35,13 @@ class UserType extends AbstractType
             ->add('direccion')
             ->add('ciudad')
             ->add('cp')
-            ->add('documentFile', VichImageType::class, [
+            ->add('documentFile', VichFileType::class, [
                 'required' => false,
+                'label' => 'Subir documento',
+                'delete_label' => 'Eliminar documentos',
             ])
+           
+            
             /*    ->add('updatedAt', null, [
                 'widget' => 'single_text',
             ])*/
