@@ -15,11 +15,10 @@
 			<div class="flex transition-transform duration-500 ease-in-out transform" id="carousel">
 				{% set imageCount = 0 %}
 				{% for campaign in publicidad %}
-					{# Check and display the first image (imageName) #}
+					{% set imageCount = imageCount + 1 %}
 					{% if campaign.imageName is not null %}
 						<div class="min-w-full h-[500px] flex items-center justify-center overflow-hidden">
-							<img src="{{ asset('campania/' ~ campaign.imageName) }}" alt="{{ campaign.imageDescription }}" class="object-cover w-full h-full">
-							{% set imageCount = imageCount + 1 %}
+							<img src="{{ asset('campania/' ~ campaign.imageName) }}" alt="Campaña {{ imageCount }}" class="object-cover w-full h-full">
 						</div>
 					{% endif %}
 				{% endfor %}
@@ -69,25 +68,24 @@
 				<div class="w-full h-px max-w-6xl mx-auto mt-3 mb-6" style="background-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 1.46%, rgba(128, 128, 128, 0.6) 40.83%, rgba(128, 128, 128, 0.3) 65.57%, rgba(128, 128, 128, 0) 107.92%);"></div>
 
 				<div class="flex flex-row gap-10 md:gap-20 mx-4">
-					{% set gafasCount = 0 %}
-					{% for gafa in gafas %}
-						{% if gafasCount < 3 %}
-							<!-- Card de gafas -->
-							<div
-								class="bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl">
-								<!-- Imagen de las gafas -->
-								<img
-								src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 md:my-2 object-cover">
+					{% for destacado in destacados %}
+						<!-- Card de gafas -->
+						<div class="bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl">
 
-								<!-- Contenido de la card -->
-								<div class="px-4 py-1 md:py-2">
-									<h3 class="text-gray-800 raleway font-light md:mb-2 text-xs md:text-sm">{{ gafa.marca }}
-										{{ gafa.modelo }}</h3>
-									<p class="text-gray-900 raleway font-semibold mb-2 text-md md:text-lg">{{ gafa.precio|number_format(2, ',', '') }}€</p>
-								</div>
+							<!-- Imagen de las gafas -->
+							<img src="{{ asset('images/gafas/' ~ destacado.imageName) }}" alt="{{ destacado.descripcion }}" class="w-full h-50 md:my-2 object-cover">
+
+							<!-- Contenido de la card -->
+							<div class="px-4 py-1 md:py-2">
+								<h3 class="text-gray-800 raleway font-light md:mb-2 text-xs md:text-sm">
+									{{ destacado.marca }} {{ destacado.modelo }}
+								</h3>
+								<p class="text-gray-900 raleway font-semibold mb-2 text-md md:text-lg">
+									{{ destacado.precio|number_format(2, ',', '') }}€
+								</p>
+
 							</div>
-							{% set gafasCount = gafasCount + 1 %}
-						{% endif %}
+						</div>
 					{% endfor %}
 				</div>
 			</div>
@@ -96,7 +94,7 @@
 				class="flex flex-col md:flex-row mx-2 md:space-x-4 space-y-4 md:space-y-0 my-6 md:my-20">
 				<!-- Categoría Gafas de Sol -->
 				<a href="#gafas-sol" class="relative group flex-1 overflow-hidden rounded-lg">
-					<img src="{{ asset('images/categorias/gafas-sol.jpg') }}" alt="Gafas de sol" class="w-full h-[400px] object-cover transition-transform duration-300 ease-in-out hover:scale-105">
+					<img src="{{ asset('images/categorias/gafas-sol.jpg') }}" alt="Gafas de sol" class="w-full h-[400px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
 					<span class="absolute bottom-4 right-4 tracking-[0.25em] text-white font-bold bg-black/30 backdrop-blur-md px-2 py-1 rounded group-hover:bg-black/70 transition-all yeseva-one uppercase">
 						Gafas de Sol
 					</span>
@@ -104,7 +102,7 @@
 
 				<!-- Categoría Gafas Graduadas -->
 				<a href="{{ path('app_gafas_index') }}" class="relative group flex-1 overflow-hidden rounded-lg">
-						<img src="{{ asset('images/categorias/gafas-graduadas.jpg') }}" alt="Gafas graduadas" class="w-full h-[400px] object-cover object-top transition-transform duration-300 ease-in-out group-hover:scale-110">
+						<img src="{{ asset('images/categorias/gafas-graduadas.jpg') }}" alt="Gafas graduadas" class="w-full h-[400px] object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
 					<span class="absolute bottom-4 right-4 tracking-[0.25em] text-white font-bold bg-black/30 backdrop-blur-md px-2 py-1 rounded group-hover:bg-black/70 transition-all yeseva-one uppercase">
 						Gafas Graduadas
 					</span>
@@ -112,7 +110,7 @@
 
 				<!-- Categoría Lentillas -->
 				<a href="#lentillas" class="relative group flex-1 overflow-hidden rounded-lg">
-					<img src="{{ asset('images/categorias/lentillas.jpg') }}" alt="Lentillas" class="w-full h-[400px] object-cover transition-transform duration-300 ease-in-out hover:scale-105">
+					<img src="{{ asset('images/categorias/lentillas.jpg') }}" alt="Lentillas" class="w-full h-[400px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
 					<span class="absolute bottom-4 right-4 tracking-[0.25em] text-white font-bold bg-black/30 backdrop-blur-md px-2 py-1 rounded group-hover:bg-black/70 transition-all yeseva-one uppercase">
 						Lentillas
 					</span>

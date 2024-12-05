@@ -25,6 +25,11 @@ class HomeController extends AbstractController
         $gafas= $entityGafas->getRepository(Gafas::class)->findAll();
         $lentillas= $entityLentillas->getRepository(Lentillas::class)->findAll();
 
+        // Combinar y filtrar las gafas y lentillas con destacado = 1
+        $destacados = array_filter(array_merge($gafas, $lentillas), function ($item) {
+            return $item->getDestacado() === 1;
+        });
+
          // buscamos los logos de las marcas en el directorio public/images/marcas
          $marcasDir = $this->getParameter('kernel.project_dir') . '/public/images/marcas';
          $finder = new Finder();
@@ -42,6 +47,7 @@ class HomeController extends AbstractController
             'gafas' => $gafas,
             'lentillas' => $lentillas,
             'marcas' => $marcas,
+            'destacados' => $destacados,
         ]);
     } 
     }

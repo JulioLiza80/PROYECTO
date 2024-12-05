@@ -26,10 +26,12 @@ class GafasCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
+            BooleanField::new('estado'),
+            BooleanField::new('destacado'),
+            NumberField::new('stock'),
             TextField::new('marca'),
             TextField::new('modelo'),
             TextEditorField::new('descripcion'),
-            TextField::new('tipo'),
             ChoiceField::new('tipo')->setChoices(['Gafas de sol'=>'gafas sol', 'Gafas graduadas'=>'gafas graduadas']),
             NumberField::new('aro'),
             NumberField::new('puente'),
@@ -42,8 +44,6 @@ class GafasCrudController extends AbstractCrudController
             NumberField::new('precio')->setNumDecimals(2),
             choiceField::new('iva')->setChoices(['21%'=>21,'10%'=>10]),
             NumberField::new('descuento'),
-            NumberField::new('stock'),
-            choiceField::new('destacado')->setChoices(['No destacado'=>0,'destacado'=>1]),
           
             //imagen1
             ImageField::new('imageName', 'principal')
@@ -64,7 +64,6 @@ class GafasCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),
             ChoiceField::new('categoria')->setChoices(['gafas'=>1,]),
-            BooleanField::new('estado')
             
         ];
     }

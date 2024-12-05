@@ -27,6 +27,9 @@ class LentillasCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
+            BooleanField::new('estado'),
+            BooleanField::new('destacado'),
+            NumberField::new('stock'),
             ChoiceField::new('marca')->setChoices(['Disop'=>'disop','Coopervision'=>'coopervision','Alcon'=>'alcon','Bausch & Lom'=>'bausch']),
             TextEditorField::new('descripcion'),
             ChoiceField::new('tipoProducto')->setChoices(['lentillas'=>'lentillas','Liquido de lentillas'=>'liquido']),
@@ -36,8 +39,6 @@ class LentillasCrudController extends AbstractCrudController
             NumberField::new('precio')->setNumDecimals(2),
             choiceField::new('iva')->setChoices(['21%'=>21,'10%'=>10]),
             NumberField::new('descuento'),
-            NumberField::new('stock'),
-            ChoiceField::new('destacado')->setChoices(['No destacado'=>0,'Destacado'=>1]),
              //imagen1
             ImageField::new('imageName', 'principal')
             ->setBasePath('images/lentillas')
@@ -45,7 +46,6 @@ class LentillasCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),
             ChoiceField::new('categoria')->setChoices(['Lentillas Y Productos'=>2,]),
-            BooleanField::new('estado')
             
         ];
     }
