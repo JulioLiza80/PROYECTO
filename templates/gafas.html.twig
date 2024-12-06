@@ -344,7 +344,12 @@
 		});
 
 		// Llamar a aplicarFiltros cuando la página se carga para mostrar el contador correctamente
-		document.addEventListener('DOMContentLoaded', aplicarFiltros);
+		document.addEventListener('DOMContentLoaded', () => {
+			aplicarFiltros(); // Aplica los filtros
+			ordenarPorRelevancia(); // Ordena por relevancia
+			updatePagination(); // Aplica la paginación por defecto
+		});
+
 
 		// PAGINACIÓN
 		let currentPage = 1;
@@ -392,8 +397,8 @@
 			}
 		}
 
-		// Inicializar la paginación
-		updatePagination();
+		// Ejecuta updatePagination cuando se cargue la página
+		document.addEventListener('DOMContentLoaded', updatePagination);
 
 	</script>
 
