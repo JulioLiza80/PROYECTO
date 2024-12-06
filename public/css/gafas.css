@@ -6,10 +6,11 @@
 
 .gafas-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-left: 20px;
+    grid-template-columns: repeat(4, 1fr); /* Mantén 4 columnas */
+    gap: 20px; /* Espaciado uniforme entre tarjetas (horizontal y vertical) */
+    margin-left: 20px; /* Conserva este margen según tu diseño */
 }
+
 
 .gafas-card {
     background: white;

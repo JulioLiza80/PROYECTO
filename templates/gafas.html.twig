@@ -25,10 +25,10 @@
 
 			<!-- Breadcrumbs (Alineado a la izquierda) -->
 			<div class="flex mb-2">
-				<button class="w-[124px] h-[42px] text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl mr-3" onclick="window.location.href='/'">
+				<button class="w-[124px] h-[35px] text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl mr-3" onclick="window.location.href='/'">
 					Inicio
 				</button>
-				<p class="w-[150px] h-[42px] text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl">
+				<p class="w-[150px] h-[35px] text-center bold shadow p-2 rounded-bl-3xl rounded-tr-3xl">
 					Gafas Graduadas
 				</p>
 			</div>
@@ -36,26 +36,39 @@
 
 			<!-- Filtros básicos (Alineado a la derecha) -->
 			<div
-				class="flex items-center shadow w-[1147px] h-[42px] rounded mb-2">
+				class="flex items-center shadow w-[1300px] h-[42px] rounded mb-2 mr-4">
+
 				<!-- Filtros y número de gafas -->
 				<div class="flex items-center mr-4 ml-4 ">
-					<p class="mr-2">Resultados:
-						{{ gafas|length }}
-						gafas</p>
+					<p class="mr-2">
+						<strong>Resultados:
+						</strong>
+						<span id="contador-gafas">0 gafas</span>
+					</p>
 				</div>
 
 				<!-- Paginación central -->
 				<div
 					class="text-center flex-grow mx-4 flex items-center justify-center">
 					<!-- Flecha izquierda -->
-					<i class="fa-solid fa-circle-left"></i>
+					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.25">
+						<path d="M12 21a9 9 0 1 0 0 -18a9 9 0 0 0 0 18"></path>
+						<path d="M8 12l4 4"></path>
+						<path d="M8 12h8"></path>
+						<path d="M12 8l-4 4"></path>
+					</svg>
 
-					<p class="text-sm">
+					<p class="text-sm ml-4 mr-4">
 						Página 1 de 8
 					</p>
 
 					<!-- Flecha derecha -->
-					<i class="fa-solid fa-circle-right"></i>
+					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.25">
+						<path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18"></path>
+						<path d="M16 12l-4 -4"></path>
+						<path d="M16 12h-8"></path>
+						<path d="M12 16l4 -4"></path>
+					</svg>
 				</div>
 
 
@@ -63,9 +76,9 @@
 				<div class="flex items-center mr-4">
 					<label for="order" class="mr-2">Ordenar por:</label>
 					<select id="order" class="border border-gray-300 rounded-lg p-1">
-						<option value="precio-asc">Precio de más bajo a más alto</option>
+						<option value="relevancia" selected>Relevancia</option>
 						<option value="precio-desc">Precio de más alto a más bajo</option>
-						<option value="relevancia">Relevancia</option>
+						<option value="precio-asc">Precio de más bajo a más alto</option>
 					</select>
 				</div>
 			</div>
@@ -81,7 +94,7 @@
 				<!-- Título Filtros con Icono -->
 				<div class="flex justify-between items-center ml-3 mt-2">
 					<p class="font-semibold text-[36px]">Filtros</p>
-					<div id="reset-icon" class="cursor-pointer hover:rotate-animation">
+					<div id="reset-icon" class="cursor-pointer hover:rotate-animation mr-2">
 						<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.25">
 							<path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5"></path>
 						</svg>
@@ -183,97 +196,205 @@
 
 
 			<!-- Grid de gafas con 4 columnas en pantallas grandes, 2 en medianas y 1 en móviles -->
-			<div class="flex flex-row flex-wrap gap-x-10 gap-y-5 ml-12">
+			<div class="flex flex-row flex-wrap max-w-[1500px] gap-x-10 gap-y-5 ml-12">
 				{% for gafa in gafas %}
+					{% if gafa.estado == true and gafa.tipo == 'gafas graduadas' %}
+						<!-- Card de gafas -->
+						<div
+							class="gafa-card bg-white rounded-lg shadow transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl" data-marca="{{ gafa.marca }}" data-material="{{ gafa.materialMontura }}" data-tipo="{{ gafa.tipoMontura }}">
 
-					<!-- Card de gafas -->
-					<div
-						class="gafa-card bg-white rounded-lg shadow transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl" data-marca="{{ gafa.marca }}" data-material="{{ gafa.materialMontura }}" data-tipo="{{ gafa.tipoMontura }}">
+							<!-- Imagen de las gafas -->
+							<img
+							src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 my-2 object-cover">
 
-						<!-- Imagen de las gafas -->
-						<img
-						src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-50 my-2 object-cover">
-
-						<!-- Contenido de la card -->
-						<div class="px-4 py-2">
-							<h3 class="text-gray-800 raleway font-light mb-2 text-sm">{{ gafa.marca }}
-								{{ gafa.modelo }}</h3>
-							<p class="text-gray-900 raleway font-semibold mb-2 text-lg">{{ gafa.precio|number_format(2, ',', '') }}€</p>
+							<!-- Contenido de la card -->
+							<div class="px-4 py-2">
+								<h3 class="text-gray-800 raleway font-light mb-2 text-sm">{{ gafa.marca }}
+									{{ gafa.modelo }}</h3>
+								<p class="text-gray-900 raleway font-semibold mb-2 text-lg">{{ gafa.precio|number_format(2, ',', '') }}€</p>
+							</div>
 						</div>
-					</div>
+					{% endif %}
 				{% endfor %}
 			</div>
 		</div>
+
+		<!-- PAGINACION -->
+		<div class="flex justify-center">
+			<div class="pagination-bottom inline-block">
+				<!-- Aquí se generarán los botones dinámicamente -->
+			</div>
+		</div>
+
 	</div>
 
 	{{ include('comun/footer.html.twig') }}
 
 	 <script>
-			// Evento al pulsar el icono de resetear filtros
-			document.getElementById('reset-icon').addEventListener('click', () => {
-				// Desmarcar todos los checkboxes
-				document.querySelectorAll('.marca-checkbox, .material-checkbox, .tipo-checkbox').forEach(checkbox => {
-					checkbox.checked = false;
-				});
+		// FILTROS BÁSICOS DE NAVEGACIÓN
 
-				// Limpiar los campos de precio
-				document.getElementById('precio-min').value = '';
-				document.getElementById('precio-max').value = '';
+		document.addEventListener('DOMContentLoaded', () => {
+			aplicarFiltros(); // Aplica los filtros inicialmente
+			ordenarPorRelevancia(); // Ordena las tarjetas inicialmente por relevancia
+		});
 
-				// Restablecer todos los elementos visibles
-				aplicarFiltros(); // Asegúrate de tener la función aplicarFiltros() del script anterior
-			});
+		// Evento de cambio en el select
+		document.getElementById('order').addEventListener('change', function () {
+			const order = this.value;
+			const gafasContainer = document.querySelector('.flex.flex-row.flex-wrap');
+			const gafas = Array.from(document.querySelectorAll('.gafa-card'));
 
-
-			// Función unificada para aplicar todos los filtros
-			function aplicarFiltros() {
-				const selectedMarcas = Array.from(document.querySelectorAll('.marca-checkbox:checked')).map(checkbox => checkbox.dataset.marca);
-				const selectedMaterials = Array.from(document.querySelectorAll('.material-checkbox:checked')).map(checkbox => checkbox.dataset.material);
-				const selectedTipos = Array.from(document.querySelectorAll('.tipo-checkbox:checked')).map(checkbox => checkbox.dataset.tipo);
-				const minPrice = parseFloat(document.getElementById('precio-min').value);
-				const maxPrice = parseFloat(document.getElementById('precio-max').value);
-	
-				const gafas = document.querySelectorAll('.gafa-card');
-	
-				gafas.forEach(gafa => {
-					const gafaMarca = gafa.dataset.marca;
-					const gafaMaterial = gafa.dataset.material;
-					const gafaTipo = gafa.dataset.tipo;
-					const gafaPrice = parseFloat(
-						gafa.querySelector('.raleway.font-semibold.mb-2.text-lg')
-							.textContent.replace('€', '').replace(',', '.')
-					);
-	
-					const cumpleMarca = selectedMarcas.length === 0 || selectedMarcas.includes(gafaMarca);
-					const cumpleMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(gafaMaterial);
-					const cumpleTipo = selectedTipos.length === 0 || selectedTipos.includes(gafaTipo);
-					const cumplePrecio = (isNaN(minPrice) || gafaPrice >= minPrice) && (isNaN(maxPrice) || gafaPrice <= maxPrice);
-	
-					if (cumpleMarca && cumpleMaterial && cumpleTipo && cumplePrecio) {
-						gafa.style.display = 'block';
-					} else {
-						gafa.style.display = 'none';
-					}
-				});
+			if (order === 'precio-asc') {
+				gafas.sort((a, b) => obtenerPrecio(a) - obtenerPrecio(b));
+			} else if (order === 'precio-desc') {
+				gafas.sort((a, b) => obtenerPrecio(b) - obtenerPrecio(a));
+			} else if (order === 'relevancia') {
+				gafas.sort(() => Math.random() - 0.5);
 			}
-	
-			// Asociar la función unificada a los eventos de filtros
-			document.querySelectorAll('.marca-checkbox, .material-checkbox, .tipo-checkbox').forEach(checkbox => {
-				checkbox.addEventListener('change', aplicarFiltros);
-			});
-	
-			// Filtrar automáticamente cuando cambien los campos de precio
-			document.querySelectorAll('#precio-min, #precio-max').forEach(input => {
-				input.addEventListener('input', aplicarFiltros);
-			});
-	
-			// Botón para borrar filtros de precio
-			document.getElementById('precio-borrar').addEventListener('click', () => {
-				document.getElementById('precio-min').value = '';
-				document.getElementById('precio-max').value = '';
-				aplicarFiltros();
-			});
-		</script>
 
+			gafasContainer.innerHTML = '';
+			gafas.forEach(gafa => gafasContainer.appendChild(gafa));
+		});
+
+		// Función para obtener el precio de una tarjeta
+		function obtenerPrecio(gafa) {
+			return parseFloat(
+				gafa.querySelector('.raleway.font-semibold.mb-2.text-lg')
+					.textContent.replace('€', '').replace(',', '.')
+			);
+		}
+
+		// Función para ordenar inicialmente por relevancia
+		function ordenarPorRelevancia() {
+			const gafasContainer = document.querySelector('.flex.flex-row.flex-wrap');
+			const gafas = Array.from(document.querySelectorAll('.gafa-card'));
+			gafas.sort(() => Math.random() - 0.5);
+			gafasContainer.innerHTML = '';
+			gafas.forEach(gafa => gafasContainer.appendChild(gafa));
+		}
+
+
+		// Evento al pulsar el icono de resetear filtros
+		document.getElementById('reset-icon').addEventListener('click', () => {
+			// Desmarcar todos los checkboxes
+			document.querySelectorAll('.marca-checkbox, .material-checkbox, .tipo-checkbox').forEach(checkbox => {
+				checkbox.checked = false;
+			});
+
+			// Limpiar los campos de precio
+			document.getElementById('precio-min').value = '';
+			document.getElementById('precio-max').value = '';
+
+			// Restablecer todos los elementos visibles
+			aplicarFiltros(); // Asegúrate de tener la función aplicarFiltros() del script anterior
+		});
+
+		// Función unificada para aplicar todos los filtros
+		function aplicarFiltros() {
+			const selectedMarcas = Array.from(document.querySelectorAll('.marca-checkbox:checked')).map(checkbox => checkbox.dataset.marca);
+			const selectedMaterials = Array.from(document.querySelectorAll('.material-checkbox:checked')).map(checkbox => checkbox.dataset.material);
+			const selectedTipos = Array.from(document.querySelectorAll('.tipo-checkbox:checked')).map(checkbox => checkbox.dataset.tipo);
+			const minPrice = parseFloat(document.getElementById('precio-min').value);
+			const maxPrice = parseFloat(document.getElementById('precio-max').value);
+
+			const gafas = document.querySelectorAll('.gafa-card');
+			let visibleGafasCount = 0;  // Contador de gafas visibles
+
+			gafas.forEach(gafa => {
+				const gafaMarca = gafa.dataset.marca;
+				const gafaMaterial = gafa.dataset.material;
+				const gafaTipo = gafa.dataset.tipo;
+				const gafaPrice = parseFloat(
+					gafa.querySelector('.raleway.font-semibold.mb-2.text-lg')
+						.textContent.replace('€', '').replace(',', '.')
+				);
+
+				const cumpleMarca = selectedMarcas.length === 0 || selectedMarcas.includes(gafaMarca);
+				const cumpleMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(gafaMaterial);
+				const cumpleTipo = selectedTipos.length === 0 || selectedTipos.includes(gafaTipo);
+				const cumplePrecio = (isNaN(minPrice) || gafaPrice >= minPrice) && (isNaN(maxPrice) || gafaPrice <= maxPrice);
+
+				if (cumpleMarca && cumpleMaterial && cumpleTipo && cumplePrecio) {
+					gafa.style.display = 'block';
+					visibleGafasCount++;  // Aumenta el contador cuando la gafa es visible
+				} else {
+					gafa.style.display = 'none';
+				}
+			});
+
+			// Actualiza el contador de gafas en la página
+			document.getElementById('contador-gafas').textContent = `${visibleGafasCount} gafas`;
+		}
+
+		// Asociar la función unificada a los eventos de filtros
+		document.querySelectorAll('.marca-checkbox, .material-checkbox, .tipo-checkbox').forEach(checkbox => {
+			checkbox.addEventListener('change', aplicarFiltros);
+		});
+
+		// Filtrar automáticamente cuando cambien los campos de precio
+		document.querySelectorAll('#precio-min, #precio-max').forEach(input => {
+			input.addEventListener('input', aplicarFiltros);
+		});
+
+		// Botón para borrar filtros de precio
+		document.getElementById('precio-borrar').addEventListener('click', () => {
+			document.getElementById('precio-min').value = '';
+			document.getElementById('precio-max').value = '';
+			aplicarFiltros();
+		});
+
+		// Llamar a aplicarFiltros cuando la página se carga para mostrar el contador correctamente
+		document.addEventListener('DOMContentLoaded', aplicarFiltros);
+
+		// PAGINACIÓN
+		let currentPage = 1;
+		const itemsPerPage = 24;
+		const items = document.querySelectorAll('.gafa-card'); // Todas las gafas
+		const totalItems = items.length; // Total de gafas
+		const totalPages = Math.ceil(totalItems / itemsPerPage); // Total de páginas
+
+		function updatePagination() {
+			// Mostrar u ocultar las gafas según la página actual
+			const start = (currentPage - 1) * itemsPerPage;
+			const end = currentPage * itemsPerPage;
+
+			// Iterar por todas las gafas
+			items.forEach((item, index) => {
+				if (index >= start && index < end) {
+					item.style.display = 'block'; // Mostrar gafas de la página actual
+				} else {
+					item.style.display = 'none'; // Ocultar gafas de otras páginas
+				}
+			});
+
+			// Actualiza los botones de paginación
+			const paginationContainer = document.querySelector('.pagination-bottom');
+			paginationContainer.innerHTML = ''; // Limpiar la paginación anterior
+
+			// Generar los botones de las páginas
+			for (let i = 1; i <= totalPages; i++) {
+				const pageLink = document.createElement('a');
+				pageLink.href = '#';
+				pageLink.textContent = i;
+				pageLink.classList.add('text-black', 'float-left', 'px-4', 'py-2', 'no-underline', 'hover:bg-[#ddd]', 'hover:rounded', 'hover:text-white');
+
+				if (i === currentPage) {
+					pageLink.classList.add('bg-green-500', 'rounded'); // Resaltar la página actual
+				}
+
+				pageLink.addEventListener('click', (e) => {
+					e.preventDefault();
+					currentPage = i;
+					updatePagination();
+				});
+
+				paginationContainer.appendChild(pageLink);
+			}
+		}
+
+		// Inicializar la paginación
+		updatePagination();
+
+	</script>
 
 {% endblock %}
