@@ -48,29 +48,44 @@
 				</div>
 
 				<!-- Paginación central -->
-				<div
-					class="text-center flex-grow mx-4 flex items-center justify-center">
-					<!-- Flecha izquierda -->
-					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.25">
-						<path d="M12 21a9 9 0 1 0 0 -18a9 9 0 0 0 0 18"></path>
-						<path d="M8 12l4 4"></path>
-						<path d="M8 12h8"></path>
-						<path d="M12 8l-4 4"></path>
-					</svg>
+				<div class="text-center flex-grow mx-4 flex items-center justify-center">
+					<!-- Botón de ir a la página 1 (izquierda) -->
+					<button id="goToFirstPage" class="p-2">
+						<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+							<path stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.757 6 3.24 10.95a1.05 1.05 0 0 0 0 1.549l5.611 5.088m5.73-3.214v1.615a.948.948 0 0 1-1.524.845l-5.108-4.251a1.1 1.1 0 0 1 0-1.646l5.108-4.251a.95.95 0 0 1 1.524.846v1.7c3.312 0 6 2.979 6 6.654v1.329a.7.7 0 0 1-1.345.353 5.174 5.174 0 0 0-4.652-3.191l-.003-.003Z"/>
+						</svg>
+					</button>
 
-					<p class="text-sm ml-4 mr-4">
-						Página 1 de 8
-					</p>
+					<!-- Flecha izquierda -->
+					<button id="prevPage" class="p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.25">
+							<path d="M12 21a9 9 0 1 0 0 -18a9 9 0 0 0 0 18"></path>
+							<path d="M8 12l4 4"></path>
+							<path d="M8 12h8"></path>
+							<path d="M12 8l-4 4"></path>
+						</svg>
+					</button>
+
+					<!-- Número de página -->
+					<p id="pageInfo" class="text-sm ml-4 mr-4">Página 1 de 1</p>
 
 					<!-- Flecha derecha -->
-					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.25">
-						<path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18"></path>
-						<path d="M16 12l-4 -4"></path>
-						<path d="M16 12h-8"></path>
-						<path d="M12 16l4 -4"></path>
-					</svg>
-				</div>
+					<button id="nextPage" class="p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="1.25">
+							<path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18"></path>
+							<path d="M16 12l-4 -4"></path>
+							<path d="M16 12h-8"></path>
+							<path d="M12 16l4 -4"></path>
+						</svg>
+					</button>
 
+					<!-- Botón de ir a laultima página (derecha) -->
+					<button id="goToLastPage" class="p-2">
+						<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+							<path stroke="#4A4A4A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15.141 6 5.518 4.95a1.05 1.05 0 0 1 0 1.549l-5.612 5.088m-6.154-3.214v1.615a.95.95 0 0 0 1.525.845l5.108-4.251a1.1 1.1 0 0 0 0-1.646l-5.108-4.251a.95.95 0 0 0-1.525.846v1.7c-3.312 0-6 2.979-6 6.654v1.329a.7.7 0 0 0 1.344.353 5.174 5.174 0 0 1 4.652-3.191l.004-.003Z"/>
+						</svg>
+					</button>
+				</div>
 
 				<!-- Ordenar por -->
 				<div class="flex items-center mr-4">
@@ -219,11 +234,14 @@
 			</div>
 		</div>
 
-		<!-- PAGINACION -->
-		<div class="flex justify-center">
-			<div class="pagination-bottom inline-block">
-				<!-- Aquí se generarán los botones dinámicamente -->
-			</div>
+		<!-- Botón de subir -->
+		<div class="fixed bottom-4 right-4">
+			<button id="scrollToTopBtn" 
+				class="bg-novapurple text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-[#9736af] transition duration-200">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+				</svg>
+			</button>
 		</div>
 
 	</div>
@@ -233,27 +251,39 @@
 	 <script>
 		// FILTROS BÁSICOS DE NAVEGACIÓN
 
+		// Evento para el botón de ir a la página 1
+		document.getElementById('goToFirstPage').addEventListener('click', () => {
+			currentPage = 1;
+			updatePagination(); // Actualiza la paginación al inicio
+		});
+
+		// Evento para el botón de ir a la última página
+		document.getElementById('goToLastPage').addEventListener('click', () => {
+			const totalVisiblePages = Math.ceil(gafas.filter(gafa => gafa.style.display === 'block').length / itemsPerPage);
+			currentPage = totalVisiblePages; // Establece la página actual como la última visible
+			updatePagination(); // Actualiza la paginación
+		});
+
 		document.addEventListener('DOMContentLoaded', () => {
 			aplicarFiltros(); // Aplica los filtros inicialmente
 			ordenarPorRelevancia(); // Ordena las tarjetas inicialmente por relevancia
+			updatePagination(); // Inicializa la paginación
 		});
+
+		let currentPage = 1;
+		const itemsPerPage = 24;
+		const gafas = Array.from(document.querySelectorAll('.gafa-card')); // Todas las tarjetas
+		const totalItems = gafas.length;
+		const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+		const gafasContainer = document.querySelector('.flex.flex-row.flex-wrap');
+		const pageInfo = document.getElementById('pageInfo');
+		const prevPageBtn = document.getElementById('prevPage');
+		const nextPageBtn = document.getElementById('nextPage');
 
 		// Evento de cambio en el select
 		document.getElementById('order').addEventListener('change', function () {
-			const order = this.value;
-			const gafasContainer = document.querySelector('.flex.flex-row.flex-wrap');
-			const gafas = Array.from(document.querySelectorAll('.gafa-card'));
-
-			if (order === 'precio-asc') {
-				gafas.sort((a, b) => obtenerPrecio(a) - obtenerPrecio(b));
-			} else if (order === 'precio-desc') {
-				gafas.sort((a, b) => obtenerPrecio(b) - obtenerPrecio(a));
-			} else if (order === 'relevancia') {
-				gafas.sort(() => Math.random() - 0.5);
-			}
-
-			gafasContainer.innerHTML = '';
-			gafas.forEach(gafa => gafasContainer.appendChild(gafa));
+			ordenarGafas(this.value);
 		});
 
 		// Función para obtener el precio de una tarjeta
@@ -264,30 +294,25 @@
 			);
 		}
 
-		// Función para ordenar inicialmente por relevancia
-		function ordenarPorRelevancia() {
-			const gafasContainer = document.querySelector('.flex.flex-row.flex-wrap');
-			const gafas = Array.from(document.querySelectorAll('.gafa-card'));
-			gafas.sort(() => Math.random() - 0.5);
-			gafasContainer.innerHTML = '';
-			gafas.forEach(gafa => gafasContainer.appendChild(gafa));
+		// Función para ordenar las tarjetas
+		function ordenarGafas(criterio) {
+			if (criterio === 'precio-asc') {
+				gafas.sort((a, b) => obtenerPrecio(a) - obtenerPrecio(b));
+			} else if (criterio === 'precio-desc') {
+				gafas.sort((a, b) => obtenerPrecio(b) - obtenerPrecio(a));
+			} else if (criterio === 'relevancia') {
+				gafas.sort(() => Math.random() - 0.5);
+			}
+
+			// Reiniciar a la primera página después de ordenar
+			currentPage = 1;
+			updatePagination();
 		}
 
-
-		// Evento al pulsar el icono de resetear filtros
-		document.getElementById('reset-icon').addEventListener('click', () => {
-			// Desmarcar todos los checkboxes
-			document.querySelectorAll('.marca-checkbox, .material-checkbox, .tipo-checkbox').forEach(checkbox => {
-				checkbox.checked = false;
-			});
-
-			// Limpiar los campos de precio
-			document.getElementById('precio-min').value = '';
-			document.getElementById('precio-max').value = '';
-
-			// Restablecer todos los elementos visibles
-			aplicarFiltros(); // Asegúrate de tener la función aplicarFiltros() del script anterior
-		});
+		// Función para ordenar inicialmente por relevancia
+		function ordenarPorRelevancia() {
+			gafas.sort(() => Math.random() - 0.5);
+		}
 
 		// Función unificada para aplicar todos los filtros
 		function aplicarFiltros() {
@@ -297,17 +322,13 @@
 			const minPrice = parseFloat(document.getElementById('precio-min').value);
 			const maxPrice = parseFloat(document.getElementById('precio-max').value);
 
-			const gafas = document.querySelectorAll('.gafa-card');
-			let visibleGafasCount = 0;  // Contador de gafas visibles
+			let visibleGafasCount = 0;
 
 			gafas.forEach(gafa => {
 				const gafaMarca = gafa.dataset.marca;
 				const gafaMaterial = gafa.dataset.material;
 				const gafaTipo = gafa.dataset.tipo;
-				const gafaPrice = parseFloat(
-					gafa.querySelector('.raleway.font-semibold.mb-2.text-lg')
-						.textContent.replace('€', '').replace(',', '.')
-				);
+				const gafaPrice = obtenerPrecio(gafa);
 
 				const cumpleMarca = selectedMarcas.length === 0 || selectedMarcas.includes(gafaMarca);
 				const cumpleMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(gafaMaterial);
@@ -316,22 +337,65 @@
 
 				if (cumpleMarca && cumpleMaterial && cumpleTipo && cumplePrecio) {
 					gafa.style.display = 'block';
-					visibleGafasCount++;  // Aumenta el contador cuando la gafa es visible
+					visibleGafasCount++;
 				} else {
 					gafa.style.display = 'none';
 				}
 			});
 
-			// Actualiza el contador de gafas en la página
 			document.getElementById('contador-gafas').textContent = `${visibleGafasCount} gafas`;
+			currentPage = 1;
+			updatePagination();
 		}
 
-		// Asociar la función unificada a los eventos de filtros
+		// Actualizar la paginación
+		function updatePagination() {
+			const start = (currentPage - 1) * itemsPerPage;
+			const end = currentPage * itemsPerPage;
+
+			gafasContainer.innerHTML = '';
+
+			const visibleGafas = gafas.filter(gafa => gafa.style.display === 'block');
+
+			visibleGafas.slice(start, end).forEach(gafa => gafasContainer.appendChild(gafa));
+
+			const totalVisiblePages = Math.ceil(visibleGafas.length / itemsPerPage);
+
+			pageInfo.textContent = `Página ${currentPage} de ${totalVisiblePages}`;
+			prevPageBtn.disabled = currentPage === 1;
+			nextPageBtn.disabled = currentPage === totalVisiblePages;
+		}
+
+		// Eventos de los botones de paginación
+		prevPageBtn.addEventListener('click', () => {
+			if (currentPage > 1) {
+				currentPage--;
+				updatePagination();
+			}
+		});
+
+		nextPageBtn.addEventListener('click', () => {
+			if (currentPage < totalPages) {
+				currentPage++;
+				updatePagination();
+			}
+		});
+
+		// Resetear filtros
+		document.getElementById('reset-icon').addEventListener('click', () => {
+			document.querySelectorAll('.marca-checkbox, .material-checkbox, .tipo-checkbox').forEach(checkbox => {
+				checkbox.checked = false;
+			});
+			document.getElementById('precio-min').value = '';
+			document.getElementById('precio-max').value = '';
+			aplicarFiltros();
+		});
+
+		// Asociar eventos a los filtros
 		document.querySelectorAll('.marca-checkbox, .material-checkbox, .tipo-checkbox').forEach(checkbox => {
 			checkbox.addEventListener('change', aplicarFiltros);
 		});
 
-		// Filtrar automáticamente cuando cambien los campos de precio
 		document.querySelectorAll('#precio-min, #precio-max').forEach(input => {
 			input.addEventListener('input', aplicarFiltros);
 		});
@@ -343,63 +407,13 @@
 			aplicarFiltros();
 		});
 
-		// Llamar a aplicarFiltros cuando la página se carga para mostrar el contador correctamente
-		document.addEventListener('DOMContentLoaded', () => {
-			aplicarFiltros(); // Aplica los filtros
-			ordenarPorRelevancia(); // Ordena por relevancia
-			updatePagination(); // Aplica la paginación por defecto
+		// BOTÓN DE SUBIR
+		
+		document.getElementById('scrollToTopBtn').addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
 		});
 
-
-		// PAGINACIÓN
-		let currentPage = 1;
-		const itemsPerPage = 24;
-		const items = document.querySelectorAll('.gafa-card'); // Todas las gafas
-		const totalItems = items.length; // Total de gafas
-		const totalPages = Math.ceil(totalItems / itemsPerPage); // Total de páginas
-
-		function updatePagination() {
-			// Mostrar u ocultar las gafas según la página actual
-			const start = (currentPage - 1) * itemsPerPage;
-			const end = currentPage * itemsPerPage;
-
-			// Iterar por todas las gafas
-			items.forEach((item, index) => {
-				if (index >= start && index < end) {
-					item.style.display = 'block'; // Mostrar gafas de la página actual
-				} else {
-					item.style.display = 'none'; // Ocultar gafas de otras páginas
-				}
-			});
-
-			// Actualiza los botones de paginación
-			const paginationContainer = document.querySelector('.pagination-bottom');
-			paginationContainer.innerHTML = ''; // Limpiar la paginación anterior
-
-			// Generar los botones de las páginas
-			for (let i = 1; i <= totalPages; i++) {
-				const pageLink = document.createElement('a');
-				pageLink.href = '#';
-				pageLink.textContent = i;
-				pageLink.classList.add('text-black', 'float-left', 'px-4', 'py-2', 'no-underline', 'hover:bg-[#ddd]', 'hover:rounded', 'hover:text-white');
-
-				if (i === currentPage) {
-					pageLink.classList.add('bg-green-500', 'rounded'); // Resaltar la página actual
-				}
-
-				pageLink.addEventListener('click', (e) => {
-					e.preventDefault();
-					currentPage = i;
-					updatePagination();
-				});
-
-				paginationContainer.appendChild(pageLink);
-			}
-		}
-
-		// Ejecuta updatePagination cuando se cargue la página
-		document.addEventListener('DOMContentLoaded', updatePagination);
-
 	</script>
+
 
 {% endblock %}
