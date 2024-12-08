@@ -68,8 +68,8 @@ class Gafas
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $destacado = null;
+    #[ORM\Column]
+    private ?bool $destacado = null;
 
     
     //imagen1
@@ -314,15 +314,15 @@ class Gafas
         return $this;
     }
 
-    public function getDestacado(): ?int
+    public function getDestacado(): ?bool
     {
         return $this->destacado;
     }
-
-    public function setDestacado(?int $destacado): static
+    
+    public function setDestacado(?bool $destacado): static
     {
         $this->destacado = $destacado;
-
+    
         return $this;
     }
 
