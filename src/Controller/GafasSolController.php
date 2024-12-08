@@ -50,8 +50,19 @@ class GafasSolController extends AbstractController
             throw $this->createNotFoundException('La gafa solar no existe.');
         }
 
+        // Obtener hasta 6 gafas aleatorias excluyendo la actual
+        $gafasRandom = $entityManager->createQueryBuilder()
+            ->select('g')
+            ->from(Gafas::class, 'g')
+            ->where('g.id != :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult();
+
         return $this->render('showDetallesGafas.html.twig', [
             'gafa' => $gafa,
+            'gafas' => $gafasRandom, // Pasar las gafas a la vista como `gafas`
         ]);
     }
 }
