@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmación Pedido{% endblock %}
+
+{% block body %}
+	{{ include('comun/header.html.twig') }}
+	<div class="flex items-center justify-center min-h-screen bg-gray-50">
+		
+		<!-- Flexbox to center content -->
+		<div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+			<h1 class="text-center text-2xl font-semibold mb-6">Pedido Confirmado</h1>
+            <p>código de referencia: </p>
+            <div class="mt-4 flex justify-center">
+                <a href="{{ path('app_user_config') }}" 
+                class="py-2 px-4 text-center hover:bg-novapurple text-white font-semibold rounded-lg bg-[#9736af] transition duration-200">
+                    Ver pedido
+                </a>
+            </div>
+		</div>
+	</div>
+	{{ include('comun/footer.html.twig') }}
+{% endblock %}

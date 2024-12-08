@@ -12,29 +12,49 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Form\UserType;
 
 class CarritoController extends AbstractController
 {
 
     
-    #[Route('/{id}/aniadirProducto/{cat}', name: 'app_aniadir', methods: ['GET','POST'])]
-    public function show( Request $request, $id, $cat, EntityManagerInterface $producto,CarritoManager $carritoManager ): Response
+    #[Route('/{id}/aniadirProducto/{cat}', name: 'app_aniadir', methods: ['GET', 'POST'])]
+    public function show(Request $request, $id, $cat, EntityManagerInterface $producto, CarritoManager $carritoManager): Response
     { 
-        if($cat==1){
-            $gafas=$producto->getRepository(Gafas::class)->findOneById($id);
-            $cantidad = $request->request->get('cantidad', 1);//cambiar a la variable recibida cuando se establezcan las cantidades
-            $carritoManager->añadirA_CarritoGafas($gafas, $cantidad);
-            return new JsonResponse(['suscess' => true]);
-            
-        }else if ($cat==2){
-            $lentillas=$producto->getRepository(Lentillas::class)->findOneById($id);
-            $cantidad = $request->request->get('cantidad', 1);//cambiar a la variable recibida cuando se estableca las cantidades
-            $carritoManager->añadirA_CarritoLentillas($lentillas, $cantidad);
-            return new JsonResponse(['suscess' => true]);
-           
-         }
-        
-     }
+        $session = $request->getSession();
+        $productoSeleccionado = null;
+
+        if($cat == "1") {
+            $productoSeleccionado = $producto->getRepository(Gafas::class)->find($id);
+        } else if($cat == "2") {
+            $productoSeleccionado = $producto->getRepository(Lentillas::class)->find($id);
+        }
+
+        if ($productoSeleccionado) {
+            $carrito = $session->get('carrito', []);
+            $productoExistente = false;
+
+            foreach ($carrito as &$productoEnCarrito) {
+                if ($productoEnCarrito['producto']->getId() === $productoSeleccionado->getId()) {
+                    $productoEnCarrito['cantidad']++;
+                    $productoExistente = true;
+                    break;
+                }
+            }
+
+            if (!$productoExistente) {
+                $carrito[] = [
+                    'producto' => $productoSeleccionado,
+                    'cantidad' => 1,
+                ];
+            }
+
+            $session->set('carrito', $carrito);
+        }
+
+        return $this->redirectToRoute('app_carrito');
+    }
 
 
 
@@ -68,6 +88,86 @@ class CarritoController extends AbstractController
      
       
         
+    }
+
+    
+    #[Route('/actualizar-carrito/{id}/{cantidad}', name: 'app_actualizar_carrito', methods: ['POST'])]
+    public function actualizarCarrito(Request $request, int $id, int $cantidad): JsonResponse
+    {
+        $session = $request->getSession();
+        $carrito = $session->get('carrito', []);
+        $total = 0;
+        $productoActualizado = null;
+
+        foreach ($carrito as &$producto) {
+            if ($producto['producto']->getId() === $id) {
+                $stock = $producto['producto']->getStock();
+
+            // Si la cantidad excede el stock, ajustamos al máximo permitido
+            if ($cantidad > $stock) {
+                $cantidad = $stock;
+            } elseif ($cantidad < 1) {
+                $cantidad = 1;
+            }
+
+                $producto['cantidad'] = $cantidad; // Actualizar la cantidad
+                $productoActualizado = [
+                    'id' => $id,
+                    'cantidad' => $producto['cantidad'],
+                    'precio' => $producto['producto']->getPrecio()
+                ];
+            }
+
+            // Calcular el total actualizado
+            $total += $producto['producto']->getPrecio() * $producto['cantidad'];
+        }
+
+        $session->set('carrito', $carrito);
+
+        return new JsonResponse([
+            'message' => 'Cantidad actualizada correctamente.',
+            'total' => $total,
+            'producto' => $productoActualizado
+        ], 200);
+    }
+
+    #[Route('/envio', name: 'app_envio', methods: ['GET', 'POST'])]
+    public function envio(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        // Crear formulario basado en el tipo de usuario (solo con los campos específicos)
+        $form = $this->createForm(UserType::class, $user, [
+            'validation_groups' => ['Default'], // Personaliza si necesitas
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            // Guardar datos en la base de datos
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Redirigir a la vista del carrito simplificada
+            return $this->redirectToRoute('app_resumen_pago');
+        }
+
+        return $this->render('envio.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    #[Route('/resumen-pago', name: 'app_resumen_pago', methods: ['GET'])]
+    public function resumenPago(SessionInterface $session): Response
+    {
+        $carrito = $session->get('carrito', []);
+
+        return $this->render('resumen_pago.html.twig', [
+            'carrito' => $carrito,
+            
+        'idcliente'=>$_ENV["APP_PAYPAL"]
+
+        ]);
     }
 
 

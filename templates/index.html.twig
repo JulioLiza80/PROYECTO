@@ -68,24 +68,27 @@
 				<div class="w-full h-px max-w-6xl mx-auto mt-3 mb-6" style="background-image: linear-gradient(90deg, rgba(128, 128, 128, 0) 1.46%, rgba(128, 128, 128, 0.6) 40.83%, rgba(128, 128, 128, 0.3) 65.57%, rgba(128, 128, 128, 0) 107.92%);"></div>
 
 				<div class="flex flex-row gap-10 md:gap-20 mx-4">
+					{% set count = 0 %}
 					{% for destacado in destacados %}
-						<!-- Card de gafas -->
-						<div class="bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl">
+						{% if count < 3 %}
+							<!-- Card de gafas -->
+							<div class="bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl">
 
-							<!-- Imagen de las gafas -->
-							<img src="{{ asset('images/gafas/' ~ destacado.imageName) }}" alt="{{ destacado.descripcion }}" class="w-full h-50 md:my-2 object-cover">
+								<!-- Imagen de las gafas -->
+								<img src="{{ asset('images/gafas/' ~ destacado.imageName) }}" alt="{{ destacado.descripcion }}" class="w-full h-50 md:my-2 object-cover">
 
-							<!-- Contenido de la card -->
-							<div class="px-4 py-1 md:py-2">
-								<h3 class="text-gray-800 raleway font-light md:mb-2 text-xs md:text-sm">
-									{{ destacado.marca }} {{ destacado.modelo }}
-								</h3>
-								<p class="text-gray-900 raleway font-semibold mb-2 text-md md:text-lg">
-									{{ destacado.precio|number_format(2, ',', '') }}€
-								</p>
-
+								<!-- Contenido de la card -->
+								<div class="px-4 py-1 md:py-2">
+									<h3 class="text-gray-800 raleway font-light md:mb-2 text-xs md:text-sm">
+										{{ destacado.marca }} {{ destacado.modelo }}
+									</h3>
+									<p class="text-gray-900 raleway font-semibold mb-2 text-md md:text-lg">
+										{{ destacado.precio|number_format(2, ',', '') }}€
+									</p>
+								</div>
 							</div>
-						</div>
+							{% set count = count + 1 %}
+						{% endif %}
 					{% endfor %}
 				</div>
 			</div>

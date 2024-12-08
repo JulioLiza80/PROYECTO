@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Envío{% endblock %}
+
+{% block body %}
+
+{{ include('comun/header.html.twig') }}
+
+<div class="container mx-auto my-10">
+    <div class="bg-white shadow rounded-lg p-12">
+        <h1 class="text-2xl font-bold mb-6">Detalles de Envío</h1>
+        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="col-span-2">
+                    {{ form_label(form.nombre, 'Nombre', {'label_attr': {'class': 'text-lg font-semibold text-gray-600'}}) }}
+                    {{ form_widget(form.nombre, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'required': 'required'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.apellido1, 'Primer Apellido', {'label_attr': {'class': 'text-lg font-semibold text-gray-600'}}) }}
+                    {{ form_widget(form.apellido1, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'required': 'required'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.apellido2, 'Segundo Apellido', {'label_attr': {'class': 'text-lg font-semibold text-gray-600'}}) }}
+                    {{ form_widget(form.apellido2, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'required': 'required'}}) }}
+                </div>
+                <div class="hidden">
+                    {{ form_label(form.email, 'Email', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'required': 'required'}}) }}
+                </div>
+                <hr class="my-4 col-span-2">
+                <div class="md:col-span-2">
+                    {{ form_label(form.direccion, 'Calle, número', {'label_attr': {'class': 'text-lg font-semibold text-gray-600'}}) }}
+                    {{ form_widget(form.direccion, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'required': 'required'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.ciudad, 'Ciudad', {'label_attr': {'class': 'text-lg font-semibold text-gray-600'}}) }}
+                    {{ form_widget(form.ciudad, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'required': 'required'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.cp, 'Código Postal', {'label_attr': {'class': 'text-lg font-semibold text-gray-600'}}) }}
+                    {{ form_widget(form.cp, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'required': 'required'}}) }}
+                </div>
+                <hr class="my-4 col-span-2">
+                <div class="mb-12">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Documento</h2>
+                    <div class="mt-4">
+                        {{ form_label(form.documentFile, 'Subir un nuevo documento') }}
+                        {{ form_widget(form.documentFile, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+            </div>
+            </div>
+            <div class="mt-4  text-center">
+                <button type="submit" class="py-2 px-8 hover:bg-novapurple text-white font-semibold rounded-lg  bg-[#9736af] transition duration-200">
+                    Detalles y pago
+                </button>
+            </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+</div>
+
+{{ include('comun/footer.html.twig') }}
+{% endblock %}

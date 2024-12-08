@@ -23,27 +23,6 @@
 					{{ form_label(form.email, 'Email', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
 					{{ form_widget(form.email, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
 				</div>
-				{# <div class="col-span-2 mb-6">
-				
-												<div>
-													{{ form_label(form.password, 'Contraseña', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-													{{ form_widget(form.password, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'disabled': 'true', 'type': 'password'}}) }}
-												</div>
-				
-												<button type="button" class="mt-2 text-sm text-blue-600 hover:underline" onclick="togglePasswordFields()">Cambiar contraseña</button>
-				
-												<div id="passwordFields" class="hidden mt-4">
-													<div>
-														{{ form_label(form.newPassword, 'Nueva contraseña', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-														{{ form_widget(form.newPassword, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'placeholder': 'Nueva contraseña'}}) }}
-													</div>
-				
-													<div>
-														{{ form_label(form.repeatPassword, 'Repetir nueva contraseña', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-														{{ form_widget(form.repeatPassword, {'attr': {'class': 'w-full mt-1 p-2 border rounded', 'placeholder': 'Repetir nueva contraseña'}}) }}
-													</div>
-												</div>
-											</div> #}
 			</div>
 		</div>
 
@@ -112,34 +91,28 @@
 
 	<script>
 		function confirmarEliminarCuenta() {
-if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) {
-fetch('{{ path('app_user_delete', {'id': user.id}) }}', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/x-www-form-urlencoded'
-},
-body: new URLSearchParams(
-{
-'_token': '{{ csrf_token('delete' ~ user.id) }}' // Asegúrate de que el CSRF token se envíe aquí
-}
-)
-}).then(response => {
-if (response.ok) {
-window.location.href = '{{ path('app_home') }}';
-} else {
-response.text().then(text => {
-alert('Hubo un error al eliminar la cuenta: ' + text);
-});
-}
-});
-}
-}
+			if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) {
+				fetch('{{ path('app_user_delete', {'id': user.id}) }}', {
+				method: 'POST',
+				headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: new URLSearchParams(
+					{
+					'_token': '{{ csrf_token('delete' ~ user.id) }}' // Asegúrate de que el CSRF token se envíe aquí
+					}
+				)
+				}).then(response => {
+					if (response.ok) {
+						window.location.href = '{{ path('app_home') }}';
+					} else {
+						response.text().then(text => {
+						alert('Hubo un error al eliminar la cuenta: ' + text);
+						});
+					}
+				});
+			}
+		}
 
-// Función para mostrar los campos de nueva contraseña
-function togglePasswordFields() {
-const passwordFields = document.getElementById('passwordFields');
-passwordFields.classList.toggle('hidden'); // Mostrar o esconder los campos
-}
-	</script>
 
 {% endblock %}

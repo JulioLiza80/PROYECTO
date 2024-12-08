@@ -33,7 +33,7 @@ class PedidosCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            IdField::new('idUsuarioPedidos.id'),
+            IdField::new('idUsuarioPedidos.id', 'ID Usuario'),
             TextField::new('direccion'),
             TextField::new('ciudad'),
             IntegerField::new('cp'),
