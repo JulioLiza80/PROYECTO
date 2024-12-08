@@ -82,6 +82,7 @@ class GafasSolController extends AbstractController
 
         return $this->render('showDetallesGafas.html.twig', [
             'gafa' => $gafa,
+            'stock' => $gafa->getStock(),
             'gafas' => $gafasSugeridas, // Pasar las gafas combinadas y aleatorias a la vista
         ]);
     }
