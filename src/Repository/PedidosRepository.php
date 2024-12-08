@@ -19,17 +19,16 @@ class PedidosRepository extends ServiceEntityRepository
     //    /**
     //     * @return Pedidos[] Returns an array of Pedidos objects
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       public function findById($value): array
+       {
+           return $this->createQueryBuilder('p')
+               ->andWhere('p.idUsuarioPedidos = :val')
+               ->setParameter('val', $value)
+               ->orderBy('p.id', 'ASC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Pedidos
     //    {

@@ -38,6 +38,10 @@ class Pedidos
     #[ORM\Column]
     private ?string $IdTransaccion = null;
 
+    public function setId(): ?int
+    {
+        return $this->id;
+    }
     
 
     public function getId(): ?int

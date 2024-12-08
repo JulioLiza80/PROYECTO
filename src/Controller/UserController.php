@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\DetalleCompra;
 use App\Entity\DetallePedido;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Gafas;
 use App\Entity\Lentillas;
+use App\Entity\Pedidos;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,15 +84,28 @@ final class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, TokenStorageInterface $tokenStorage, SessionInterface $session, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, User $user, TokenStorageInterface $tokenStorage, SessionInterface $session, EntityManagerInterface $entityManager, EntityManagerInterface $entityPedidos, EntityManagerInterface $entityCompras ): Response
     {
 
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
 
+
             // Eliminamos el token de autenticación y cerramos la sesión para que pueda redirigir a Inicio después de eliminar el usuario
             $tokenStorage->setToken(null);
             $session->invalidate();
+            //eliminar pedidos
+            $pedidosUsuario= $entityPedidos->getRepository(Pedidos::class)->findById($user->getId());
+           foreach($pedidosUsuario as $pedido){
+            $entityPedidos->remove($pedido);
+           }
 
+           //eliminar detalle compra
+           $compraUsuario= $entityCompras->getRepository(DetalleCompra::class)->findById($user->getId());
+           foreach($compraUsuario as $compra){
+            $entityPedidos->remove($compra);
+           }
+
+           //elimiar usuario
             $entityManager->remove($user);
             $entityManager->flush();
         }
