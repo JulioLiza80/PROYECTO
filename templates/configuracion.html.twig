@@ -32,7 +32,7 @@
                         <a href="{{ path('app_forgot_password_request', {'activeTab': 'contraseña'}) }}" class="block py-2 px-2 md:px-4
 						                            {% if activeTab == 'contraseña' %}bg-gray-200 text-gray-800 font-bold{% else %}text-gray-600{% endif %}
 						                            rounded text-sm md:text-md">
-                            cambiar contraseña
+                            Cambiar contraseña
                         </a>
                     </li>
 				</ul>
@@ -47,7 +47,10 @@
                     {% elseif activeTab == 'pedidos' %}
                         {# Renderiza el template para Mis Pedidos #}
                         {{ include('pedidos.html.twig') }}
-                        {% else %}
+                    {% elseif activeTab == 'detallePedido'%}
+                        {# Renderiza el template para Detalle de Pedido #}
+                        {{ include('detalle_pedido.html.twig') }}
+                    {% else %}
                          {{ include('reset_password\request.html.html.twig') }}
                     {% endif %}
                 {% endblock %}
@@ -55,6 +58,5 @@
         </div>
 	</div>
 
-	{{ include('comun/footer.html.twig') }}
 
 {% endblock %}

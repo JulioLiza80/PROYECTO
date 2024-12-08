@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resumen de Pago{% endblock %}
+
+{% block body %}
+
+{{ include('comun/header.html.twig') }}
+
+<div class="container mx-auto my-10">
+    <div class="bg-white shadow rounded-lg p-8">
+        <h1 class="text-2xl font-bold mb-6">Resumen de pago</h1>
+        <ul class="divide-y divide-gray-200">
+            {% set total = 0 %}
+            {% for producto in carrito %}
+                <li class="flex justify-between py-3">
+                    <div class="flex items-center gap-4">
+                        <img src="{{ vich_uploader_asset(producto['producto'], 'imageFile') }}"
+                            alt="{{ producto['producto'].imageName }}"
+                            class="w-16 h-16 rounded-md object-cover">
+                        <div class="flex flex-col">
+                            <span>{{ producto['producto'].marca }} {{ producto['producto'].modelo }} <span class="ml-2 font-semibold">x{{ producto['cantidad'] }}</span></span>
+                        </div>
+                    </div>
+                    <span class="ml-auto py-3 font-semibold">{{ producto['producto'].precio * producto['cantidad'] }}€</span>
+                    {% set total = total + (producto['producto'].precio * producto['cantidad']) %}
+                </li>
+            {% endfor %}
+        </ul>
+        <hr class="text-gray-500">
+        <div class="mt-4 text-right">
+            <input id="total" type='hidden' value={{total}} />
+            <h3 class="text-lg font-semibold">Total: <span class="ml-4">{{ total }}€</span></h3>
+            
+        </div>
+        <div class="mt-4">
+            <div id="paypal-button-container" class="mt-16 mx-56">
+                <form id="paypal-form" action="{{path('app_compra')}}" method="post">
+                    <input type="hidden" name="detalles" id="detalles-input">
+                    <input type="hidden" name="total" id="total-input"
+                        value="{{total|number_format(2, '.', ',')}}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ include('comun/footer.html.twig') }}
+
+
+<script src="https://www.paypal.com/sdk/js?client-id={{ idcliente }}&currency=EUR&components=buttons&enable-funding=venmo,paylater,card"
+    data-sdk-integration-source="developer-studio"></script>
+
+{% endblock %}

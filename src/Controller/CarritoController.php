@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Form\UserType;
 
 class CarritoController extends AbstractController
 {
@@ -128,6 +130,46 @@ class CarritoController extends AbstractController
             'producto' => $productoActualizado
         ], 200);
     }
+
+    #[Route('/envio', name: 'app_envio', methods: ['GET', 'POST'])]
+    public function envio(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        // Crear formulario basado en el tipo de usuario (solo con los campos específicos)
+        $form = $this->createForm(UserType::class, $user, [
+            'validation_groups' => ['Default'], // Personaliza si necesitas
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            // Guardar datos en la base de datos
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Redirigir a la vista del carrito simplificada
+            return $this->redirectToRoute('app_resumen_pago');
+        }
+
+        return $this->render('envio.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    #[Route('/resumen-pago', name: 'app_resumen_pago', methods: ['GET'])]
+    public function resumenPago(SessionInterface $session): Response
+    {
+        $carrito = $session->get('carrito', []);
+
+        return $this->render('resumen_pago.html.twig', [
+            'carrito' => $carrito,
+            
+        'idcliente'=>$_ENV["APP_PAYPAL"]
+
+        ]);
+    }
+
 
 
     /*{% for producto in app.session.get('carrito') %}

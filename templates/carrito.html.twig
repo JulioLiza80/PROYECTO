@@ -6,7 +6,7 @@
 
 {{ include('comun/header.html.twig') }}
 
-<section class="h-full mt-5">
+<section class="h-full mt-5 mb-48">
     <div class="container mx-auto py-5">
         <div class="flex flex-col md:flex-row gap-4">
             <!-- Tabla del carrito -->
@@ -103,14 +103,20 @@
                         </li>
                     </ul>
                     {% if total > 0 %}
-                        <div class="mt-4">
-                            <div id="paypal-button-container">
-                                <form id="paypal-form" action="{{path('app_compra')}}" method="post">
-                                    <input type="hidden" name="detalles" id="detalles-input">
-                                    <input type="hidden" name="total" id="total-input"
-                                        value="{{total|number_format(2, '.', ',')}}">
-                                </form>
-                            </div>
+                        <div class="mt-4 flex justify-center">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <!-- Si el usuario está autenticado -->
+                            <a href="{{ path('app_envio') }}" 
+                            class="py-2 px-4 hover:bg-novapurple text-white font-semibold rounded-lg bg-[#9736af] transition duration-200">
+                                Continuar al pago
+                            </a>
+                        {% else %}
+                            <!-- Si el usuario no está autenticado -->
+                            <a href="{{ path('app_register') }}" 
+                            class="py-2 px-4 text-center hover:bg-novapurple text-white font-semibold rounded-lg bg-[#9736af] transition duration-200">
+                                Regístrate para continuar
+                            </a>
+                        {% endif %}
                         </div>
                     {% endif %}
                 </div>
@@ -118,6 +124,8 @@
         </div>
     </div>
 </section>
+
+{{ include('comun/footer.html.twig') }}
 
 <script src="https://www.paypal.com/sdk/js?client-id={{ idcliente }}&currency=EUR&components=buttons&enable-funding=venmo,paylater,card"
     data-sdk-integration-source="developer-studio"></script>

@@ -57,8 +57,7 @@ security:
         - { path: ^/detalle/compra, roles: [ROLE_ADMIN] }
         #  COMPRA CONTROLLER
         - { path: ^/compra, roles: [ROLE_ADMIN, ROLE_USER] }
-        #  CARRITO CONTROLLER
-        - { path: ^/carrito, roles: [ROLE_ADMIN, ROLE_USER] }
+
 
         
 when@test:
