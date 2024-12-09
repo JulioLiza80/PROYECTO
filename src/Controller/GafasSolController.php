@@ -50,8 +50,40 @@ class GafasSolController extends AbstractController
             throw $this->createNotFoundException('La gafa solar no existe.');
         }
 
+        // Obtener 3 gafas cuyo tipo sea "gafas graduadas", excluyendo la gafa actual
+        $gafasGraduadas = $entityManager->createQueryBuilder()
+            ->select('g')
+            ->from(Gafas::class, 'g')
+            ->where('g.tipo = :tipoGraduadas')
+            ->andWhere('g.id != :id')
+            ->setParameter('tipoGraduadas', 'gafas graduadas')
+            ->setParameter('id', $id)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+
+        // Obtener 3 gafas cuyo tipo sea "gafas sol", excluyendo la gafa actual
+        $gafasSol = $entityManager->createQueryBuilder()
+            ->select('g')
+            ->from(Gafas::class, 'g')
+            ->where('g.tipo = :tipoSol')
+            ->andWhere('g.id != :id')
+            ->setParameter('tipoSol', 'gafas sol')
+            ->setParameter('id', $id)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+
+        // Combinar ambas listas
+        $gafasSugeridas = array_merge($gafasGraduadas, $gafasSol);
+
+        // Mezclar aleatoriamente las gafas sugeridas
+        shuffle($gafasSugeridas);
+
         return $this->render('showDetallesGafas.html.twig', [
             'gafa' => $gafa,
+            'stock' => $gafa->getStock(),
+            'gafas' => $gafasSugeridas, // Pasar las gafas combinadas y aleatorias a la vista
         ]);
     }
 }

@@ -16,7 +16,7 @@
 
 		<!-- Imagen de Banner -->
 		<div class="banner-gafas-graduadas w-full h-[342px] relative mb-4">
-			<img src="{{ asset('images/banner-gafas-graduadas.avif') }}" alt="Banner Gafas Graduadas" class="absolute inset-0 w-full h-full object-cover object-position">
+			<img src="{{ asset('banners/banner-gafas-graduadas.png') }}" alt="Banner Gafas Graduadas" class="absolute inset-0 w-full h-full object-cover object-position">
 		</div>
 
 		<!-- Contenedor breadcrumbs y filtros básicos -->
@@ -208,7 +208,7 @@
 
 
 			<!-- Grid de gafas con 4 columnas en pantallas grandes, 2 en medianas y 1 en móviles -->
-			<div class="flex flex-row flex-wrap max-w-[1500px] gap-x-10 gap-y-5 ml-12">
+			<div class="gafasContainer flex flex-row flex-wrap max-w-[1500px] gap-x-10 gap-y-5 ml-12">
 				{% for gafa in gafas %}
 					{% if gafa.estado == true and gafa.tipo == 'gafas graduadas' %}
 						<!-- Card de gafas -->
@@ -417,6 +417,17 @@
 		});
 
 		// CLICK CARD DE GAFAS
+
+		// Delegación de eventos para las gafa-card
+		gafasContainer.addEventListener('click', function(event) {
+			// Verifica si el elemento clicado o uno de sus padres es una .gafa-card
+			let card = event.target.closest('.gafa-card');
+			if (card) {
+				const gafaId = card.getAttribute('data-id');
+				console.log(gafaId);
+				window.location.href = `/gafas/${gafaId}/show`;
+			}
+		});
 
 		document.addEventListener('DOMContentLoaded', function() {
 			// Seleccionamos todas las cards de gafas

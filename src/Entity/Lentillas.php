@@ -26,7 +26,7 @@ class Lentillas
     private ?string $descripcion = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $tipoProducto = null;
+    private ?string $tipo_producto = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $frecuencia = null;
@@ -109,12 +109,12 @@ class Lentillas
 
     public function getTipoProducto(): ?string
     {
-        return $this->tipoProducto;
+        return $this->tipo_producto;
     }
 
-    public function setTipoProducto(string $tipoProducto): static
+    public function setTipoProducto(string $tipo_producto): static
     {
-        $this->tipoProducto = $tipoProducto;
+        $this->tipo_producto = $tipo_producto;
 
         return $this;
     }
