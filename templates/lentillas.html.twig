@@ -172,11 +172,11 @@
                     </button>
                     <div id="tipo-producto-list" class="mt-1 mb-2 ml-3">
                         <ul class="list-none text-lg">
-                            {% for tipo in tipos_de_producto %}
+                            {% for tipoProducto in tipo_producto %}
                                 <li class="flex items-center text-gray-700 cursor-pointer">
-                                    <input type="checkbox" class="tipo-producto-checkbox" data-tipo="{{ tipo }}" id="tipo-producto-{{ loop.index }}" class="mr-2">
+                                    <input type="checkbox" class="tipo-producto-checkbox" data-tipo="{{ tipoProducto }}" id="tipo-producto-{{ loop.index }}" class="mr-2">
                                     <label for="tipo-producto-{{ loop.index }}" class="text-gray-700">
-                                        &nbsp;{{ tipo|capitalize }}
+                                        &nbsp;{{ tipoProducto|capitalize }}
                                     </label>
                                 </li>
                             {% endfor %}
@@ -258,7 +258,7 @@
 			</div>
 
            <!-- Grid de lentillas con 4 columnas en pantallas grandes, 2 en medianas y 1 en móviles -->
-            <div class="flex flex-row flex-wrap max-w-[1500px] gap-x-10 gap-y-5 ml-12">
+            <div class="lentillasContainer flex flex-row flex-wrap max-w-[1500px] gap-x-10 gap-y-5 ml-12">
                 {% for lentilla in lentillas %}
                     {% if lentilla.estado == true %}
                         <!-- Card de lentillas -->
@@ -335,7 +335,14 @@
         aplicarFiltros(); // Aplica los filtros inicialmente
         ordenarPorRelevancia(); // Ordena las tarjetas inicialmente por relevancia
         updatePagination(); // Inicializa la paginación
+        
+        // Evento para manejar el cambio de criterio de orden
+        document.getElementById('order').addEventListener('change', (event) => {
+            const criterio = event.target.value;
+            ordenarLentillas(criterio);
+        });
     });
+
 
     let currentPage = 1;
     const itemsPerPage = 25;
@@ -486,6 +493,17 @@
                 window.location.href = `/lentillas/${lentillaId}/show`;
             });
         });
+    });
+
+    // Delegación de eventos para las lentilla-card
+    lentillasContainer.addEventListener('click', function(event) {
+        // Verifica si el elemento clicado o uno de sus padres es una .lentilla-card
+        let card = event.target.closest('.lentilla-card');
+        if (card) {
+            const lentillaId = card.getAttribute('data-id');
+            console.log(lentillaId);
+            window.location.href = `/lentillas/${lentillaId}/show`;
+        }
     });
 
     // BOTÓN DE SUBIR

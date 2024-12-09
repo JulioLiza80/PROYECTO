@@ -33,7 +33,7 @@ class LentillasController extends AbstractController
         }, $lentillas));
 
         // Extraer tipos de producto únicos
-        $tipos_de_producto = array_unique(array_map(function ($lentilla) {
+        $tipo_producto = array_unique(array_map(function ($lentilla) {
             return $lentilla->getTipoProducto(); // Correcto
         }, $lentillas));
 
@@ -42,12 +42,13 @@ class LentillasController extends AbstractController
             return $lentilla->getTipo(); // Correcto
         }, $lentillas));
 
+
         return $this->render('lentillas.html.twig', [
             'lentillas' => $lentillas,
             'marcas' => $marcas, // Pasar las marcas únicas
             'materiales' => $materiales, // Pasar los materiales únicos
             'frecuencias' => $frecuencias, // Pasar las frecuencias únicas
-            'tipos_de_producto' => $tipos_de_producto, // Pasar los tipos de producto
+            'tipo_producto' => $tipo_producto, // Pasar los tipos de producto
             'tipos' => $tipos, // Pasar los tipos de lentillas
         ]);
     }
@@ -62,15 +63,13 @@ class LentillasController extends AbstractController
             throw $this->createNotFoundException('La lentilla no existe.');
         }
 
-        // Obtener 6 lentillas del mismo tipo, excluyendo la actual
+        // Obtener 6 lentillas aleatorias, excluyendo la actual
         $lentillasSugeridas = $entityManager->createQueryBuilder()
             ->select('l')
             ->from(Lentillas::class, 'l')
-            ->where('l.tipo = :tipo')
-            ->andWhere('l.id != :id')
-            ->setParameter('tipo', $lentilla->getTipo())
+            ->where('l.id != :id')
             ->setParameter('id', $id)
-            ->setMaxResults(6) // Cambiado de 3 a 6
+            ->setMaxResults(6) // Obtener 6 lentillas aleatorias
             ->getQuery()
             ->getResult();
 
