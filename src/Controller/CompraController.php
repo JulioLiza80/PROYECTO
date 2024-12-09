@@ -11,6 +11,7 @@ use App\Service\ComprasManager;
 use SebastianBergmann\Template\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
@@ -24,7 +25,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class CompraController extends AbstractController
 {
       #[Route('/compra', name: 'app_compra', methods: ['POST', 'GET'])]
-      public function crearCompra(RequestStack $request, ComprasManager $comprasManager, MailerInterface $mailer): Response
+      public function crearCompra(RequestStack $request, ComprasManager $comprasManager, MailerInterface $mailer, EntityManagerInterface $gafas, EntityManagerInterface $lentillas, EntityManagerInterface $dp  ): Response
       { 
             $session = $request->getSession();
             $carrito= $session->get('carrito');
@@ -96,11 +97,19 @@ class CompraController extends AbstractController
 
                   //actualizar stock
                         $comprasManager->stocks();
-
+                       
 
                   //creacion de detallePedido
-                        $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
-                        return $this->redirectToRoute('app_home');
+                      $comprasManager->nuevoDetallePedido($pedido, new DetallePedido(),$pedido->getIdTransaccion());
+                       //dd($pedido, $detallePedido);
+                        return $this->render('confirmation_pedido.html.twig',[
+                          'pedido'=> $pedido,
+                          'detallePedido' => $dp->getRepository(DetallePedido::class)->findPedidosByIdPedido($pedido->getId()),
+                          'gafas' => $gafas->getRepository(Gafas::class)->findAll(),
+                          'lentillas'=>$lentillas->getRepository(Lentillas::class)->findAll()
+
+                        ]);
+
                   //2º SUPUESTO -- PAYPAL DEVUELVE ESTADO DIFERENTE A COMPLETO
                   }else{
 
@@ -130,7 +139,7 @@ class CompraController extends AbstractController
                         // $mailer->send($email2);
                   //vaciamos carrito
                   $session->remove('carrito');
-                  return $this->redirectToRoute('app_home');
+                  return $this->redirectToRoute('errores/errorPago.html.twig');
 
                   }
                   // 3º SUPESTO -- EL PAGO HA SIDO INFERIOR A LA CANTIDAD RECUPERADA DEL CARRITO
@@ -169,7 +178,7 @@ class CompraController extends AbstractController
                   // $mailer->send($email2);
             //vaciamos carrito
                   $session->remove('carrito');
-                  return $this->redirectToRoute('app_home');
+                  return $this->redirectToRoute('errores/errorPago.html.twig');
 
 
             }

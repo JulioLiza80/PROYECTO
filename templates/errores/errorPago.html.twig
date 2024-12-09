@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restablecer contraseña
+{% endblock %}
+
+{% block body %}
+	{{ include('comun/header.html.twig') }}
+	<div
+		class="flex items-center justify-center min-h-screen bg-gray-50">
+		<div
+			class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+			
+				<div class="alert alert-danger text-center p-4 mb-6 bg-red-100 text-red-800 border border-red-400 rounded-lg">
+					<p><strong>Existe un problema con el pago efectuado, nos pondremos en contacto con usted, a la mayor brevedad posible.</strong></p>
+                    <p>Gracias </p>
+				</div>
+
+                 <div class="mt-4 flex justify-center">
+                <a href="{{ path('app_home') }}" 
+                class="py-2 px-4 text-center hover:bg-novapurple text-white font-semibold rounded-lg bg-[#9736af] transition duration-200">
+                    Volver a inicio
+                </a>
+            </div>
+		</div>
+	</div>
+	{{ include('comun/footer.html.twig') }}
+{% endblock %}
