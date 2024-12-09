@@ -18,7 +18,11 @@
                             alt="{{ producto['producto'].imageName }}"
                             class="w-16 h-16 rounded-md object-cover">
                         <div class="flex flex-col">
-                            <span>{{ producto['producto'].marca }} {{ producto['producto'].modelo }} <span class="ml-2 font-semibold">x{{ producto['cantidad'] }}</span></span>
+                            {% if producto['producto'].tipoProducto is defined %}
+                                <span class="capitalize">{{ producto['producto'].tipoProducto ~ ' ' ~ producto['producto'].marca }} <span class="ml-2 font-semibold">{{ producto['cantidad'] }}</span></span>
+                            {% else %}
+                                <span class="capitalize">{{ producto['producto'].marca ~ ' ' ~ producto['producto'].modelo }} <span class="ml-2 font-semibold">{{ producto['cantidad'] }}</span></span>
+                            {% endif %}                                    
                         </div>
                     </div>
                     <span class="ml-auto py-3 font-semibold">{{ producto['producto'].precio * producto['cantidad'] }}€</span>

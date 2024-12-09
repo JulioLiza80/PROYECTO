@@ -17,7 +17,7 @@
                         <thead>
                             <tr>
                                 <th class="p-3 border-b text-gray-700">Producto</th>
-                                <th class="p-3 border-b text-gray-700">ID</th>
+
                                 <th class="p-3 border-b text-gray-700">Unidades</th>
                                 <th class="p-3 border-b text-gray-700">Precio</th>
                                 <th class="p-3 border-b text-gray-700"></th>
@@ -33,11 +33,17 @@
                                                 alt="{{ producto['producto'].imageName }}"
                                                 class="w-16 h-16 rounded-md object-cover">
                                             <div>
-                                                <p class="text-gray-900 font-medium">{{ producto['producto'].marca }}</p>
+                                                <p class="text-gray-900 font-medium capitalize">
+                                                    {% if producto['producto'].tipoProducto is defined %}
+                                                        {{ producto['producto'].tipoProducto ~ ' ' ~ producto['producto'].marca }}
+                                                    {% else %}
+                                                        {{ producto['producto'].marca ~ ' ' ~ producto['producto'].modelo }}
+                                                    {% endif %}
+                                                </p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-3 border-b">{{ producto['producto'].id }}</td>
+
                                     <td class="p-3 border-b align-middle">
                                         <div class="d-flex flex-row">
                                             <input 
