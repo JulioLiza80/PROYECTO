@@ -15,6 +15,9 @@
                 <button class="w-[124px] h-[35px] text-sm text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl mr-3" onclick="window.location.href='/'">
                     Inicio
                 </button>
+                <button class="w-[124px] h-[35px] text-sm text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl mr-3" onclick="window.location.href='/lentillas'">
+                    Lentillas
+                </button>
                 <p class="h-[35px] px-4 text-sm text-center font-bold shadow p-2 rounded-bl-3xl rounded-tr-3xl">
                     {{ lentilla.marca|capitalize }} 
                     <span>
@@ -44,15 +47,16 @@
                 <div class="flex flex-col gap-8 justify-center ml-20">
                     <!-- Marca y tipo de lentilla -->
                     <h1 class="text-2xl font-bold text-gray-800">
-                        {{ lentilla.marca|capitalize }}
-                        <span>
-                            {% if lentilla.tipo is null %}
-                                Líquido
-                            {% else %}
-                                {{ lentilla.tipo|capitalize }}
-                            {% endif %}
-                        </span>
+                    <span>
+                        {% if lentilla.tipoProducto is null %}
+                            Líquido
+                        {% else %}
+                            {{ lentilla.tipoProducto|capitalize }}
+                        {% endif %}
+                    </span>
+                    {{ lentilla.marca|capitalize }}
                     </h1>
+                        
                     <!-- Precio -->
                     <p class="text-xl font-semibold text-gray-600">{{ lentilla.precio }}€</p>
                     <!-- Disponibilidad -->
@@ -156,15 +160,16 @@
 
                         <!-- Contenido de la card -->
                         <div class="px-4 py-2">
-                            <h3 class="text-gray-800 raleway font-light mb-2 text-sm flex items-center space-x-2">
-                                <span>{{ lentilla.marca|capitalize }}</span>
+                            <h3 class="text-gray-800 raleway font-light mb-2 text-sm flex items-center space-x-1">
                                 <span>
-                                    {% if lentilla.tipo is null %}
+                                    {% if lentilla.tipoProducto is null %}
                                         Líquido
                                     {% else %}
-                                        {{ lentilla.tipo|capitalize }}
+                                        {{ lentilla.tipoProducto|capitalize }}
                                     {% endif %}
                                 </span>
+                                <span>{{ lentilla.marca|capitalize }}</span>
+                                
                             </h3>
                             <p class="text-gray-900 raleway font-semibold mb-2 text-lg">
                                 {{ lentilla.precio|number_format(2, ',', '') }}€
