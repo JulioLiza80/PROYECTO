@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -38,6 +39,13 @@ class UserCrudController extends AbstractCrudController
             TextField::new('direccion'),
             TextField::new('ciudad'),
             IntegerField::new('cp'),
+            ChoiceField::new('roles', 'Roles')
+            ->allowMultipleChoices()
+            ->autocomplete()
+            ->setChoices([  'User' => 'ROLE_USER',
+                            'Admin' => 'ROLE_ADMIN']),
+
+            
             //descarga
            
           
