@@ -1,39 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #555555;
+        }
+        h3 {
+            color: #444444;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #9736af;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            width: auto;
+        }
+        .btn:hover {
+            background-color: #712282;
+        }
+        .expired {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            text-align: center;
+            color: #888;
+        }
+        .order-summary {
+            margin-top: 20px;
+        }
+        .order-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+        .order-summary li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .order-summary .total {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+        .order-summary .shipping {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Gracias por tu pedido!</h1>
 
+        <p>Hemos recibido tu pedido y estamos procesándolo. A continuación te mostramos un resumen de tu compra:</p>
 
+        <div class="order-summary">
+            <h3>Resumen de pago</h3>
+            <ul>
+                {% set total = 0 %}
+                {% for producto in carrito %}
+                    <li>
+                        {% if producto['producto'].categoria == 1 %}
+                            Marca: {{producto['producto'].marca}}, Modelo: {{producto['producto'].modelo}}, Tipo: {{producto['producto'].tipo}}, (x{{ producto['cantidad'] }}, {{ producto['producto'].precio }}€)
+                        {% endif %}
+                        
+                        {% if producto['producto'].categoria == 2 %}
+                            Marca: {{producto['producto'].marca}}, Tipo: {{producto['producto'].tipoProducto}}, (x{{ producto['cantidad'] }}, {{ producto['producto'].precio }}€)
+                        {% endif %}
+                        
+                        {% set total = total + (producto['producto'].precio * producto['cantidad']) %}
+                    </li>
+                {% else %}
+                    <li>Productos <span>€0</span></li>
+                {% endfor %}
+                <li class="shipping">
+                    Envío: Gratis
+                </li>
+                <li class="total">
+                    <div>
+                        <strong>Total (incluye IVA): {{ total }}€</strong>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-
-
-  <div>
-      <h3>Resumen  de pago</h3>
-      <ul >
-      {% set total = 0 %}
-      {% for producto in carrito %}
-        <li>
-          {% if producto['producto'].categoria==1 %}
-                Marca: {{producto['producto'].marca}} , Modelo: {{producto['producto'].modelo}}, Tipo: {{producto['producto'].tipo}}, (x{{ producto['cantidad']  }}, x {{producto['producto'].precio}})
-          {% endif %}
-                <span>€{{ (producto['producto'].precio * producto['cantidad']) }}</span>
-          
-          {% if producto['producto'].categoria==2 %}
-                Marca: {{producto['producto'].marca}} , Tipo: {{producto['producto'].tipoProducto}}, (x{{ producto['cantidad']  }}, x {{producto['producto'].precio}})
-          {% endif %}  
-               <span>€{{ (producto['producto'].precio * producto['cantidad']) }}</span>
-          {% set total = total + (producto['producto'].precio * producto['cantidad']) %}
-        </li>
-           {% else %}
-         <li >
-            Productos
-            <span>€0</span>
-          </li>  
-        {% endfor %}
-          <li>
-            Envío
-            <span>Gratis</span>
-          </li>
-          <li>
-          <div>
-          <strong>Total(incluye IVA): €{{total}}</strong>
-          </div>
-      </li>
-    </ul>
-</div>
+        <p class="footer">¡Gracias por elegirnos!</p>
+    </div>
+</body>
+</html>

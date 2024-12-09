@@ -76,9 +76,9 @@ class CompraController extends AbstractController
                   //creacion de correos
                         //correo cliente
                         $email = (new TemplatedEmail())
-                              ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
+                              ->from(new Address('opticanovaproyecto@gmail.com', 'Nova Opticos'))
                               ->to((string) $this->getUser()->getUserIdentifier())
-                              ->subject('Pedido :' . $pedido->getId() . ', Optica Nova')
+                              ->subject('Pedido ' . $compra->getIdTransaccion() . ' - Nova Opticos')
                               ->htmlTemplate('correos/clienteCompra.html.twig')
                               ->context([
                               'carrito' => $session->get('carrito'),
@@ -97,6 +97,9 @@ class CompraController extends AbstractController
 
                   //actualizar stock
                         $comprasManager->stocks();
+
+                  // Recuperar id transacción
+                        $idTransaccion=$compra->getIdTransaccion();
                        
 
                   //creacion de detallePedido
@@ -104,6 +107,7 @@ class CompraController extends AbstractController
                        //dd($pedido, $detallePedido);
                         return $this->render('confirmation_pedido.html.twig',[
                           'pedido'=> $pedido,
+                          'idTransaccion' => $idTransaccion,
                           'detallePedido' => $dp->getRepository(DetallePedido::class)->findPedidosByIdPedido($pedido->getId()),
                           'gafas' => $gafas->getRepository(Gafas::class)->findAll(),
                           'lentillas'=>$lentillas->getRepository(Lentillas::class)->findAll()
@@ -119,9 +123,9 @@ class CompraController extends AbstractController
                         //creacion de correos
                         //correo cliente
                         $email = (new TemplatedEmail())
-                              ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
+                              ->from(new Address('opticanovaproyecto@gmail.com', 'Nova Opticos'))
                               ->to((string) $this->getUser()->getUserIdentifier())
-                              ->subject('Compra :' . $compra->getId() . ', Optica Nova')
+                              ->subject('Compra :' . $compra->getId() . ', Nova Opticos')
                               ->htmlTemplate('correos/procesoIncompleto.html.twig')
                               ->context([
                               'carrito' => $session->get('carrito'),
@@ -158,9 +162,9 @@ class CompraController extends AbstractController
                   //creacion de correos
                   //correo cliente
                   $email = (new TemplatedEmail())
-                        ->from(new Address('opticanovaproyecto@gmail.com', 'Optica Nova'))
+                        ->from(new Address('opticanovaproyecto@gmail.com', 'Nova Opticos'))
                         ->to((string) $this->getUser()->getUserIdentifier())
-                        ->subject('Compra :' . $compra->getId() . ', Optica Nova')
+                        ->subject('Compra :' . $compra->getId() . ', Nova Opticos')
                         ->htmlTemplate('correos/pagoIncorrecto.html.twig')
                         ->context([
                         'carrito' => $session->get('carrito'),'cantidadPagada' =>$c

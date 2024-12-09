@@ -1,29 +1,61 @@
 
 {% block content %}
-	<form method="POST" action="{{ path('app_user_edit', {'id': user.id}) }}" enctype="multipart/form-data">
-		{{ form_start(form) }}
+<h2 class="text-3xl font-semibold text-gray-800">Detalles del Pedido #{{ idPedido }}</h2>
+<h3 class="text-xl font-semibold text-gray-500 mb-6">Ref: {{ idTransaccion }}</h2>
 
-		<!-- Dirección -->
-		<div class="mb-12">
-			<h2 class="text-lg font-semibold text-gray-700 mb-4">Dirección</h2>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-				<div>
-					{{ form_label(form.direccion, 'Calle, número', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-					{{ form_widget(form.direccion, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
-				</div>
-				<div>
-					{{ form_label(form.ciudad, 'Ciudad', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-					{{ form_widget(form.ciudad, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
-				</div>
-				<div>
-					{{ form_label(form.cp, 'Código Postal', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-					{{ form_widget(form.cp, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
-				</div>
-			</div>
-		</div>
+<ul class="divide-y divide-gray-200">
+    {% set total = 0 %}
+    {% for detalle in pedidoSeleccionadoDetalles %}
+        <li class="flex justify-between py-4">
+            <div class="flex items-center gap-4">
+                {% if detalle.categoriaProducto == 1 %}
+                    <div class="flex flex-col space-y-2">
+                        {% for g in gafas %}
+                            {% if detalle.IdProducto == g.id %}
+                                <div class="flex items-center gap-4">
+                                    <img src="{{ vich_uploader_asset(g) }}" 
+                                         alt="{{ g.marca }} {{ g.modelo }}" 
+                                         class="w-16 h-16 rounded-md object-cover">
+                                    <div class="flex flex-col">
+                                        <span class="text-gray-800 font-semibold">{{ g.marca }} {{ g.modelo }}</span>
+                                        <span class="text-gray-600">Cantidad: {{ detalle.cantidad }}</span>
+                                        <span class="text-gray-600">Precio: {{ detalle.precio }}€</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                {% if detalle.categoriaProducto == 2 %}
+                    <div class="flex flex-col space-y-2">
+                        {% for l in lentillas %}
+                            {% if detalle.IdProducto == l.id %}
+                                <div class="flex items-center gap-4">
+                                    <img src="{{ vich_uploader_asset(l) }}" 
+                                         alt="{{ l.marca }}" 
+                                         class="w-16 h-16 rounded-md object-cover">
+                                    <div class="flex flex-col">
+                                        <span class="text-gray-800 font-semibold">{{ l.tipoProducto }} {{ l.marca }}</span>
+                                        <span class="text-gray-600">Cantidad: {{ detalle.cantidad }}</span>
+                                        <span class="text-gray-600">Precio: {{ detalle.precio }}€</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </li>
+        {% set total = total + detalle.precio * detalle.cantidad %}
+    {% endfor %}
+</ul>
 
-		{{ form_end(form) }}
-	</form>
+<hr class="my-6 border-gray-300">
+
+<div class="mt-4 text-right">
+    <h3 class="text-xl font-semibold">Total: <span class="ml-2">{{ total }}€</span></h3>
+</div>
 
 
 {% endblock %}

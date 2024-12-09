@@ -32,12 +32,12 @@ class DetallePedidoCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
+            IdField::new('Idusuario', 'Id Usuario'),
             IdField::new('idPedido'),
             IdField::new('idProducto'),
             IdField::new('categoriaProducto'),
             NumberField::new('cantidad'),
             NumberField::new('precio'),
-            IdField::new('Idusuario'),
             
         ];
     }

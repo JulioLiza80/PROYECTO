@@ -1,25 +1,37 @@
-
 {% block content %}
 
-			<div class="mb-12"> <h2 class="text-lg font-semibold text-gray-700 mb-4">Pedidos realizados</h2>
-			<div class="grid grid-cols-2 gap-4">
-				<div class="col-span-2">
-					{{ form_label(form.nombre, 'Nombre', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-					{{ form_widget(form.nombre, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
-				</div>
-				<div>
-					{{ form_label(form.apellido1, 'Primer Apellido', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-					{{ form_widget(form.apellido1, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
-				</div>
-				<div>
-					{{ form_label(form.apellido2, 'Segundo Apellido', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-					{{ form_widget(form.apellido2, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
-				</div>
-				<div class="col-span-2">
-					{{ form_label(form.email, 'Email', {'label_attr': {'class': 'text-sm font-semibold text-gray-600'}}) }}
-					{{ form_widget(form.email, {'attr': {'class': 'w-full mt-1 p-2 border rounded'}}) }}
-				</div>
-
-
+    <div class="">
+        <table class="table-auto w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-100 border-b">
+                    <th class="px-8 py-2 md:px-16">ID Pedido</th>
+                    <th class="px-8 py-2 md:px-16">Total</th>
+                    <th class="px-8 py-2 md:px-16">Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidosResumen %}
+                <tr class="border-b hover:bg-gray-50 transition">
+                    <td class="px-8 py-4 md:px-16 md:py-4">{{ pedido.idPedido }}</td>
+                    <td class="px-8 py-4 md:px-16 md:py-4">€{{ pedido.precioTotal|number_format(2, '.', ',') }}</td>
+                    <td class="px-8 py-4 md:px-16 md:py-4 flex justify-center">
+                        <a href="{{ path('app_user_config', {'activeTab': 'detallePedido', 'idPedido': pedido.idPedido}) }}" class="text-novapurple">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                <path d="M21 21l-6 -6" />
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center p-6 text-gray-500 italic">No se encontraron pedidos.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}
+

@@ -33,7 +33,7 @@ class PedidosCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            IdField::new('idUsuarioPedidos.id', 'ID Usuario'),
+            IdField::new('idUsuarioPedidos.id', 'Id Usuario'),
             TextField::new('direccion'),
             TextField::new('ciudad'),
             IntegerField::new('cp'),
@@ -49,7 +49,7 @@ class PedidosCrudController extends AbstractCrudController
     return $crud
         ->setEntityLabelInSingular('Pedido')
         ->setEntityLabelInPlural('Pedidos')
-        ->setSearchFields(['id'])
+        ->setSearchFields(['id', 'IdTransaccion'])
         ->setDefaultSort(['id' => 'DESC'])
     ;
 }

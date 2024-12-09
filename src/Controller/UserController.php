@@ -139,33 +139,97 @@ final class UserController extends AbstractController
 
     // Configuración
     #[Route('/configuracion', name: 'app_user_config', methods: ['GET'])]
-    public function configuration(Request $request, EntityManagerInterface $entityManager, EntityManagerInterface $entityGafas, EntityManagerInterface $entityLentillas, EntityManagerInterface $entityPedidos, EntityManagerInterface $entityUsuario  ): Response
-    {
+    public function configuration(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        EntityManagerInterface $entityGafas,
+        EntityManagerInterface $entityLentillas,
+        EntityManagerInterface $entityPedidos,
+        EntityManagerInterface $entityUsuario
+    ): Response {
         $activeTab = $request->query->get('activeTab', 'cuenta');
+        $idPedidoSeleccionado = $request->query->get('idPedido', null);
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
             return $this->redirectToRoute('app_user_config');
         }
 
-        //recuperacion de todos los productos para despues filtrar;
-        $gafas= $entityGafas->getRepository(Gafas::class)->findAll();
-        $lentillas= $entityLentillas->getRepository(Lentillas::class)->findAll();
-        $usuarioPedido= $entityUsuario->getRepository((User::class))->findOneByEmail($user->getUserIdentifier());
-        $pedidosUsuario= $entityPedidos->getRepository(DetallePedido::class)->findPedidosById($usuarioPedido->getId());
-        
-        
+        // Recuperación de datos comunes
+        $gafas = $entityGafas->getRepository(Gafas::class)->findAll();
+        $lentillas = $entityLentillas->getRepository(Lentillas::class)->findAll();
+        $usuarioPedido = $entityUsuario->getRepository(User::class)->findOneByEmail($user->getUserIdentifier());
+        $pedidosUsuario = $entityPedidos->getRepository(DetallePedido::class)->findPedidosById($usuarioPedido->getId());
+
+        // Procesamiento para "Mis Pedidos"
+        $pedidosResumen = [];
+        foreach ($pedidosUsuario as $detalle) {
+            $idPedido = $detalle->getIdPedido();
+            $categoria = $detalle->getCategoriaProducto();
+            $idProducto = $detalle->getIdProducto();
+            $precio = $detalle->getPrecio();
+
+            // Encuentra la imagen según la categoría
+            $imagen = null;
+            if ($categoria === 1) { // Gafas
+                foreach ($gafas as $g) {
+                    if ($g->getId() === $idProducto) {
+                        $imagen = $g->getImageName();
+                        break;
+                    }
+                }
+            } elseif ($categoria === 2) { // Lentillas
+                foreach ($lentillas as $l) {
+                    if ($l->getId() === $idProducto) {
+                        $imagen = $l->getImageName();
+                        break;
+                    }
+                }
+            }
+
+            // Agrupa los detalles por IdPedido
+            if (!isset($pedidosResumen[$idPedido])) {
+                $pedidosResumen[$idPedido] = [
+                    'idPedido' => $idPedido,
+                    'imagen' => $imagen,
+                    'precioTotal' => 0,
+                ];
+            }
+
+            $pedidosResumen[$idPedido]['precioTotal'] += $precio;
+        }
+
+
+        $pedidoSeleccionadoDetalles = null;
+        $idTransaccion = null;
+        if ($idPedidoSeleccionado) {
+            $pedidoSeleccionadoDetalles = array_filter(
+                $pedidosUsuario,
+                fn($detalle) => $detalle->getIdPedido() === (int)$idPedidoSeleccionado
+            );
+
+            // Obtener el IdTransaccion de la entidad Pedidos
+            $pedido = $entityPedidos->getRepository(Pedidos::class)->findOneById($idPedidoSeleccionado);
+            if ($pedido) {
+                $idTransaccion = $pedido->getIdTransaccion(); // Asumiendo que tienes un método getIdTransaccion() en la entidad Pedido
+            }
+        }
+
         return $this->render('configuracion.html.twig', [
             'activeTab' => $activeTab,
             'user' => $user,
             'form' => $form->createView(),
-            'gafas'=> $gafas,
-            'lentillas'=> $lentillas,
-            'pedidos' => $pedidosUsuario,
+            'gafas' => $gafas,
+            'lentillas' => $lentillas,
+            'pedidosResumen' => $pedidosResumen,
+            'pedidoSeleccionadoDetalles' => $pedidoSeleccionadoDetalles,
+            'idPedido' => $idPedidoSeleccionado,
+            'idTransaccion' => $idTransaccion, // Pasamos el IdTransaccion a la vista
         ]);
     }
+
+
 }
