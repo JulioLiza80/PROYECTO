@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Promos - Optica Nova{% endblock %}
+
+{% block body %}
+
+{{ include('comun/header.html.twig') }}
+
+<div class="example-wrapper py-8">
+
+    <!-- Imagen de Banner -->
+    <div class="banner-campanias w-full h-[342px] relative mb-4">
+        <img src="{{ asset('banners/banner-campanias.png') }}" alt="Banner Campanias" class="absolute inset-0 w-full h-full object-cover object-position">
+    </div>
+
+    <div class="container mx-auto py-8">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Promociones</h1>
+
+        {% if campanias_activas|length > 0 %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for campania in campanias_activas %}
+                    <div 
+                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                        onclick="openModal('{{ campania.id }}')"
+                    >
+                        <img 
+                            src="{{ asset('campania/' ~ campania.imageName) }}" 
+                            alt="{{ campania.imageDescription|striptags }}" 
+                            class="w-full h-48 object-cover"
+                        >
+                        <div class="p-4">
+                            <h5 class="text font-semibold text-gray-800 mb-2" title="{{ campania.imageDescription|striptags }}">
+                                {{ campania.imageDescription|slice(0, 30)|striptags }}{% if campania.imageDescription|length > 30 %}...{% endif %}
+                            </h5>
+                            <p class="text-sm text-gray-600">
+                                Estado: <span class="font-medium">{{ campania.estado ? 'Activa' : 'Inactiva' }}</span>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-600 text-lg">No hay promociones activas en este momento.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="modal-campania" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 overflow-hidden">
+        <div id="modal-content" class="flex flex-col md:flex-row">
+            <!-- Imagen -->
+            <div class="w-full md:w-1/2">
+                <img id="modal-image" src="" alt="" class="w-full h-full object-cover">
+            </div>
+            <!-- Detalles -->
+            <div class="w-full md:w-1/2 p-6 flex flex-col justify-between">
+                <h2 id="modal-description" class="text-xl font-bold text-gray-800 mb-4"></h2>
+                <button 
+                    class="px-3 py-1 bg-[#1f2937] text-white rounded hover:bg-[#34455d] transition mx-auto mt-auto mb-4"
+                    onclick="closeModal()"
+                >
+                    Volver atrás
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ include('comun/footer.html.twig') }}
+
+<script>
+    function openModal(id) {
+        // Obtener datos de la campaña usando data-* (puedes ajustar según la lógica)
+        const card = document.querySelector(`[onclick="openModal('${id}')"]`);
+        const imgSrc = card.querySelector('img').getAttribute('src');
+        const description = card.querySelector('h5').getAttribute('title');  // Cambiar de h2 a h5
+
+        // Configurar contenido del modal
+        document.getElementById('modal-image').src = imgSrc;
+        document.getElementById('modal-description').innerText = description;
+
+        // Mostrar modal
+        document.getElementById('modal-campania').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal-campania').classList.add('hidden');
+    }
+</script>
+
+{% endblock %}
