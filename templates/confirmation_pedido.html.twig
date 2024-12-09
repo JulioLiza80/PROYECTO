@@ -9,11 +9,40 @@
 		<!-- Flexbox to center content -->
 		<div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg border border-gray-200">
 			<h1 class="text-center text-2xl font-semibold mb-6">Pedido Confirmado</h1>
-            <p>código de referencia: </p>
+			
+            <p>código de referencia:{{pedido.id}} </p>
+            {% for detalle in detallePedido %}
+			<p>código de detallePedido:{{detalle.id}} </p>
+            {% if detalle.categoriaProducto == 1 %}
+            <h1>Gafas</h1>
+            {% for g in gafas %}
+               {% if detalle.IdProducto == g.id %}
+                <p>{{g.id}} ---- {{g.marca}} ----- {{g.modelo}} --------- {{detalle.cantidad}} ------- {{detalle.precio}} </p>
+               {% endif %}
+            {% endfor %}      
+            {% endif %}
+            {% if detalle.categoriaProducto == 2 %}
+            <h1>Lentillas</h1>
+            {% for l in lentillas %}
+               {% if detalle.IdProducto == l.id %}
+                <p>{{l.id}} ---- {{l.marca}} ----- {{detalle.cantidad}} ------- {{detalle.precio}} </p>
+               {% endif %}
+            {% endfor %}      
+            {% endif %}
+            {% endfor %}
+
+			
             <div class="mt-4 flex justify-center">
                 <a href="{{ path('app_user_config') }}" 
                 class="py-2 px-4 text-center hover:bg-novapurple text-white font-semibold rounded-lg bg-[#9736af] transition duration-200">
                     Ver pedido
+                </a>
+            </div>
+			
+            <div class="mt-4 flex justify-center">
+                <a href="{{ path('app_home') }}" 
+                class="py-2 px-4 text-center hover:bg-novapurple text-white font-semibold rounded-lg bg-[#9736af] transition duration-200">
+                    Volver a inicio
                 </a>
             </div>
 		</div>

@@ -49,6 +49,7 @@ security:
         - { path: ^/user/^/edit, roles: [ROLE_ADMIN] }
         - { path: ^/user/configuracion, roles: [ROLE_ADMIN, ROLE_USER] }    
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/user, roles: ROLE_ADMIN }
         # RESET PASSWORD
         - { path: ^/reset-password, roles: [ROLE_ADMIN, ROLE_USER] }
         #  PEDIDOS

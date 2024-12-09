@@ -29,6 +29,16 @@ class DetallePedidoRepository extends ServiceEntityRepository
                ->getResult()
            ;
        }
+       public function findPedidosByIdPedido($value): array
+       {
+           return $this->createQueryBuilder('d')
+               ->andWhere('d.IdPedido = :val')
+               ->setParameter('val', $value)
+               ->orderBy('d.id', 'ASC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?DetallePedido
     //    {
