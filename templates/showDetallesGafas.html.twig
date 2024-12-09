@@ -10,24 +10,42 @@
 	<div
 		class="flex flex-col items-center py-12 justify-center gap-8">
 
+		<!-- BREADCRUMBS (envuelto en un contenedor para alinearlo a la izquierda) -->
+		<div class="w-full px-12">
+			<div class="flex mb-2 justify-start ml-[230px]">
+				<button class="w-[124px] h-[35px] text-sm text-center shadow p-2 rounded-bl-3xl rounded-tr-3xl mr-3" onclick="window.location.href='/'">
+					Inicio
+				</button>
+				<p class="h-[35px] px-4 text-sm text-center font-bold shadow p-2 rounded-bl-3xl rounded-tr-3xl">
+					{{ gafa.marca }} {{ gafa.modelo }}
+				</p>
+			</div>
+		</div>
+
 		<!-- DETALLES GAFA -->
 		<div class="shadow py-4 pl-4 pr-4 w-[70%] rounded justify-center">
 			<div
 				class="flex flex-col lg:flex-row gap-6">
 				<!-- Contenedor izquierdo: miniaturas e imagen principal -->
-				<div
-					class="flex gap-4">
+				<div class="flex gap-4 ml-[150px]">
 					<!-- Miniaturas -->
 					<div class="flex flex-col gap-2">
-						<img src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="Miniatura 1" onclick="updateMainImage('{{ asset('images/gafas/' ~ gafa.imageName) }}')" class="w-20 h-20 object-cover border border-gray-300 rounded cursor-pointer hover:ring-2 hover:ring-blue-500"/>
-						<img src="{{ asset('images/gafas/' ~ gafa.imageName2) }}" alt="Miniatura 2" onclick="updateMainImage('{{ asset('images/gafas/' ~ gafa.imageName2) }}')" class="w-20 h-20 object-cover border border-gray-300 rounded cursor-pointer hover:ring-2 hover:ring-blue-500"/>
-						<img src="{{ asset('images/gafas/' ~ gafa.imageName3) }}" alt="Miniatura 3" onclick="updateMainImage('{{ asset('images/gafas/' ~ gafa.imageName3) }}')" class="w-20 h-20 object-cover border border-gray-300 rounded cursor-pointer hover:ring-2 hover:ring-blue-500"/>
+						{% if gafa.imageName %}
+							<img src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="Miniatura 1" onclick="updateMainImage('{{ asset('images/gafas/' ~ gafa.imageName) }}')" class="w-20 h-20 object-cover border border-gray-300 rounded cursor-pointer hover:ring-2 hover:ring-blue-500"/>
+						{% endif %}
+						{% if gafa.imageName2 %}
+							<img src="{{ asset('images/gafas/' ~ gafa.imageName2) }}" alt="Miniatura 2" onclick="updateMainImage('{{ asset('images/gafas/' ~ gafa.imageName2) }}')" class="w-20 h-20 object-cover border border-gray-300 rounded cursor-pointer hover:ring-2 hover:ring-blue-500"/>
+						{% endif %}
+						{% if gafa.imageName3 %}
+							<img src="{{ asset('images/gafas/' ~ gafa.imageName3) }}" alt="Miniatura 3" onclick="updateMainImage('{{ asset('images/gafas/' ~ gafa.imageName3) }}')" class="w-20 h-20 object-cover border border-gray-300 rounded cursor-pointer hover:ring-2 hover:ring-blue-500"/>
+						{% endif %}
 					</div>
 
 					<!-- Imagen principal -->
-					<div class="flex justify-center items-center border border-gray-300 rounded w-full max-w-lg h-[400px]">
+					<div class="flex justify-center items-center border border-gray-300 rounded w-full md:w-[400px] h-[400px] md:h-[400px] bg-white">
 						<img id="mainImage" src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.marca }} {{ gafa.modelo }}" class="max-w-full max-h-full object-cover rounded"/>
 					</div>
+
 				</div>
 
 				<!-- Contenedor derecho: información del producto -->
@@ -48,8 +66,23 @@
 
 					<!-- Botón de añadir al carrito -->
 					<form id="addToCartForm" data-url="{{ path('app_aniadir', {'id': gafa.id, 'cat': 1}) }}">
-						<button type="button" onclick="addToCart()" class="bg-purple-600 text-white text-lg font-semibold py-3 px-6 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
-							Añadir al carrito
+						<button 
+							type="button" 
+							onclick="addToCart()" 
+							class="text-lg font-semibold py-3 px-6 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 
+								{% if stock == 0 or stock is null %} 
+									bg-gray-400 cursor-not-allowed opacity-50 
+								{% else %}
+									bg-purple-600 hover:bg-purple-700 text-white
+								{% endif %}"
+							{% if stock == 0 or stock is null %} 
+								disabled 
+							{% endif %}>
+							{% if stock == 0 or stock is null %}
+								Sin Stock
+							{% else %}
+								Añadir al carrito
+							{% endif %}
 						</button>
 					</form>
 				</div>
@@ -64,7 +97,7 @@
 
 
 			<!-- Snackbar -->
-			<div id="snackbar" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded shadow-lg opacity-0 transition-opacity duration-300">
+			<div id="snackbar" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded shadow-lg opacity-0 transition-opacity duration-300" style="z-index: 9999;">
 				Artículo añadido al carrito
 			</div>
 
@@ -73,41 +106,41 @@
 		<!-- DESCRIPCION DETALLADA -->
 		<div class="shadow py-6 px-6 w-[70%] rounded bg-white text-gray-800">
 			<h2 class="text-xl font-bold mb-4">Detalles de producto</h2>
-			<div
-				class="grid grid-cols-2 gap-x-6 text-sm">
+			<div class="grid grid-cols-2 gap-x-6 text-sm">
 				<!-- Columna izquierda -->
 				<div>
 					<div class="flex justify-between py-1 border-b">
 						<span class="font-semibold">Marca</span>
-						<span>{{ gafa.marca|capitalize }}</span>
+						<span>{{ gafa.marca|default('-')|capitalize }}</span>
 					</div>
 					<div class="flex justify-between py-1 border-b">
 						<span class="font-semibold">Modelo</span>
-						<span>{{ gafa.modelo|capitalize }}</span>
+						<span>{{ gafa.modelo|default('-')|capitalize }}</span>
 					</div>
 					<div class="flex justify-between py-1">
 						<span class="font-semibold">Color de montura</span>
-						<span>{{ gafa.colorMontura|capitalize }}</span>
+						<span>{{ gafa.colorMontura|default('-')|capitalize }}</span>
 					</div>
-
 				</div>
+
 				<!-- Columna derecha -->
 				<div>
 					<div class="flex justify-between py-1 border-b">
 						<span class="font-semibold">Tipo de montura</span>
-						<span>{{ gafa.tipoMontura|capitalize }}</span>
+						<span>{{ gafa.tipoMontura|default('-')|capitalize }}</span>
 					</div>
 					<div class="flex justify-between py-1 border-b">
 						<span class="font-semibold">Material de montura</span>
-						<span>{{ gafa.materialMontura|capitalize }}</span>
+						<span>{{ gafa.materialMontura|default('-')|capitalize }}</span>
 					</div>
 					<div class="flex justify-between py-1">
 						<span class="font-semibold">Color de lente</span>
-						<span>{{ gafa.colorLentes|capitalize }}</span>
+						<span>{{ gafa.colorLentes|default('-')|capitalize }}</span>
 					</div>
 				</div>
 			</div>
 		</div>
+
 
 		<!-- QUIZÁS TAMBIÉN TE GUSTE -->
 		<div class="mx-4">
