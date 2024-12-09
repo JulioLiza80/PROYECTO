@@ -480,6 +480,7 @@
             card.addEventListener('click', function () {
                 // Obtenemos el ID de la lentilla desde el atributo data-id
                 const lentillaId = card.getAttribute('data-id');
+                console.log(lentillaId);
                 
                 // Redirigimos al usuario a la página correspondiente
                 window.location.href = `/lentillas/${lentillaId}/show`;
