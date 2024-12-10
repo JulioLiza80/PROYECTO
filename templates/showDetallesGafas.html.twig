@@ -141,9 +141,9 @@
     </div>
 
     <!-- QUIZÁS TAMBIÉN TE GUSTE -->
-    <div class="flex flex-wrap justify-center gap-4 md:gap-8 mx-4">
+    <div class=" gafasContainer flex flex-wrap justify-center gap-4 md:gap-8 mx-4">
         {% for gafa in gafas|slice(0, 6) %}
-        <div class="w-[140px] md:w-[180px] lg:w-[200px] bg-white rounded-lg shadow overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
+        <div class="gafa-card w-[140px] md:w-[180px] lg:w-[200px] bg-white rounded-lg shadow overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl" data-id="{{ gafa.id }}">
             <img src="{{ asset('images/gafas/' ~ gafa.imageName) }}" alt="{{ gafa.descripcion }}" class="w-full h-40 object-cover">
             <div class="px-4 py-2">
                 <h3 class="text-gray-800 text-xs md:text-sm">{{ gafa.marca }} {{ gafa.modelo }}</h3>
