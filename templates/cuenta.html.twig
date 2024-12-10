@@ -2,7 +2,6 @@
 {% block content %}
 	<form method="POST" action="{{ path('app_user_edit', {'id': user.id}) }}" enctype="multipart/form-data">
 		{{ form_start(form) }}
-		<!-- Aquí empieza el formulario con Symfony -->
 
 		<!-- Información personal -->
 			<div class="mb-12"> <h2 class="text-lg font-semibold text-gray-700 mb-4">Información Personal</h2>
@@ -55,22 +54,18 @@
 		<div class="mb-12">
 			<h2 class="text-lg font-semibold text-gray-700 mb-4">Documento</h2>
 
-			{# Si ya existe un archivo subido, mostrar el nombre y un enlace para descargarlo #}
 			{% if user.documentFile %}
 				<p class="text-sm text-gray-600 mb-2">Documento actual:
 					{{ user.documentFile }}
-					{# Nombre del archivo #}
 				</p>
 				<a href="{{ asset('uploads/documents/' ~ user.documentFile) }}" target="_blank" class="text-sm text-blue-600 hover:underline">Ver documento</a>
 			{% endif %}
 
-			{# El campo para cargar un nuevo archivo con el form_label y form_widget #}
 			<div class="mt-4">
 				{{ form_label(form.documentFile, 'Subir un nuevo documento') }}
 				{{ form_widget(form.documentFile, {'attr': {'class': 'form-control'}}) }}
 			</div>
 
-			{# Si el documento ya fue subido, puedes ofrecer una opción para eliminarlo o gestionar el archivo #}
 			{% if user.documentFile %}
 				<button type="button" class="mt-2 text-sm text-red-600 hover:underline" onclick="alert('Función para eliminar documento aún no implementada.')">Eliminar Documento</button>
 			{% endif %}
@@ -85,7 +80,6 @@
 		<div class="flex items-center justify-center mt-12">
 			<button type="button" onclick="confirmarEliminarCuenta()" class="ml-4 bg-red-600 text-white font-semibold rounded-lg py-2 px-4 hover:bg-red-700">Eliminar Cuenta</button>
 		</div>
-		<!-- Aquí termina el formulario con Symfony -->
 		{{ form_end(form) }}
 	</form>
 
@@ -99,7 +93,7 @@
 				},
 				body: new URLSearchParams(
 					{
-					'_token': '{{ csrf_token('delete' ~ user.id) }}' // Asegúrate de que el CSRF token se envíe aquí
+					'_token': '{{ csrf_token('delete' ~ user.id) }}'
 					}
 				)
 				}).then(response => {
