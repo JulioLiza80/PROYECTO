@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Optica Nova
-{% endblock %}
+{% block title %}Nova Opticos - Home{% endblock %}
 
 {% block body %}
 	<style></style>
@@ -15,8 +14,8 @@
 			<div class="flex transition-transform duration-500 ease-in-out transform" id="carousel">
 				{% set imageCount = 0 %}
 				{% for campaign in publicidad %}
+					{% if campaign.imageName is not null and campaign.estado == true %}
 					{% set imageCount = imageCount + 1 %}
-					{% if campaign.imageName is not null %}
 						<div class="min-w-full h-[500px] flex items-center justify-center overflow-hidden">
 							<img src="{{ asset('campania/' ~ campaign.imageName) }}" alt="Campaña {{ imageCount }}" class="object-cover w-full h-full">
 						</div>
@@ -73,6 +72,13 @@
 						{% if count < 3 %}
 							<!-- Card de gafas -->
 							<div class="bg-white rounded-lg shadow overflow-hidden transform transition md:max-w-48 max-w-40 md:max-h-48 max-h-40 duration-300 hover:scale-105 hover:shadow-xl">
+							{% if destacado.modelo is not defined %}
+								<a href="{{ path('app_lentillas_show', {'id': destacado.id}) }}">
+							{% elseif destacado.categoria == 1 %}
+								<a href="{{ path('app_gafas_show', {'id': destacado.id}) }}">
+							{% elseif destacado.categoria == 2 %}
+								<a href="{{ path('app_gafas_sol_show', {'id': destacado.id}) }}">
+							{% endif %}
 
 								<!-- Imagen de las gafas -->
 								<img src="{{ vich_uploader_asset(destacado, 'imageFile') }}" alt="{{ destacado.descripcion }}" class="w-full h-50 md:my-2 object-cover">
@@ -93,6 +99,7 @@
 										{{ destacado.precio|number_format(2, ',', '') }}€
 									</p>
 								</div>
+							</a>
 							</div>
 							{% set count = count + 1 %}
 						{% endif %}

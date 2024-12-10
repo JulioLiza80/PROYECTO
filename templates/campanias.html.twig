@@ -17,7 +17,7 @@
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Promociones</h1>
 
         {% if campanias_activas|length > 0 %}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="flex flex-row justify-center gap-6">
                 {% for campania in campanias_activas %}
                     <div 
                         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
