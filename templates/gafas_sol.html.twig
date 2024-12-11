@@ -263,7 +263,7 @@
 		// Evento para el botón de ir a la página 1
 		document.getElementById('goToFirstPage').addEventListener('click', () => {
 			currentPage = 1;
-			updatePagination(); // Actualiza la paginación al inicio
+			updatePagination(); 
 		});
 
 		// Evento para el botón de ir a la última página
@@ -274,9 +274,9 @@
 		});
 
 		document.addEventListener('DOMContentLoaded', () => {
-			aplicarFiltros(); // Aplica los filtros inicialmente
-			ordenarPorRelevancia(); // Ordena las tarjetas inicialmente por relevancia
-			updatePagination(); // Inicializa la paginación
+			aplicarFiltros();
+			ordenarPorRelevancia(); 
+			updatePagination(); 
 		});
 
 		let currentPage = 1;
