@@ -268,7 +268,7 @@
                             data-frecuencia="{{ lentilla.frecuencia }}" 
                             data-tipo="{{ lentilla.tipo }}"
                             data-material="{{ lentilla.material }}"
-                            data-tipo-producto="{{ lentilla.tipoProducto }}"> <!-- Añadido 'tipoProducto' como data -->
+                            data-tipo-producto="{{ lentilla.tipoProducto }}">
 
                             <!-- Imagen de las lentillas -->
                             <img
@@ -320,20 +320,20 @@
     // Evento para el botón de ir a la página 1
     document.getElementById('goToFirstPage').addEventListener('click', () => {
         currentPage = 1;
-        updatePagination(); // Actualiza la paginación al inicio
+        updatePagination();
     });
 
     // Evento para el botón de ir a la última página
     document.getElementById('goToLastPage').addEventListener('click', () => {
         const totalVisiblePages = Math.ceil(lentillas.filter(lentilla => lentilla.style.display === 'block').length / itemsPerPage);
-        currentPage = totalVisiblePages; // Establece la página actual como la última visible
-        updatePagination(); // Actualiza la paginación
+        currentPage = totalVisiblePages; 
+        updatePagination(); 
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        aplicarFiltros(); // Aplica los filtros inicialmente
-        ordenarPorRelevancia(); // Ordena las tarjetas inicialmente por relevancia
-        updatePagination(); // Inicializa la paginación
+        aplicarFiltros(); 
+        ordenarPorRelevancia(); 
+        updatePagination(); 
         
         // Evento para manejar el cambio de criterio de orden
         document.getElementById('order').addEventListener('change', (event) => {
@@ -345,7 +345,7 @@
 
     let currentPage = 1;
     const itemsPerPage = 25;
-    const lentillas = Array.from(document.querySelectorAll('.lentilla-card')); // Todas las tarjetas
+    const lentillas = Array.from(document.querySelectorAll('.lentilla-card')); 
     const totalItems = lentillas.length;
     
     // Contenedor de las lentillas
@@ -394,10 +394,10 @@
         const selectedMarcas = Array.from(document.querySelectorAll('.marca-checkbox:checked')).map(checkbox => checkbox.dataset.marca);
         const selectedFrequencies = Array.from(document.querySelectorAll('.frecuencia-checkbox:checked')).map(checkbox => checkbox.dataset.frecuencia);
         const selectedTipos = Array.from(document.querySelectorAll('.tipo-checkbox:checked')).map(checkbox => checkbox.dataset.tipo);
-        const selectedTiposProducto = Array.from(document.querySelectorAll('.tipo-producto-checkbox:checked')).map(checkbox => checkbox.dataset.tipoProducto); // Nuevo filtro
-        const selectedMateriales = Array.from(document.querySelectorAll('.material-checkbox:checked')).map(checkbox => checkbox.dataset.material); // Nuevo filtro
-        const minPrice = parseFloat(document.getElementById('precio-min').value) || 0;  // Default 0 if empty
-        const maxPrice = parseFloat(document.getElementById('precio-max').value) || Infinity;  // Default Infinity if empty
+        const selectedTiposProducto = Array.from(document.querySelectorAll('.tipo-producto-checkbox:checked')).map(checkbox => checkbox.dataset.tipoProducto); 
+        const selectedMateriales = Array.from(document.querySelectorAll('.material-checkbox:checked')).map(checkbox => checkbox.dataset.material); 
+        const minPrice = parseFloat(document.getElementById('precio-min').value) || 0;  
+        const maxPrice = parseFloat(document.getElementById('precio-max').value) || Infinity;  
 
         let visibleLentillasCount = 0;
 
@@ -405,8 +405,8 @@
             const lentillaMarca = lentilla.dataset.marca;
             const lentillaFrecuencia = lentilla.dataset.frecuencia;
             const lentillaTipo = lentilla.dataset.tipo;
-            const lentillaTipoProducto = lentilla.dataset.tipoProducto; // Nuevo campo
-            const lentillaMaterial = lentilla.dataset.material; // Nuevo campo
+            const lentillaTipoProducto = lentilla.dataset.tipoProducto; 
+            const lentillaMaterial = lentilla.dataset.material; 
             const lentillaPrice = obtenerPrecio(lentilla);
 
             const cumpleMarca = selectedMarcas.length === 0 || selectedMarcas.includes(lentillaMarca);
@@ -425,7 +425,7 @@
         });
 
         document.getElementById('contador-lentillas').textContent = `${visibleLentillasCount} lentillas`;
-        currentPage = 1; // Reinicia la página a la 1
+        currentPage = 1; 
         updatePagination();
     }
 

@@ -34,22 +34,22 @@ class LentillasController extends AbstractController
 
         // Extraer tipos de producto únicos
         $tipo_producto = array_unique(array_map(function ($lentilla) {
-            return $lentilla->getTipoProducto(); // Correcto
+            return $lentilla->getTipoProducto(); 
         }, $lentillas));
 
         // Extraer tipos únicos de lentillas
         $tipos = array_unique(array_map(function ($lentilla) {
-            return $lentilla->getTipo(); // Correcto
+            return $lentilla->getTipo(); 
         }, $lentillas));
 
 
         return $this->render('lentillas.html.twig', [
             'lentillas' => $lentillas,
-            'marcas' => $marcas, // Pasar las marcas únicas
-            'materiales' => $materiales, // Pasar los materiales únicos
-            'frecuencias' => $frecuencias, // Pasar las frecuencias únicas
-            'tipo_producto' => $tipo_producto, // Pasar los tipos de producto
-            'tipos' => $tipos, // Pasar los tipos de lentillas
+            'marcas' => $marcas, 
+            'materiales' => $materiales, 
+            'frecuencias' => $frecuencias, 
+            'tipo_producto' => $tipo_producto,
+            'tipos' => $tipos, 
         ]);
     }
 
@@ -69,7 +69,7 @@ class LentillasController extends AbstractController
             ->from(Lentillas::class, 'l')
             ->where('l.id != :id')
             ->setParameter('id', $id)
-            ->setMaxResults(6) // Obtener 6 lentillas aleatorias
+            ->setMaxResults(6) 
             ->getQuery()
             ->getResult();
 
@@ -79,7 +79,7 @@ class LentillasController extends AbstractController
         return $this->render('showDetallesLentillas.html.twig', [
             'lentilla' => $lentilla,
             'stock' => $lentilla->getStock(),
-            'lentillas' => $lentillasSugeridas, // Pasar las lentillas sugeridas
+            'lentillas' => $lentillasSugeridas,
         ]);
     }
 }

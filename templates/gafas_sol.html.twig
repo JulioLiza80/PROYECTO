@@ -268,8 +268,8 @@
 		// Evento para el botón de ir a la última página
 		document.getElementById('goToLastPage').addEventListener('click', () => {
 			const totalVisiblePages = Math.ceil(gafas.filter(gafa => gafa.style.display === 'block').length / itemsPerPage);
-			currentPage = totalVisiblePages; // Establece la página actual como la última visible
-			updatePagination(); // Actualiza la paginación
+			currentPage = totalVisiblePages; 
+			updatePagination(); 
 		});
 
 		document.addEventListener('DOMContentLoaded', () => {
@@ -280,7 +280,7 @@
 
 		let currentPage = 1;
 		const itemsPerPage = 24;
-		const gafas = Array.from(document.querySelectorAll('.gafa-card')); // Todas las tarjetas
+		const gafas = Array.from(document.querySelectorAll('.gafa-card')); 
 		const totalItems = gafas.length;
 		const totalPages = Math.ceil(totalItems / itemsPerPage);
 
