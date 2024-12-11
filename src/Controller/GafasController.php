@@ -19,7 +19,7 @@ class GafasController extends AbstractController
 
         // Extraer las marcas únicas
         $marcas = array_unique(array_map(function ($gafa) {
-            return $gafa->getMarca();  // Asegúrate de que el método getMarca() exista en tu entidad
+            return $gafa->getMarca();
         }, $gafas));
 
         // Extraer materiales únicos
@@ -34,9 +34,9 @@ class GafasController extends AbstractController
 
         return $this->render('gafas.html.twig', [
             'gafas' => $gafas,
-            'marcas' => $marcas,  // Pasar las marcas únicas
-            'materiales' => $materiales,  // Pasar los materiales únicos
-            'tiposMontura' => $tiposMontura,  // Pasar los tipos de montura únicos
+            'marcas' => $marcas,
+            'materiales' => $materiales,
+            'tiposMontura' => $tiposMontura, 
         ]);
     }
 

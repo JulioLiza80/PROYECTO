@@ -3,10 +3,18 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
+			{% block title %}Nova Opticos{% endblock %}
 		</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+		<meta name="description" content="En Nova Ópticos miramos por ti. Cuidamos de tu visión ofreciéndote las mejores soluciones en gafas graduadas, gafas de sol y lentillas para garantizar siempre tu satisfacción. Nuestro objetivo es ofrecer a nuestros clientes la mejor atención en todos los sentidos: asesoramiento personalizado, servicios de revisión de la vista, y productos que se adaptan a las necesidades de todos los bolsillos gracias a nuestras ofertas y promociones.">
+		<meta name="keywords" content="gafas graduadas, gafas de sol, lentillas, revisión de la vista, óptica, promociones en gafas, Nova Ópticos, cuidado visual">
+
+		<link rel="icon" type="image/png" href="/images/logos/novaopticos-logo.png/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/images/logos/novaopticos-logo.png/favicon.svg" />
+		<link rel="shortcut icon" href="/images/logos/novaopticos-logo.png/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/logos/novaopticos-logo.png/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="NovaOpticos" />
+		<link rel="manifest" href="/images/logos/novaopticos-logo.png/site.webmanifest" />
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('styles') }}
 		{% endblock %}

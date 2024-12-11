@@ -56,7 +56,7 @@ class LentillasCrudController extends AbstractCrudController
              return $crud
                  ->setEntityLabelInSingular('Producto')
                  ->setEntityLabelInPlural('Productos')
-                 ->setSearchFields(['marca','tipoProducto','id'])
+                 ->setSearchFields(['marca','id'])
                  ->setDefaultSort(['id' => 'DESC'])
              ;
          }

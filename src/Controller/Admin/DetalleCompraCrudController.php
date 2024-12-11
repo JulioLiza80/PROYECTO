@@ -35,12 +35,11 @@ class DetalleCompraCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            IdField::new('idUsuario.id'),
+            IdField::new('idUsuario.id', 'Id Usuario'),
             IntegerField::new('IdTransaccion'),
             DateField::new('fecha'),
             TextField::new('status'),
             TextField::new('email'),
-            IntegerField::new('idCliente'),
             NumberField::new('total')
             
         ];
